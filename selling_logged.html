@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Art Store-selling art works</title>
+  <link href="css/theme.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/account_page.css">
+</head>
+<body>
+<header>
+  <div id="topHeaderRow">
+    <div class="container">
+      <nav class="navbar navbar-inverse " role="navigation">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse"
+                  data-target=".navbar-ex1-collapse"><span class="sr-only">Toggle navigation</span><span
+                  class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+          </button>
+          <p class="navbar-text">Good morning, Chen Wang! Welcome to <strong>Art Store</strong>.
+            <a style="color: grey;" href="index.html"> Log out</a><em> Where art works come and go. </em></p>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse pull-right">
+          <ul class="nav navbar-nav">
+            <li><a href="account_logged.html"><span class="glyphicon glyphicon-user"></span> My Account</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-gift"></span> Wish List</a></li>
+            <li><a href="shoppingcart_logged.html"><span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart</a>
+            </li>
+            <li><a href="#"><span class="glyphicon glyphicon-arrow-right"></span> Checkout</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </div>
+  <!--	add CSS style to this place Mar 08 13:05-->
+  <div id="logoRow">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <h1>Art Store</h1>
+        </div>
+        <div class="col-md-4">
+          <form class="form-inline" role="search" action="search_logged.html">
+            <div class="input-group">
+              <label class="sr-only" for="search">Search</label>
+              <input type="text" id="search" class="form-control" placeholder="Search" name="search">
+              <span class="input-group-btn">
+              <button class="btn btn-default" type="submit">
+                <span class="glyphicon glyphicon-search"></span>
+              </button>
+              </span></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--	add CSS style to this place Mar 08 16:38-->
+  <div id="mainNavigationRow">
+    <div class="container">
+      <nav class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse"
+                  data-target=".navbar-ex1-collapse"><span class="sr-only">Toggle navigation</span><span
+                  class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="index_logged.html">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="search_logged.html">Art Works</a></li>
+            <li><a href="#">Artists</a></li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Specials<b
+                    class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Special 1</a></li>
+                <li><a href="#">Special 2</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <!-- end container -->
+  </div>
+  <!-- end mainNavigationRow -->
+</header>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      
+      <div class="panel panel-default">
+        <div class="panel-heading">Account</div>
+        <div class="panel-body">
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="account_logged.html">My Account</a></li>
+            <li class="active"><a href="selling_logged.html">Selling art works</a></li>
+            <li><a href="sold_logged.html">Sold art works</a></li>
+            <li><a href="ordered_logged.html">Order history</a></li>
+          </ul>
+        </div>
+      </div>
+    
+    </div>
+    <div class="col-md-9">
+      <h2>Selling Art Works</h2>
+      <table class="table table-condensed">
+        <thead>
+        <tr>
+          <th>Image</th>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Amount</th>
+          <th>Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td><img class="img-thumbnail" src="images/art/tiny/116010.jpg" alt="..."></td>
+          <td><a href="details_logged.html">Artist Holding a Thistle</a></td>
+          <td>2</td>
+          <td>$500</td>
+          <td>$1000</td>
+          <td>March 18, 2018</td>
+        </tr>
+        <tr>
+          <td><img class="img-thumbnail" src="images/art/tiny/113010.jpg" alt="..."></td>
+          <td><a href="details_logged.html">Self-portrait in a Straw Hat</a></td>
+          <td>1</td>
+          <td>$700</td>
+          <td>$700</td>
+          <td>March 18, 2018</td>
+        </tr>
+        </tbody>
+      
+      </table>
+    </div>
+  </div>
+</div>  <!-- end container -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <h4><span class="glyphicon glyphicon-info-sign"></span> About Us</h4>
+        <p>Fudan University (simplified Chinese: 复旦大学; traditional Chinese: 復旦大學; pinyin: Fùdàn Dàxué), located in
+          Shanghai, China, is one of the most prestigious and selective universities in China. It is also a member in
+          the C9 League. Its institutional predecessor was founded in 1905, shortly before the end of China's imperial
+          Qing dynasty. Fudan is now composed of four campuses in downtown Shanghai, including Handan (邯郸), Fenglin
+          (枫林), Zhangjiang (张江), and Jiangwan (江湾), which share the same central administration.</p>
+      </div>
+      <div class="col-md-3">
+        <h4><span class="glyphicon glyphicon-earphone"></span> Customer Service</h4>
+        <ul class="nav nav-stacked">
+          <li><a href="#">Delivery Information</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Shipping</a></li>
+          <li><a href="#">Terms and Conditions</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h4><span class="glyphicon glyphicon-shopping-cart"></span> Just Ordered</h4>
+        <div class="media"><a class="pull-left" href="#"><img class="media-object"
+                                                              src="images/art/tiny/099110.jpg" alt="..."></a>
+          <div class="media-body">
+            <p class="media-heading similarTitle"><a href="#">The Veiled Woman</a></p>
+            <em>5 minutes ago</em></div>
+        </div>
+        <div class="media"><a class="pull-left" href="#"><img class="media-object"
+                                                              src="images/art/tiny/116010.jpg" alt="..."></a>
+          <div class="media-body">
+            <p class="media-heading similarTitle"><a href="#">Artist Holding a Thistle</a></p>
+            <em>11 minutes ago</em></div>
+        </div>
+        <div class="media"><a class="pull-left" href="details_logged.html"><img class="media-object"
+                                                                                src="images/art/tiny/113010.jpg"
+                                                                                alt="..."></a>
+          <div class="media-body">
+            <p class="media-heading similarTitle"><a href="details_logged.html">Self-portrait in a Straw Hat</a></p>
+            <em>23 minutes ago</em></div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <h4><span class="glyphicon glyphicon-envelope"></span> Contact us</h4>
+        <form role="form">
+          <div class="form-group tight-form-group">
+            <label class="sr-only" for="name">Name</label>
+            <input type="text" class="form-control"
+                   id="name" name="name" placeholder="Enter name ...">
+          </div>
+          <div class="form-group tight-form-group">
+            <label class="sr-only" for="email_footer">Email</label>
+            <input type="email" class="form-control" name="email" id="email_footer" placeholder="Enter email ...">
+          </div>
+          <div class="form-group tight-form-group">
+            <label class="sr-only" for="message">Message</label>
+            <textarea class="form-control" rows="3" name="message" id="message"
+                      placeholder="Enter message ..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div id="copyrightRow">
+    <div class="container">
+      <div class="row">
+        <p class="text-muted">All images are copyright to their owners.
+          Composed on March 10th, 2018
+          <span class="pull-right">&copy; 2018 Copyright Wang, Chen</span></p>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="js/jquery-3.3.1.js"></script>
+<script src="js/pagination.js"></script>
+<script type="text/javascript" src="js/search_page.js"></script>
+<script src="js/collapse-menu.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $('.table tbody').pagination({
+            perPage: 2,
+            insertAfter: '.table',
+            pageNumbers: true
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+h1 {
+    font-size: 3em;
+    font-weight: bold;
+    margin-top: 0;
+}
+
+div#topHeaderRow {
+    font-size: 0.9em;
+}
+
+.price {
+    font-size: 1.4em;
+    color: red;
+    font-weight: bold;
+}
+
+.similarTitle {
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.cartText {
+    font-size: 0.75em;
+}
+
+footer {
+    margin-top: 1em;
+    background-color: #E7E7E7;
+
+}
+
+.tight-form-group {
+    margin-bottom: 5px;
+}
+
+#copyrightRow {
+    background-color: #3A3A3A;
+    padding: 0.75em 0 0.75em 0;
+    margin-top: 5px;
+}
+
+.moveRight {
+    text-align: right;
+}
+
+.strong {
+    font-weight: bold;
+}
+
+.floating_control {
+    position: fixed;
+    right: -230px;
+    bottom: 0;
+    _position: absolute;
+    width: 230px;
+    height: 100%;
+    background: #009aff;
+    z-index: 999999;
+    _margin-bottom: 0;
+    transition: all .5s ease;
+}
+
+.floating_control .hover_button {
+    width: 30px;
+    height: 129px;
+    padding-top: 20px;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    margin-top: -66px;
+    left: -30px;
+    font-size: 14px;
+    color: #fff;
+    background: #009aff;
+    -webkit-border-radius: 3px 0 0 3px;
+    -moz-border-radius: 3px 0 0 3px;
+    border-radius: 3px 0 0 3px;
+    -moz-box-shadow: -4px 4px 4px -4px #000;
+    -webkit-box-shadow: -4px 4px 4px -4px #000;
+    box-shadow: -4px 4px 4px -4px #000;
+}
+
+.floating_control .hover_button span {
+    width: 30px;
+    height: 100px;
+    line-height: 19px;
+    writing-mode: tb;
+    text-align: center;
+    overflow: hidden;
+}
+
+.floating_control .main_mask {
+    width: 186px;
+    height: 560px;
+    margin-left: 22px;
+    position: absolute;
+    top: 55%;
+    *margin-top: -140px;
+    margin-top: -280px;
+}
+
+.floating_control .f1 {
+    height: 36px;
+    line-height: 36px;
+    float: left;
+    font-size: 14px;
+    _font-size: 14px;
+    *font-size: 15px;
+    color: #fff;
+    vertical-align: top;
+    font-weight: bold;
+}
+
+.mask {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 100000;
+    width: 100%;
+    height: 100%;
+    opacity: 0.3;
+    filter: alpha(Opacity=30);
+    background: #000;
+    display: none;
+}
