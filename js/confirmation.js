@@ -6,7 +6,6 @@ $("form input").blur(function () {
     $parent.find(".msg").remove();
     //removes the previous notifying elements
     //find(): finds all the matching elements in the matching elements set
-    <!--  jlkfdj -->
 
     //Name validation
     if ($(this).is("#first-name")) {
