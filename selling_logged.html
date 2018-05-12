@@ -4,74 +4,87 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Art Store-selling art works</title>
-  <link href="css/theme.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/account_page.css">
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/site_theme.css">
 </head>
 <body>
 <header>
+
   <div id="topHeaderRow">
     <div class="container">
       <nav class="navbar navbar-inverse " role="navigation">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse"
-                  data-target=".navbar-ex1-collapse"><span class="sr-only">Toggle navigation</span><span
-                  class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
           </button>
-          <p class="navbar-text">Good morning, Chen Wang! Welcome to <strong>Art Store</strong>.
-            <a style="color: grey;" href="index.html"> Log out</a><em> Where art works come and go. </em></p>
+          <p class="navbar-text">Welcome to <strong>Art Store</strong>, <a href="#" class="navbar-link">Login</a> or <a
+                  href="#" class="navbar-link">Create new account</a><em> Where art works come and go. </em></p>
         </div>
+
         <div class="collapse navbar-collapse navbar-ex1-collapse pull-right">
           <ul class="nav navbar-nav">
-            <li><a href="account_logged.html"><span class="glyphicon glyphicon-user"></span> My Account</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-user"></span> My Account</a></li>
             <li><a href="#"><span class="glyphicon glyphicon-gift"></span> Wish List</a></li>
-            <li><a href="shoppingcart_logged.html"><span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart</a>
-            </li>
+            <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart</a></li>
             <li><a href="#"><span class="glyphicon glyphicon-arrow-right"></span> Checkout</a></li>
           </ul>
         </div>
       </nav>
     </div>
   </div>
-  <!--	add CSS style to this place Mar 08 13:05-->
+
   <div id="logoRow">
     <div class="container">
       <div class="row">
         <div class="col-md-8">
           <h1>Art Store</h1>
         </div>
+
+
         <div class="col-md-4">
-          <form class="form-inline" role="search" action="search_logged.html">
+          <form class="form-inline" role="search">
             <div class="input-group">
               <label class="sr-only" for="search">Search</label>
               <input type="text" id="search" class="form-control" placeholder="Search" name="search">
               <span class="input-group-btn">
-              <button class="btn btn-default" type="submit">
-                <span class="glyphicon glyphicon-search"></span>
-              </button>
-              </span></div>
+                  <button class="btn btn-default" type="submit"><span
+                          class="glyphicon glyphicon-search"></span></button>
+                  </span>
+            </div>
           </form>
         </div>
+
+
       </div>
+
+
     </div>
   </div>
-  <!--	add CSS style to this place Mar 08 16:38-->
+
   <div id="mainNavigationRow">
     <div class="container">
+
       <nav class="navbar navbar-default" role="navigation">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse"
-                  data-target=".navbar-ex1-collapse"><span class="sr-only">Toggle navigation</span><span
-                  class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
           </button>
         </div>
+
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="index_logged.html">Home</a></li>
+            <li class="active"><a href="#">Home</a></li>
             <li><a href="#">About Us</a></li>
-            <li><a href="search_logged.html">Art Works</a></li>
+            <li><a href="#">Art Works</a></li>
             <li><a href="#">Artists</a></li>
-            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Specials<b
-                    class="caret"></b></a>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Specials <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="#">Special 1</a></li>
                 <li><a href="#">Special 2</a></li>
@@ -80,10 +93,9 @@
           </ul>
         </div>
       </nav>
-    </div>
-    <!-- end container -->
-  </div>
-  <!-- end mainNavigationRow -->
+    </div>  <!-- end container -->
+  </div>  <!-- end mainNavigationRow -->
+
 </header>
 <div class="container">
   <div class="row">
@@ -118,7 +130,7 @@
         <tbody>
         <tr>
           <td><img class="img-thumbnail" src="images/art/tiny/116010.jpg" alt="..."></td>
-          <td><a href="details_logged.html">Artist Holding a Thistle</a></td>
+          <td><a href="details.html">Artist Holding a Thistle</a></td>
           <td>2</td>
           <td>$500</td>
           <td>$1000</td>
@@ -126,7 +138,7 @@
         </tr>
         <tr>
           <td><img class="img-thumbnail" src="images/art/tiny/113010.jpg" alt="..."></td>
-          <td><a href="details_logged.html">Self-portrait in a Straw Hat</a></td>
+          <td><a href="details.html">Self-portrait in a Straw Hat</a></td>
           <td>1</td>
           <td>$700</td>
           <td>$700</td>
@@ -172,11 +184,11 @@
             <p class="media-heading similarTitle"><a href="#">Artist Holding a Thistle</a></p>
             <em>11 minutes ago</em></div>
         </div>
-        <div class="media"><a class="pull-left" href="details_logged.html"><img class="media-object"
+        <div class="media"><a class="pull-left" href="details.html"><img class="media-object"
                                                                                 src="images/art/tiny/113010.jpg"
                                                                                 alt="..."></a>
           <div class="media-body">
-            <p class="media-heading similarTitle"><a href="details_logged.html">Self-portrait in a Straw Hat</a></p>
+            <p class="media-heading similarTitle"><a href="details.html">Self-portrait in a Straw Hat</a></p>
             <em>23 minutes ago</em></div>
         </div>
       </div>
@@ -212,10 +224,10 @@
     </div>
   </div>
 </footer>
-<script src="js/jquery-3.3.1.js"></script>
+<script src="js/jquery.js"></script>
 <script src="js/pagination.js"></script>
-<script type="text/javascript" src="js/search_page.js"></script>
-<script src="js/collapse-menu.js"></script>
+<script type="text/javascript" src="js/big_image.js"></script>
+<script src="js/bootstrap.js"></script>
 <script type="text/javascript">
     jQuery(document).ready(function ($) {
         $('.table tbody').pagination({

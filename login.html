@@ -4,68 +4,87 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Art Store-login</title>
-  <link href="css/theme.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/account_page.css">
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/site_theme.css">
 </head>
 <body>
 <header>
+
   <div id="topHeaderRow">
     <div class="container">
       <nav class="navbar navbar-inverse " role="navigation">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse"
-                  data-target=".navbar-ex1-collapse"><span class="sr-only">Toggle navigation</span><span
-                  class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
           </button>
-          <p class="navbar-text">Welcome to <strong>Art Store</strong>, <a href="login.html"
-                                                                           class="navbar-link">Login</a> or <a
-                  href="register.html" class="navbar-link">Create new account</a><em> Where art works come and go. </em>
-          </p>
+          <p class="navbar-text">Welcome to <strong>Art Store</strong>, <a href="#" class="navbar-link">Login</a> or <a
+                  href="#" class="navbar-link">Create new account</a><em> Where art works come and go. </em></p>
+        </div>
+
+        <div class="collapse navbar-collapse navbar-ex1-collapse pull-right">
+          <ul class="nav navbar-nav">
+            <li><a href="#"><span class="glyphicon glyphicon-user"></span> My Account</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-gift"></span> Wish List</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-arrow-right"></span> Checkout</a></li>
+          </ul>
         </div>
       </nav>
     </div>
   </div>
-  <!--	add CSS style to this place Mar 08 13:05-->
+
   <div id="logoRow">
     <div class="container">
       <div class="row">
         <div class="col-md-8">
           <h1>Art Store</h1>
         </div>
+
+
         <div class="col-md-4">
-          <form class="form-inline" role="search" action="search.html">
+          <form class="form-inline" role="search">
             <div class="input-group">
               <label class="sr-only" for="search">Search</label>
-              <input type="text" class="form-control" placeholder="Search" name="search"
-                     id="search">
+              <input type="text" id="search" class="form-control" placeholder="Search" name="search">
               <span class="input-group-btn">
-              <button class="btn btn-default" type="submit">
-                <span class="glyphicon glyphicon-search"></span>
-              </button>
-              </span></div>
+                  <button class="btn btn-default" type="submit"><span
+                          class="glyphicon glyphicon-search"></span></button>
+                  </span>
+            </div>
           </form>
         </div>
+
+
       </div>
+
+
     </div>
   </div>
-  <!--	add CSS style to this place Mar 08 16:38-->
+
   <div id="mainNavigationRow">
     <div class="container">
+
       <nav class="navbar navbar-default" role="navigation">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse"
-                  data-target=".navbar-ex1-collapse"><span class="sr-only">Toggle navigation</span><span
-                  class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
           </button>
         </div>
+
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="index.html">Home</a></li>
+            <li class="active"><a href="#">Home</a></li>
             <li><a href="#">About Us</a></li>
-            <li><a href="search.html">Art Works</a></li>
+            <li><a href="#">Art Works</a></li>
             <li><a href="#">Artists</a></li>
-            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Specials<b
-                    class="caret"></b></a>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Specials <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="#">Special 1</a></li>
                 <li><a href="#">Special 2</a></li>
@@ -74,10 +93,9 @@
           </ul>
         </div>
       </nav>
-    </div>
-    <!-- end container -->
-  </div>
-  <!-- end mainNavigationRow -->
+    </div>  <!-- end container -->
+  </div>  <!-- end mainNavigationRow -->
+
 </header>
 <div class="container">
   <div class="row">
@@ -197,8 +215,8 @@
     </div>
   </div>
 </footer>
-<script src="js/collapse-menu.js"></script>
-<script src="js/jquery-3.3.1.js"></script>
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.js"></script>
 <script src="js/confirmation.js"></script>
 </body>
 </html>

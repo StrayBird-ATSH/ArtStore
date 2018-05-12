@@ -4,67 +4,88 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Art Store</title>
-  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="css/index_style.css">
+  <link rel="stylesheet" href="css/site_theme.css">
 </head>
 <body>
 <header>
+
   <div id="topHeaderRow">
     <div class="container">
       <nav class="navbar navbar-inverse " role="navigation">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse"
-                  data-target=".navbar-ex1-collapse"><span class="sr-only">Toggle navigation</span><span
-                  class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
           </button>
-          <p class="navbar-text">Welcome to <strong>Art Store</strong>,
-            <a href="login.html" class="navbar-link">Login</a> or <a
-                    href="register.html" class="navbar-link">Create new account</a>
-            <em> Where art works come and go. </em></p>
+          <p class="navbar-text">Welcome to <strong>Art Store</strong>, <a href="#" class="navbar-link">Login</a> or <a
+                  href="#" class="navbar-link">Create new account</a><em> Where art works come and go. </em></p>
+        </div>
+
+        <div class="collapse navbar-collapse navbar-ex1-collapse pull-right">
+          <ul class="nav navbar-nav">
+            <li><a href="#"><span class="glyphicon glyphicon-user"></span> My Account</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-gift"></span> Wish List</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-arrow-right"></span> Checkout</a></li>
+          </ul>
         </div>
       </nav>
     </div>
   </div>
-  <!--	add CSS style to this place Mar 08 13:05-->
+
   <div id="logoRow">
     <div class="container">
       <div class="row">
         <div class="col-md-8">
           <h1>Art Store</h1>
         </div>
+
+
         <div class="col-md-4">
-          <form class="form-inline" role="search" action="search.html">
+          <form class="form-inline" role="search">
             <div class="input-group">
               <label class="sr-only" for="search">Search</label>
-              <input type="text" class="form-control" id="search" placeholder="Search" name="search">
+              <input type="text" id="search" class="form-control" placeholder="Search" name="search">
               <span class="input-group-btn">
-              <button class="btn btn-default" type="submit">
-                <span class="glyphicon glyphicon-search"></span>
-              </button>
-              </span></div>
+                  <button class="btn btn-default" type="submit"><span
+                          class="glyphicon glyphicon-search"></span></button>
+                  </span>
+            </div>
           </form>
         </div>
+
+
       </div>
+
+
     </div>
   </div>
-  <!--	add CSS style to this place Mar 08 16:38-->
+
   <div id="mainNavigationRow">
     <div class="container">
+
       <nav class="navbar navbar-default" role="navigation">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse"
-                  data-target=".navbar-ex1-collapse"><span class="sr-only">Toggle navigation</span><span
-                  class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
           </button>
         </div>
+
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="index.html">Home</a></li>
+            <li class="active"><a href="#">Home</a></li>
             <li><a href="#">About Us</a></li>
-            <li><a href="search.html">Art Works</a></li>
+            <li><a href="#">Art Works</a></li>
             <li><a href="#">Artists</a></li>
-            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Specials<b
-                    class="caret"></b></a>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Specials <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="#">Special 1</a></li>
                 <li><a href="#">Special 2</a></li>
@@ -73,10 +94,9 @@
           </ul>
         </div>
       </nav>
-    </div>
-    <!-- end container -->
-  </div>
-  <!-- end mainNavigationRow -->
+    </div>  <!-- end container -->
+  </div>  <!-- end mainNavigationRow -->
+
 </header>
 <section class="hero is-dark home-body">
   <div class="slider-bg">
@@ -102,9 +122,12 @@
                 <div class="columns is-vcentered">
                   <div class="column">
                     <p class="title">Landscape with a Calm</p>
-                    <p class="subtitle">In the late 1640s and early 1650s, at the height of his artistic <br>
-                      maturity, Nicolas Poussin turned from historical narrative to landscape painting. <br>
-                      Landscape with a Calm does not illustrate a story but rather evokes a mood.</p>
+                    <p class="subtitle">In the late 1640s and early 1650s, at the height of his
+                      artistic <br>
+                      maturity, Nicolas Poussin turned from historical narrative to landscape
+                      painting. <br>
+                      Landscape with a Calm does not illustrate a story but rather evokes a mood.
+                    </p>
                     <a class="btn-more" href="details.html"></a>
                   </div>
                 </div>
@@ -116,9 +139,12 @@
                 <div class="columns is-vcentered">
                   <div class="column">
                     <p class="title">The Grand Canal in Venice</p>
-                    <p class="subtitle">Canaletto was at the peak of his powers when he created this view of the
-                      sun-drenched palaces lining the Grand Canal and reflected in its shimmering water.
-                      With precise brushwork, he also evoked the effects of soot and crumbling stucco disfiguring
+                    <p class="subtitle">Canaletto was at the peak of his powers when he created this
+                      view of the
+                      sun-drenched palaces lining the Grand Canal and reflected in its shimmering
+                      water.
+                      With precise brushwork, he also evoked the effects of soot and crumbling
+                      stucco disfiguring
                       the facades.</p>
                     <a class="btn-more" href="details.html"></a>
                   </div>
@@ -128,7 +154,8 @@
           </div>
         </div>
         <!-- loop end -->
-        <button onclick="changeImage()" class="slick-next slick-arrow" type="button" style="display: block;">Next
+        <button onclick="changeImage()" class="slick-next slick-arrow" type="button" style="display: block;">
+          Next
         </button>
       </div>
     </div>
@@ -169,10 +196,14 @@
     <div class="row">
       <div class="col-md-3">
         <h4><span class="glyphicon glyphicon-info-sign"></span> About Us</h4>
-        <p>Fudan University (simplified Chinese: 复旦大学; traditional Chinese: 復旦大學; pinyin: Fùdàn Dàxué), located in
-          Shanghai, China, is one of the most prestigious and selective universities in China. It is also a member in
-          the C9 League. Its institutional predecessor was founded in 1905, shortly before the end of China's imperial
-          Qing dynasty. Fudan is now composed of four campuses in downtown Shanghai, including Handan (邯郸), Fenglin
+        <p>Fudan University (simplified Chinese: 复旦大学; traditional Chinese: 復旦大學; pinyin: Fùdàn Dàxué), located
+          in
+          Shanghai, China, is one of the most prestigious and selective universities in China. It is also a
+          member in
+          the C9 League. Its institutional predecessor was founded in 1905, shortly before the end of China's
+          imperial
+          Qing dynasty. Fudan is now composed of four campuses in downtown Shanghai, including Handan (邯郸),
+          Fenglin
           (枫林), Zhangjiang (张江), and Jiangwan (江湾), which share the same central administration.</p>
       </div>
       <div class="col-md-3">
@@ -199,9 +230,11 @@
             <em>11 minutes ago</em></div>
         </div>
         <div class="media"><a class="pull-left" href="details.html"><img class="media-object"
-                                                                         src="images/art/tiny/113010.jpg" alt="..."></a>
+                                                                         src="images/art/tiny/113010.jpg"
+                                                                         alt="..."></a>
           <div class="media-body">
-            <p class="media-heading similarTitle"><a href="details.html">Self-portrait in a Straw Hat</a></p>
+            <p class="media-heading similarTitle"><a href="details.html">Self-portrait in a Straw Hat</a>
+            </p>
             <em>23 minutes ago</em></div>
         </div>
       </div>
@@ -215,7 +248,8 @@
           </div>
           <div class="form-group tight-form-group">
             <label class="sr-only" for="email_footer">Email</label>
-            <input type="email" class="form-control" name="email" id="email_footer" placeholder="Enter email ...">
+            <input type="email" class="form-control" name="email" id="email_footer"
+                   placeholder="Enter email ...">
           </div>
           <div class="form-group tight-form-group">
             <label class="sr-only" for="message">Message</label>
@@ -237,9 +271,8 @@
     </div>
   </div>
 </footer>
-
+<script src="js/jquery.js"></script>
 <script src="js/homepage.js"></script>
-<script src="js/jquery-3.3.1.js"></script>
-
+<script src="js/bootstrap.js"></script>
 </body>
 </html>
