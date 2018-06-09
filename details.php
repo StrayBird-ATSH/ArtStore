@@ -8,12 +8,9 @@
   <link rel="stylesheet" href="css/site_theme.css">
 </head>
 <body>
-<?php include_once 'includes\config.php';
+<?php require_once 'includes\config.php';
 include 'includes\art-header.inc.php';
-session_start();
-error_reporting(0);
 $connection = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME);
-mysqli_select_db($connection, 'art_store');
 $connection->query("SET NAMES utf8");
 $error = mysqli_connect_error();
 if ($error != null) {
@@ -27,7 +24,6 @@ $sql = "SELECT * FROM artworks WHERE artworkID=$artworkID";
 $result = mysqli_query($connection, $sql);
 $imagesInformation = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
-
 <div class="container">
   <div class="row">
     <div class="col-md-10">
@@ -251,8 +247,6 @@ $imagesInformation = mysqli_fetch_all($result, MYSQLI_ASSOC);
     </div> <!-- end col-md-2 (right navigation) -->
   </div>  <!-- end main row -->
 </div>  <!-- end container -->
-
-
 <?php include 'art-footer.inc.php' ?>
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.js"></script>

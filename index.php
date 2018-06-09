@@ -9,70 +9,62 @@
   <link rel="stylesheet" href="css/site_theme.css">
 </head>
 <body>
-<?php include 'includes\art-header.inc.php' ?>
-<section class="hero is-dark home-body">
-  <div class="slider-bg">
-    <div class="home-banner-slider " id="bg0"
-         style="background-image:url('images/works/large/131010.jpg')"
-         data-index="0"></div>
-    <div class="home-banner-slider is-active" id="bg1"
-         style="background-image:url('images/works/large/132030.jpg')"
-         data-index="1"></div>
-  </div>
-  <div class="hero-body">
-    <div class="hero-slider">
-      <div class="slider-hero container slick-initialized slick-slider slick-dotted">
-        <button onclick="changeImage()" class="slick-prev slick-arrow" type="button"
-                style="display: block;">Previous
-        </button>
-        <!-- loop slider -->
-        <div class="slick-list draggable" id="slick-list">
-          <div class="slick-track" style="opacity: 1;">
-            <div class="col-md-2">
-              <section class="slick-slide" id="slick-slide00"
-                       style="width: 30em; opacity: 0; transition: opacity 500ms ease-out;">
-                <div class="columns is-vcentered">
-                  <div class="column">
-                    <p class="title">Landscape with a Calm</p>
-                    <p class="subtitle">In the late 1640s and early 1650s, at the height of his
-                      artistic <br>
-                      maturity, Nicolas Poussin turned from historical narrative to landscape
-                      painting. <br>
-                      Landscape with a Calm does not illustrate a story but rather evokes a mood.
-                    </p>
-                    <a class="btn-more" href="details.php"></a>
-                  </div>
-                </div>
-              </section>
-            </div>
-            <div class="col-md-5">
-              <section class="slick-slide slick-current slick-active" id="slick-slide01"
-                       style="width: 30em;  opacity: 1; transition: opacity 500ms ease-out;">
-                <div class="columns is-vcentered">
-                  <div class="column">
-                    <p class="title">The Grand Canal in Venice</p>
-                    <p class="subtitle">Canaletto was at the peak of his powers when he created this
-                      view of the
-                      sun-drenched palaces lining the Grand Canal and reflected in its shimmering
-                      water.
-                      With precise brushwork, he also evoked the effects of soot and crumbling
-                      stucco disfiguring
-                      the facades.</p>
-                    <a class="btn-more" href="details.php"></a>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </div>
-        </div>
-        <!-- loop end -->
-        <button onclick="changeImage()" class="slick-next slick-arrow" type="button" style="display: block;">
-          Next
-        </button>
+<?php include 'includes\art-header.inc.php';
+require_once 'includes\config.php';
+$connection = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME);
+$connection->query("SET NAMES utf8");
+$error = mysqli_connect_error();
+if ($error != null) {
+  $output = "<p>Unable to connect to database<p>" . $error;
+  exit($output);
+}
+if (isset($_GET['artworkID']))
+  $artworkID = $_GET['artworkID'];
+$sqlView = "SELECT * FROM artworks ORDER BY view DESC LIMIT 3";
+$result = mysqli_query($connection, $sqlView);
+$imagesViewMost = mysqli_fetch_all($result, MYSQLI_ASSOC);
+$sqlRecent = "SELECT * FROM artworks ORDER BY timeReleased DESC LIMIT 3";
+$result = mysqli_query($connection, $sqlRecent);
+$imagesMostRecent = mysqli_fetch_all($result, MYSQLI_ASSOC);
+?>
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    <div class="item active">
+      <img src="img/<?php echo $imagesViewMost[0]['imageFileName'] ?>" alt="...">
+      <div class="carousel-caption">
+        <h3>Caption Text</h3>
+      </div>
+    </div>
+    <div class="item">
+      <img src="img/<?php echo $imagesViewMost[1]['imageFileName'] ?>" alt="...">
+      <div class="carousel-caption">
+        <h3>Caption Text</h3>
+      </div>
+    </div>
+    <div class="item">
+      <img src="img/<?php echo $imagesViewMost[2]['imageFileName'] ?>" alt="...">
+      <div class="carousel-caption">
+        <h3>Caption Text</h3>
       </div>
     </div>
   </div>
-</section>
+
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+  </a>
+  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+  </a>
+</div> <!-- Carousel -->
 
 <div class="container">
   <div class="row" id="hot-display">
@@ -103,9 +95,8 @@
   </div>
 </div>
 
-<?php include 'includes\art-footer.inc.php' ?>
+<?php include 'art-footer.inc.php' ?>
 <script src="js/jquery.js"></script>
-<script src="js/homepage.js"></script>
 <script src="js/bootstrap.js"></script>
 </body>
 </html>
