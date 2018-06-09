@@ -20,77 +20,121 @@ if ($error != null) {
 }
 if (isset($_GET['artworkID']))
   $artworkID = $_GET['artworkID'];
-$sqlView = "SELECT * FROM artworks ORDER BY view DESC LIMIT 3";
+$sqlView =
+    "SELECT imageFileName,title,description,artworkID FROM artworks ORDER BY view DESC LIMIT 3";
 $result = mysqli_query($connection, $sqlView);
 $imagesViewMost = mysqli_fetch_all($result, MYSQLI_ASSOC);
 $sqlRecent = "SELECT * FROM artworks ORDER BY timeReleased DESC LIMIT 3";
 $result = mysqli_query($connection, $sqlRecent);
 $imagesMostRecent = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
-<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-  <!-- Indicators -->
-  <ol class="carousel-indicators">
-    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-  </ol>
 
-  <!-- Wrapper for slides -->
-  <div class="carousel-inner">
-    <div class="item active">
-      <img src="img/<?php echo $imagesViewMost[0]['imageFileName'] ?>" alt="...">
-      <div class="carousel-caption">
-        <h3>Caption Text</h3>
-      </div>
-    </div>
-    <div class="item">
-      <img src="img/<?php echo $imagesViewMost[1]['imageFileName'] ?>" alt="...">
-      <div class="carousel-caption">
-        <h3>Caption Text</h3>
-      </div>
-    </div>
-    <div class="item">
-      <img src="img/<?php echo $imagesViewMost[2]['imageFileName'] ?>" alt="...">
-      <div class="carousel-caption">
-        <h3>Caption Text</h3>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+          <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+          <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+          <div class="item active">
+            <img src="img/<?php echo $imagesViewMost[0]['imageFileName'] ?>">
+            <div class="carousel-caption">
+              <a href="details.php?artworkID=<?php echo $imagesViewMost[1]['artworkID'] ?>">
+                <h3><?php echo $imagesViewMost[0]['title'] ?>
+                </h3>
+              </a>
+              <?php echo $imagesViewMost[0]['description'] ?>
+            </div>
+          </div>
+          <div class="item">
+            <img src="img/<?php echo $imagesViewMost[1]['imageFileName'] ?>">
+            <div class="carousel-caption">
+              <a href="details.php?artworkID=<?php echo $imagesViewMost[1]['artworkID'] ?>">
+                <h3>
+                  <?php echo $imagesViewMost[1]['title'] ?>
+                </h3>
+              </a>
+              <?php echo $imagesViewMost[1]['description'] ?>
+            </div>
+          </div>
+          <div class="item">
+            <img src="img/<?php echo $imagesViewMost[2]['imageFileName'] ?>">
+            <div class="carousel-caption">
+              <h3>
+                <a href="details.php?artworkID=<?php echo $imagesViewMost[2]['artworkID'] ?>">
+                  <?php echo $imagesViewMost[2]['title'] ?>
+                </a>
+              </h3>
+              <?php echo $imagesViewMost[2]['description'] ?>
+            </div>
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- Controls -->
-  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left"></span>
-  </a>
-  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right"></span>
-  </a>
-</div> <!-- Carousel -->
 
 <div class="container">
   <div class="row" id="hot-display">
     <div class="col-md-4">
-      <img src="images/art/113010.jpg">
-      <h3><a href="details.php">Self-portrait in a Straw Hat</a></h3>
-      <p>By <a href="search.php">Louise Elisabeth Lebrun</a></p>
-      <p>The painting appears, after cleaning, to be an autograph replica of a picture, the
-        original of which was painted in Brussels in 1782 in free imitation of Rubens's
-        'Chapeau de Paille', which LeBrun had seen in Antwerp.</p>
+      <img src="img/<?php echo $imagesMostRecent[0]['imageFileName'] ?>">
+      <h3><a href="details.php?artworkID=<?php echo $imagesMostRecent[0]['artworkID'] ?>">
+          <?php echo $imagesMostRecent[0]['title'] ?>
+        </a>
+      </h3>
+      <p>By
+        <a href="search.php?artworkID=<?php echo $imagesMostRecent[0]['artworkID'] ?>">
+          <?php echo $imagesMostRecent[0]['artist'] ?>
+        </a>
+      </p>
+      <p>
+        <?php echo $imagesMostRecent[0]['description'] ?>
+      </p>
     </div>
     <div class="col-md-4">
-      <img src="images/art/113010.jpg">
-      <h3><a href="details.php">Self-portrait in a Straw Hat</a></h3>
-      <p>By <a href="search.php">Louise Elisabeth Lebrun</a></p>
-      <p>The painting appears, after cleaning, to be an autograph replica of a picture, the
-        original of which was painted in Brussels in 1782 in free imitation of Rubens's
-        'Chapeau de Paille', which LeBrun had seen in Antwerp.</p>
+      <img src="img/<?php echo $imagesMostRecent[1]['imageFileName'] ?>">
+      <h3><a href="details.php?artworkID=<?php echo $imagesMostRecent[1]['artworkID'] ?>">
+          <?php echo $imagesMostRecent[1]['title'] ?>
+        </a>
+      </h3>
+      <p>By
+        <a href="search.php?artworkID=<?php echo $imagesMostRecent[1]['artworkID'] ?>">
+          <?php echo $imagesMostRecent[1]['artist'] ?>
+        </a>
+      </p>
+      <p>
+        <?php echo $imagesMostRecent[1]['description'] ?>
+      </p>
     </div>
     <div class="col-md-4">
-      <img src="images/art/113010.jpg">
-      <h3><a href="details.php">Self-portrait in a Straw Hat</a></h3>
-      <p>By <a href="search.php">Louise Elisabeth Lebrun</a></p>
-      <p>The painting appears, after cleaning, to be an autograph replica of a picture, the
-        original of which was painted in Brussels in 1782 in free imitation of Rubens's
-        'Chapeau de Paille', which LeBrun had seen in Antwerp.</p>
+      <img src="img/<?php echo $imagesMostRecent[2]['imageFileName'] ?>">
+      <h3><a href="details.php?artworkID=<?php echo $imagesMostRecent[2]['artworkID'] ?>">
+          <?php echo $imagesMostRecent[2]['title'] ?>
+        </a>
+      </h3>
+      <p>By
+        <a href="search.php?artworkID=<?php echo $imagesMostRecent[2]['artworkID'] ?>">
+          <?php echo $imagesMostRecent[2]['artist'] ?>
+        </a>
+      </p>
+      <p>
+        <?php echo $imagesMostRecent[2]['description'] ?>
+      </p>
     </div>
   </div>
 </div>
