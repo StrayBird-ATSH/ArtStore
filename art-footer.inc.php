@@ -22,7 +22,7 @@
         <h4><span class="glyphicon glyphicon-shopping-cart"></span> Just Ordered</h4>
         <div class="media">
           <a class="pull-left" href="#">
-            <img class="media-object" src="../images/art/tiny/099110.jpg" alt="...">
+            <img class="media-object" src="images/art/tiny/099110.jpg" alt="...">
           </a>
           <div class="media-body">
             <p class="media-heading similarTitle"><a href="#">The Veiled Woman</a></p>
@@ -31,7 +31,7 @@
         </div>
         <div class="media">
           <a class="pull-left" href="#">
-            <img class="media-object" src="../images/art/tiny/116010.jpg" alt="...">
+            <img class="media-object" src="images/art/tiny/116010.jpg" alt="...">
           </a>
           <div class="media-body">
             <p class="media-heading similarTitle"><a href="#">Artist Holding a Thistle</a></p>
@@ -40,7 +40,7 @@
         </div>
         <div class="media">
           <a class="pull-left" href="#">
-            <img class="media-object" src="../images/art/tiny/113010.jpg" alt="...">
+            <img class="media-object" src="images/art/tiny/113010.jpg" alt="...">
           </a>
           <div class="media-body">
             <p class="media-heading similarTitle"><a href="#">Self-portrait in a Straw Hat</a></p>

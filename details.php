@@ -10,15 +10,18 @@
 <body>
 <?php include_once 'includes\config.php';
 include 'includes\art-header.inc.php';
+session_start();
+error_reporting(0);
 $connection = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME);
+mysqli_select_db($connection, 'art_store');
+$connection->query("SET NAMES utf8");
 $error = mysqli_connect_error();
 if ($error != null) {
   $output = "<p>Unable to connect to database<p>" . $error;
   exit($output);
 }
-if (!isset($_GET['artworkID']))
-  $artworkID = 437;
-else
+$artworkID = 437;
+if (isset($_GET['artworkID']))
   $artworkID = $_GET['artworkID'];
 $sql = "SELECT * FROM artworks WHERE artworkID=$artworkID";
 $result = mysqli_query($connection, $sql);
@@ -46,7 +49,7 @@ $imagesInformation = mysqli_fetch_all($result, MYSQLI_ASSOC);
           <p>
             <?php echo $imagesInformation[0]['description'] ?>
           </p>
-          <p class="price"><?php echo $imagesInformation[0]['price'] ?></p>
+          <p class="price">$<?php echo $imagesInformation[0]['price'] ?></p>
           <div class="btn-group btn-group-lg">
             <button type="button" class="btn btn-default">
               <a href="#"><span class="glyphicon glyphicon-gift"></span> Add to Wish List</a>
@@ -65,7 +68,7 @@ $imagesInformation = mysqli_fetch_all($result, MYSQLI_ASSOC);
               </tr>
               <tr>
                 <th>Medium:</th>
-                <td><?php echo $imagesInformation[0]['description'] ?></td>
+                <td>Oil on canvas</td>
               </tr>
               <tr>
                 <th>Dimensions:</th>
@@ -73,14 +76,14 @@ $imagesInformation = mysqli_fetch_all($result, MYSQLI_ASSOC);
                   <?php
                   $width = $imagesInformation[0]['width'];
                   $height = $imagesInformation[0]['height'];
-                  echo $width . "cm by " . $height . 'cm ' ?>
+                  echo $width . "cm x " . $height . 'cm ' ?>
                 </td>
               </tr>
               <tr>
                 <th>Home:</th>
                 <td>
                   <a href="#">
-                    <?php echo $imagesInformation[0]['ownerID'] ?>
+                    National Gallery, London
                   </a>
                 </td>
               </tr>
@@ -88,7 +91,8 @@ $imagesInformation = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 <th>Genres:</th>
                 <td><a href="#">
                     <?php echo $imagesInformation[0]['genre'] ?>
-                  </a>, <a href="#">Rococo</a></td>
+                  </a>
+                </td>
               </tr>
               <tr>
                 <th>Subjects:</th>
@@ -96,7 +100,6 @@ $imagesInformation = mysqli_fetch_all($result, MYSQLI_ASSOC);
               </tr>
             </table>
           </div>
-
         </div>  <!-- end col-md-7 -->
       </div>  <!-- end row (product info) -->
 
@@ -250,7 +253,7 @@ $imagesInformation = mysqli_fetch_all($result, MYSQLI_ASSOC);
 </div>  <!-- end container -->
 
 
-<?php include 'includes\art-footer.inc.php' ?>
+<?php include 'art-footer.inc.php' ?>
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.js"></script>
 </body>
