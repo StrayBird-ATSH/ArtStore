@@ -28,18 +28,11 @@ $imagesInformation = mysqli_fetch_all($result, MYSQLI_ASSOC);
   <div class="row">
     <div class="col-md-10">
       <h2><?php echo $imagesInformation[0]['title'] ?></h2>
-      <p>By
-        <a href="search.php?artworkID="
-            <?php echo $imagesInformation[0]['artworkID'] ?>
-        >
-          <?php echo $imagesInformation[0]['artist'] ?>
-        </a>
-      </p>
+      <p>By <?php echo $imagesInformation[0]['artist'] ?></p>
       <div class="row">
         <div class="col-md-5">
           <img src="img/<?php echo $imagesInformation[0]['imageFileName'] ?>"
-               class="img-thumbnail img-responsive"
-               alt="<?php echo $imagesInformation[0]['title'] ?>"/>
+               class="img-thumbnail img-responsive"/>
         </div>
         <div class="col-md-7">
           <p>
@@ -78,21 +71,17 @@ $imagesInformation = mysqli_fetch_all($result, MYSQLI_ASSOC);
               <tr>
                 <th>Home:</th>
                 <td>
-                  <a href="#">
-                    National Gallery, London
-                  </a>
+                  National Gallery, London
                 </td>
               </tr>
               <tr>
                 <th>Genres:</th>
-                <td><a href="#">
-                    <?php echo $imagesInformation[0]['genre'] ?>
-                  </a>
+                <td><?php echo $imagesInformation[0]['genre'] ?>
                 </td>
               </tr>
               <tr>
                 <th>Subjects:</th>
-                <td><a href="#">People</a>, <a href="#">Arts</a></td>
+                <td>People, Arts</td>
               </tr>
             </table>
           </div>

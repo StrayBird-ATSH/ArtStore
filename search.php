@@ -7,7 +7,25 @@
   <title>Art Store-Search</title>
 </head>
 <body>
-<?php include 'includes\art-header.inc.php' ?>
+<?php include 'includes\art-header.inc.php';
+require_once 'includes\config.php';
+$connection = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME);
+$connection->query("SET NAMES utf8");
+$error = mysqli_connect_error();
+if ($error != null) {
+  $output = "<p>Unable to connect to database<p>" . $error;
+  exit($output);
+}
+if (isset($_GET['artworkID']))
+  $artworkID = $_GET['artworkID'];
+$sqlView =
+    "SELECT imageFileName,title,description,artworkID FROM artworks ORDER BY view DESC LIMIT 3";
+$result = mysqli_query($connection, $sqlView);
+$imagesViewMost = mysqli_fetch_all($result, MYSQLI_ASSOC);
+$sqlRecent = "SELECT * FROM artworks ORDER BY timeReleased DESC LIMIT 3";
+$result = mysqli_query($connection, $sqlRecent);
+$imagesMostRecent = mysqli_fetch_all($result, MYSQLI_ASSOC);
+?>
 <div class="container">
   <div class="row">
     <div class="col-md-10">
@@ -181,16 +199,15 @@
     </div>
   </div>
 </div>
-<?php include 'includes\art-footer.inc.php' ?>
+<?php include 'art-footer.inc.php' ?>
 <script src="js/jquery.js"></script>
-<script src="js/duplication.js"></script>
 <script src="js/pagination.js"></script>
 <script type="text/javascript" src="js/big_image.js"></script>
 <script src="js/bootstrap.js"></script>
 <script type="text/javascript">
   jQuery(document).ready(function ($) {
     $('.table tbody').pagination({
-      perPage: 2,
+      perPage: 3,
       insertAfter: '.table',
       pageNumbers: true
     });

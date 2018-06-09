@@ -17,8 +17,6 @@ if ($error != null) {
   $output = "<p>Unable to connect to database<p>" . $error;
   exit($output);
 }
-if (isset($_GET['artworkID']))
-  $artworkID = $_GET['artworkID'];
 $sqlView =
     "SELECT imageFileName,title,description,artworkID FROM artworks ORDER BY view DESC LIMIT 3";
 $result = mysqli_query($connection, $sqlView);
@@ -27,7 +25,6 @@ $sqlRecent = "SELECT * FROM artworks ORDER BY timeReleased DESC LIMIT 3";
 $result = mysqli_query($connection, $sqlRecent);
 $imagesMostRecent = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
-
 <div class="container">
   <div class="row">
     <div class="col-md-12">
@@ -38,13 +35,12 @@ $imagesMostRecent = mysqli_fetch_all($result, MYSQLI_ASSOC);
           <li data-target="#carousel-example-generic" data-slide-to="1"></li>
           <li data-target="#carousel-example-generic" data-slide-to="2"></li>
         </ol>
-
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
           <div class="item active">
             <img src="img/<?php echo $imagesViewMost[0]['imageFileName'] ?>">
             <div class="carousel-caption">
-              <a href="details.php?artworkID=<?php echo $imagesViewMost[1]['artworkID'] ?>">
+              <a href="details.php?artworkID=<?php echo $imagesViewMost[0]['artworkID'] ?>">
                 <h3><?php echo $imagesViewMost[0]['title'] ?>
                 </h3>
               </a>
@@ -91,13 +87,12 @@ $imagesMostRecent = mysqli_fetch_all($result, MYSQLI_ASSOC);
       <div class="thumbnail">
         <img src="img/<?php echo $imagesMostRecent[0]['imageFileName'] ?>">
         <div class="caption">
-          <h3>
-            <?php echo $imagesMostRecent[0]['title'] ?>
+          <h3><a href="details.php?artworkID=<?php echo $imagesMostRecent[0]['artworkID'] ?>">
+              <?php echo $imagesMostRecent[0]['title'] ?>
+            </a>
           </h3>
           <p>By
-            <a href="search.php?artworkID=<?php echo $imagesMostRecent[1]['artworkID'] ?>">
-              <?php echo $imagesMostRecent[1]['artist'] ?>
-            </a>
+            <?php echo $imagesMostRecent[0]['artist'] ?>
           </p>
           <p>
             <?php echo $imagesMostRecent[0]['description'] ?>
@@ -109,13 +104,12 @@ $imagesMostRecent = mysqli_fetch_all($result, MYSQLI_ASSOC);
       <div class="thumbnail">
         <img src="img/<?php echo $imagesMostRecent[1]['imageFileName'] ?>">
         <div class="caption">
-          <h3>
-            <?php echo $imagesMostRecent[1]['title'] ?>
+          <h3><a href="details.php?artworkID=<?php echo $imagesMostRecent[1]['artworkID'] ?>">
+              <?php echo $imagesMostRecent[1]['title'] ?>
+            </a>
           </h3>
           <p>By
-            <a href="search.php?artworkID=<?php echo $imagesMostRecent[1]['artworkID'] ?>">
-              <?php echo $imagesMostRecent[1]['artist'] ?>
-            </a>
+            <?php echo $imagesMostRecent[1]['artist'] ?>
           </p>
           <p>
             <?php echo $imagesMostRecent[1]['description'] ?>
@@ -127,13 +121,12 @@ $imagesMostRecent = mysqli_fetch_all($result, MYSQLI_ASSOC);
       <div class="thumbnail">
         <img src="img/<?php echo $imagesMostRecent[2]['imageFileName'] ?>">
         <div class="caption">
-          <h3>
-            <?php echo $imagesMostRecent[2]['title'] ?>
+          <h3><a href="details.php?artworkID=<?php echo $imagesMostRecent[2]['artworkID'] ?>">
+              <?php echo $imagesMostRecent[2]['title'] ?>
+            </a>
           </h3>
           <p>By
-            <a href="search.php?artworkID=<?php echo $imagesMostRecent[2]['artworkID'] ?>">
-              <?php echo $imagesMostRecent[2]['artist'] ?>
-            </a>
+            <?php echo $imagesMostRecent[2]['artist'] ?>
           </p>
           <p>
             <?php echo $imagesMostRecent[2]['description'] ?>
