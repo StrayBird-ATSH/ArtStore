@@ -8,7 +8,26 @@
   <link href="css/site_theme.css" rel="stylesheet">
 </head>
 <body>
-<?php include 'includes\art-header.inc.php' ?>
+<?php include 'includes\art-header.inc.php';
+if (isset($_POST)) {
+  require_once 'includes\config.php';
+  $connection = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME);
+  $connection->query("SET NAMES utf8");
+  $error = mysqli_connect_error();
+  if ($error != null) {
+    $output = "<p>Unable to connect to database<p>" . $error;
+    exit($output);
+  }
+  $email = $_POST['email'];
+  $sql = "SELECT COUNT(*) FROM users WHERE email=$email";
+  $result = mysqli_query($connection, $sql);
+  if ($result === 0) {
+
+  }
+}
+
+
+?>
 <div class="container">
   <div class="row">
     <div class="col-md-3">
@@ -23,7 +42,7 @@
       </div>
     </div>
     <div class="col-md-9">
-      <form role="form" class="form-horizontal" action="art-form-process.php" method="post">
+      <form role="form" class="form-horizontal" action="register_page.php" method="post">
         <div class="page-header">
           <h2>Register Account</h2>
           <p>If you already have an account with us, please login at the login page.</p>
@@ -31,31 +50,31 @@
         <div class="form-group">
           <label for="first" class="col-md-3 control-label">First Name</label>
           <div class="col-md-9">
-            <input type="text" class="form-control" name="first">
+            <input type="text" class="form-control" name="first" title="">
           </div>
         </div>
         <div class="form-group">
           <label for="last" class="col-md-3 control-label">Last Name</label>
           <div class="col-md-9">
-            <input type="text" class="form-control" name="last">
+            <input type="text" class="form-control" name="last" title="">
           </div>
         </div>
         <div class="form-group">
           <label for="email" class="col-md-3 control-label">Email</label>
           <div class="col-md-9">
-            <input type="email" class="form-control" name="email">
+            <input type="email" class="form-control" name="email" title="">
           </div>
         </div>
         <div class="form-group">
           <label for="password1" class="col-md-3 control-label">Password</label>
           <div class="col-md-9">
-            <input type="password" class="form-control" name="password1">
+            <input type="password" class="form-control" name="password1" title="">
           </div>
         </div>
         <div class="form-group">
           <label for="password2" class="col-md-3 control-label">Password Confirm</label>
           <div class="col-md-9">
-            <input type="password" class="form-control" name="password2">
+            <input type="password" class="form-control" name="password2" title="">
           </div>
         </div>
         <div class="form-group">
@@ -76,8 +95,9 @@
     </div>
   </div>
 </div>
-<?php include 'includes\art-footer.inc.php' ?>
+<?php include 'art-footer.inc.php' ?>
 <script src="js/jquery.js"></script>
+<script src="js/confirmation.js"></script>
 <script src="js/bootstrap.js"></script>
 </body>
 </html>
