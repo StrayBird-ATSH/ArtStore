@@ -17,46 +17,46 @@ if ($error != null) {
   exit($output);
 }
 $sql =
-    "SELECT imageFileName,title,description,artist,artworkID,price,view FROM artworks LIMIT 80";
+    "SELECT imageFileName,title,description,artist,artworkID,price,view FROM artworks";
 if ((isset($_GET['title']) && $_GET['title'] != "") ||
     (isset($_GET['description']) && $_GET['description'] != "") ||
     (isset($_GET['artist']) && $_GET['artist'] != "")) {
   $sql .= " WHERE ";
   if ((isset($_GET['title']) && $_GET['title'] != "")) {
     $title = $_GET['title'];
-    $sql .= " title LIKE  $title";
+    $sql .= " title LIKE  '$title'";
     if ((isset($_GET['description']) && $_GET['description'] != "")) {
       $description = $_GET['description'];
-      $sql .= " AND description LIKE  $description";
+      $sql .= " AND description LIKE  '$description'";
       if ((isset($_GET['artist']) && $_GET['artist'] != "")) {
         $artist = $_GET['artist'];
-        $sql .= " AND artist LIKE  $artist";
+        $sql .= " AND artist LIKE  '$artist'";
       }
     } elseif ((isset($_GET['artist']) && $_GET['artist'] != "")) {
       $artist = $_GET['artist'];
-      $sql .= " AND artist LIKE  $artist";
+      $sql .= " AND artist LIKE  '$artist'";
     }
   } elseif ((isset($_GET['description']) && $_GET['description'] != "")) {
     $description = $_GET['description'];
-    $sql .= " description LIKE  $description";
+    $sql .= " description LIKE  '$description'";
     if ((isset($_GET['artist']) && $_GET['artist'] != "")) {
       $artist = $_GET['artist'];
-      $sql .= " AND artist LIKE $artist";
+      $sql .= " AND artist LIKE '$artist'";
     }
   } elseif ((isset($_GET['artist']) && $_GET['artist'] != "")) {
     $artist = $_GET['artist'];
-    $sql .= " artist LIKE  $artist";
+    $sql .= " artist LIKE  '$artist'";
   }
 }
 if (isset($_GET['sort']) && $_GET['sort'] != 0) {
   $sortValue = $_GET['sort'];
   $sql .= " ORDER BY ";
-  if ($sortValue = 1)
+  if ($sortValue == "1")
     $sql .= " price ";
   else
     $sql .= " view DESC";
 }
-$result = mysqli_query($connection, $sql);
+$result = mysqli_query($connection, $sql . " LIMIT 80");
 $images = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
 <div class="container">
