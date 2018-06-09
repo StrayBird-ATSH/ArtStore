@@ -8,26 +8,45 @@
   <link rel="stylesheet" href="css/site_theme.css">
 </head>
 <body>
-<?php include 'includes\art-header.inc.php' ?>
+<?php include_once 'includes\config.php';
+include 'includes\art-header.inc.php';
+$connection = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME);
+$error = mysqli_connect_error();
+if ($error != null) {
+  $output = "<p>Unable to connect to database<p>" . $error;
+  exit($output);
+}
+if (!isset($_GET['artworkID']))
+  $artworkID = 437;
+else
+  $artworkID = $_GET['artworkID'];
+$sql = "SELECT * FROM artworks WHERE artworkID=$artworkID";
+$result = mysqli_query($connection, $sql);
+$imagesInformation = mysqli_fetch_all($result, MYSQLI_ASSOC);
+?>
 
 <div class="container">
   <div class="row">
-    
     <div class="col-md-10">
-      <h2>Self-portrait in a Straw Hat</h2>
-      <p>By <a href="search.php">Louise Elisabeth Lebrun</a></p>
+      <h2><?php echo $imagesInformation[0]['title'] ?></h2>
+      <p>By
+        <a href="search.php?artworkID="
+            <?php echo $imagesInformation[0]['artworkID'] ?>
+        >
+          <?php echo $imagesInformation[0]['artist'] ?>
+        </a>
+      </p>
       <div class="row">
         <div class="col-md-5">
-          <img src="images/art/113010.jpg" class="img-thumbnail img-responsive" alt="Self-portrait in a Straw Hat"/>
+          <img src="img/<?php echo $imagesInformation[0]['imageFileName'] ?>"
+               class="img-thumbnail img-responsive"
+               alt="<?php echo $imagesInformation[0]['title'] ?>"/>
         </div>
         <div class="col-md-7">
           <p>
-            The painting appears, after cleaning, to be an autograph replica of a picture, the original of which was
-            painted in Brussels in 1782 in free imitation of Rubens's 'Chapeau de Paille', which LeBrun had seen in
-            Antwerp. It was exhibited in Paris in 1782 at the Salon de la Correspondance. LeBrun's original is recorded
-            in a private collection in France.
+            <?php echo $imagesInformation[0]['description'] ?>
           </p>
-          <p class="price">$700</p>
+          <p class="price"><?php echo $imagesInformation[0]['price'] ?></p>
           <div class="btn-group btn-group-lg">
             <button type="button" class="btn btn-default">
               <a href="#"><span class="glyphicon glyphicon-gift"></span> Add to Wish List</a>
@@ -42,23 +61,34 @@
             <table class="table">
               <tr>
                 <th>Date:</th>
-                <td>1782</td>
+                <td><?php echo $imagesInformation[0]['yearOfWork'] ?></td>
               </tr>
               <tr>
                 <th>Medium:</th>
-                <td>Oil on canvas</td>
+                <td><?php echo $imagesInformation[0]['description'] ?></td>
               </tr>
               <tr>
                 <th>Dimensions:</th>
-                <td>98cm x 71cm</td>
+                <td>
+                  <?php
+                  $width = $imagesInformation[0]['width'];
+                  $height = $imagesInformation[0]['height'];
+                  echo $width . "cm by " . $height . 'cm ' ?>
+                </td>
               </tr>
               <tr>
                 <th>Home:</th>
-                <td><a href="#">National Gallery, London</a></td>
+                <td>
+                  <a href="#">
+                    <?php echo $imagesInformation[0]['ownerID'] ?>
+                  </a>
+                </td>
               </tr>
               <tr>
                 <th>Genres:</th>
-                <td><a href="#">Realism</a>, <a href="#">Rococo</a></td>
+                <td><a href="#">
+                    <?php echo $imagesInformation[0]['genre'] ?>
+                  </a>, <a href="#">Rococo</a></td>
               </tr>
               <tr>
                 <th>Subjects:</th>
@@ -66,12 +96,12 @@
               </tr>
             </table>
           </div>
-        
+
         </div>  <!-- end col-md-7 -->
       </div>  <!-- end row (product info) -->
-      
+
       <p>&nbsp;</p>
-      
+
       <h3>Similar Products </h3>
       <div class="row">
         <div class="col-md-3">
@@ -92,7 +122,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="col-md-3">
           <div class="thumbnail">
             <img src="images/art/thumbs/120010l.jpg" alt="..." class="img-thumbnail img-responsive">
@@ -110,7 +140,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="col-md-3">
           <div class="thumbnail">
             <img src="images/art/thumbs/107010.jpg" alt="..." class="img-thumbnail img-responsive">
@@ -128,7 +158,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="col-md-3">
           <div class="thumbnail">
             <img src="images/art/thumbs/106020.jpg" alt="..." class="img-thumbnail img-responsive">
@@ -145,18 +175,18 @@
             </div>
           </div>
         </div>
-      
+
       </div>  <!-- end similar products row -->
     </div>  <!-- end col-md-10 (main content) -->
-    
+
     <div class="col-md-2">
-      
+
       <div class="panel panel-primary">
         <div class="panel-heading">
           <h3 class="panel-title">Cart </h3>
         </div>
         <div class="panel-body">
-          
+
           <div class="media">
             <a class="pull-left" href="#">
               <img class="media-object" src="images/art/tiny/116010.jpg" alt="..." width="32">
@@ -184,7 +214,7 @@
           </div>
         </div>
       </div>
-      
+
       <div class="panel panel-info">
         <div class="panel-heading">
           <h3 class="panel-title">Popular Artists</h3>
@@ -201,7 +231,7 @@
           </ul>
         </div>
       </div>
-      
+
       <div class="panel panel-info">
         <div class="panel-heading">
           <h3 class="panel-title">Popular Genres</h3>
