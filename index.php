@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Art Store</title>
   <link rel="stylesheet" href="css/bootstrap.css">
-  <link rel="stylesheet" href="css/index_style.css">
   <link rel="stylesheet" href="css/site_theme.css">
 </head>
 <body>
@@ -75,7 +74,6 @@ $imagesMostRecent = mysqli_fetch_all($result, MYSQLI_ASSOC);
             </div>
           </div>
         </div>
-
         <!-- Controls -->
         <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
           <span class="glyphicon glyphicon-chevron-left"></span>
@@ -87,58 +85,70 @@ $imagesMostRecent = mysqli_fetch_all($result, MYSQLI_ASSOC);
     </div>
   </div>
 </div>
-
-
 <div class="container">
-  <div class="row" id="hot-display">
-    <div class="col-md-4">
-      <img src="img/<?php echo $imagesMostRecent[0]['imageFileName'] ?>">
-      <h3><a href="details.php?artworkID=<?php echo $imagesMostRecent[0]['artworkID'] ?>">
-          <?php echo $imagesMostRecent[0]['title'] ?>
-        </a>
-      </h3>
-      <p>By
-        <a href="search.php?artworkID=<?php echo $imagesMostRecent[0]['artworkID'] ?>">
-          <?php echo $imagesMostRecent[0]['artist'] ?>
-        </a>
-      </p>
-      <p>
-        <?php echo $imagesMostRecent[0]['description'] ?>
-      </p>
+  <div class="row">
+    <div class="col-sm-6 col-md-4">
+      <div class="thumbnail">
+        <img src="img/<?php echo $imagesMostRecent[0]['imageFileName'] ?>">
+        <div class="caption">
+          <h3>
+            <?php echo $imagesMostRecent[0]['title'] ?>
+          </h3>
+          <p>By
+            <a href="search.php?artworkID=<?php echo $imagesMostRecent[1]['artworkID'] ?>">
+              <?php echo $imagesMostRecent[1]['artist'] ?>
+            </a>
+          </p>
+          <p>
+            <?php echo $imagesMostRecent[0]['description'] ?>
+          </p>
+          <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default"
+                                                                             role="button">Button</a></p>
+        </div>
+      </div>
     </div>
-    <div class="col-md-4">
-      <img src="img/<?php echo $imagesMostRecent[1]['imageFileName'] ?>">
-      <h3><a href="details.php?artworkID=<?php echo $imagesMostRecent[1]['artworkID'] ?>">
-          <?php echo $imagesMostRecent[1]['title'] ?>
-        </a>
-      </h3>
-      <p>By
-        <a href="search.php?artworkID=<?php echo $imagesMostRecent[1]['artworkID'] ?>">
-          <?php echo $imagesMostRecent[1]['artist'] ?>
-        </a>
-      </p>
-      <p>
-        <?php echo $imagesMostRecent[1]['description'] ?>
-      </p>
+    <div class="col-sm-6 col-md-4">
+      <div class="thumbnail">
+        <img src="img/<?php echo $imagesMostRecent[1]['imageFileName'] ?>">
+        <div class="caption">
+          <h3>
+            <?php echo $imagesMostRecent[1]['title'] ?>
+          </h3>
+          <p>By
+            <a href="search.php?artworkID=<?php echo $imagesMostRecent[1]['artworkID'] ?>">
+              <?php echo $imagesMostRecent[1]['artist'] ?>
+            </a>
+          </p>
+          <p>
+            <?php echo $imagesMostRecent[1]['description'] ?>
+          </p>
+          <p><a href="#" class="btn btn-primary" role="button">Button</a>
+            <a href="#" class="btn btn-default" role="button">Button</a></p>
+        </div>
+      </div>
     </div>
-    <div class="col-md-4">
-      <img src="img/<?php echo $imagesMostRecent[2]['imageFileName'] ?>">
-      <h3><a href="details.php?artworkID=<?php echo $imagesMostRecent[2]['artworkID'] ?>">
-          <?php echo $imagesMostRecent[2]['title'] ?>
-        </a>
-      </h3>
-      <p>By
-        <a href="search.php?artworkID=<?php echo $imagesMostRecent[2]['artworkID'] ?>">
-          <?php echo $imagesMostRecent[2]['artist'] ?>
-        </a>
-      </p>
-      <p>
-        <?php echo $imagesMostRecent[2]['description'] ?>
-      </p>
+    <div class="col-sm-6 col-md-4">
+      <div class="thumbnail">
+        <img src="img/<?php echo $imagesMostRecent[2]['imageFileName'] ?>">
+        <div class="caption">
+          <h3>
+            <?php echo $imagesMostRecent[2]['title'] ?>
+          </h3>
+          <p>By
+            <a href="search.php?artworkID=<?php echo $imagesMostRecent[2]['artworkID'] ?>">
+              <?php echo $imagesMostRecent[2]['artist'] ?>
+            </a>
+          </p>
+          <p>
+            <?php echo $imagesMostRecent[2]['description'] ?>
+          </p>
+          <p><a href="#" class="btn btn-primary" role="button">Button</a>
+            <a href="#" class="btn btn-default" role="button">Button</a></p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-
 <?php include 'art-footer.inc.php' ?>
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.js"></script>
