@@ -185,3 +185,7 @@ select {
   border-radius: 4px;
   line-height: 1.428571429;
 }
+
+.carousel-inner img {
+  width:100%;
+}

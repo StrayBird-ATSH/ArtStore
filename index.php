@@ -102,8 +102,6 @@ $imagesMostRecent = mysqli_fetch_all($result, MYSQLI_ASSOC);
           <p>
             <?php echo $imagesMostRecent[0]['description'] ?>
           </p>
-          <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default"
-                                                                             role="button">Button</a></p>
         </div>
       </div>
     </div>
@@ -122,8 +120,6 @@ $imagesMostRecent = mysqli_fetch_all($result, MYSQLI_ASSOC);
           <p>
             <?php echo $imagesMostRecent[1]['description'] ?>
           </p>
-          <p><a href="#" class="btn btn-primary" role="button">Button</a>
-            <a href="#" class="btn btn-default" role="button">Button</a></p>
         </div>
       </div>
     </div>
@@ -142,8 +138,6 @@ $imagesMostRecent = mysqli_fetch_all($result, MYSQLI_ASSOC);
           <p>
             <?php echo $imagesMostRecent[2]['description'] ?>
           </p>
-          <p><a href="#" class="btn btn-primary" role="button">Button</a>
-            <a href="#" class="btn btn-default" role="button">Button</a></p>
         </div>
       </div>
     </div>
