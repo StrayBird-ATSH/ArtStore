@@ -24,6 +24,7 @@ footer {
 .onSuccess {
   color: green;
 }
+
 div#topHeaderRow {
   font-size: 0.9em;
 }
@@ -146,6 +147,10 @@ div#artistBox {
   background-color: #FAFCFF;
 }
 
+#artistBox td {
+  width: 20%;
+}
+
 table tbody td {
   border-top: 1pt solid #95BEF0;
   line-height: 1.5em;
@@ -174,10 +179,10 @@ caption {
   font-size: 1.2em;
 }
 
-#searchInput {
-  line-height: 1.428571429;
+input[type="search"] {
+  line-height: 1.5;
   padding: 6px 12px;
-  border-radius: 4px;
+  border-radius: 3px;
 }
 
 select {
@@ -187,5 +192,9 @@ select {
 }
 
 .carousel-inner img {
-  width:100%;
+  width: 100%;
+}
+
+.artThumb {
+  max-width: 10em;
 }

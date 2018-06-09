@@ -49,7 +49,7 @@
             <div class="input-group">
               <label class="sr-only" for="search">Search</label>
               <input type="text" class="form-control"
-                     placeholder="Search" name="search">
+                     placeholder="Search for an artwork" name="title">
               <span class="input-group-btn">
                   <button class="btn btn-default" type="submit">
                     <span class="glyphicon glyphicon-search">

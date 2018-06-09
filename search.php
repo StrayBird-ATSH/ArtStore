@@ -16,115 +16,96 @@ if ($error != null) {
   $output = "<p>Unable to connect to database<p>" . $error;
   exit($output);
 }
-if (isset($_GET['artworkID']))
-  $artworkID = $_GET['artworkID'];
-$sqlView =
-    "SELECT imageFileName,title,description,artworkID FROM artworks ORDER BY view DESC LIMIT 3";
-$result = mysqli_query($connection, $sqlView);
-$imagesViewMost = mysqli_fetch_all($result, MYSQLI_ASSOC);
-$sqlRecent = "SELECT * FROM artworks ORDER BY timeReleased DESC LIMIT 3";
-$result = mysqli_query($connection, $sqlRecent);
-$imagesMostRecent = mysqli_fetch_all($result, MYSQLI_ASSOC);
+$sql =
+    "SELECT imageFileName,title,description,artist,artworkID,price,view FROM artworks LIMIT 80";
+if ((isset($_GET['title']) && $_GET['title'] != "") ||
+    (isset($_GET['description']) && $_GET['description'] != "") ||
+    (isset($_GET['artist']) && $_GET['artist'] != "")) {
+  $sql .= " WHERE ";
+  if ((isset($_GET['title']) && $_GET['title'] != "")) {
+    $title = $_GET['title'];
+    $sql .= " title LIKE  $title";
+    if ((isset($_GET['description']) && $_GET['description'] != "")) {
+      $description = $_GET['description'];
+      $sql .= " AND description LIKE  $description";
+      if ((isset($_GET['artist']) && $_GET['artist'] != "")) {
+        $artist = $_GET['artist'];
+        $sql .= " AND artist LIKE  $artist";
+      }
+    } elseif ((isset($_GET['artist']) && $_GET['artist'] != "")) {
+      $artist = $_GET['artist'];
+      $sql .= " AND artist LIKE  $artist";
+    }
+  } elseif ((isset($_GET['description']) && $_GET['description'] != "")) {
+    $description = $_GET['description'];
+    $sql .= " description LIKE  $description";
+    if ((isset($_GET['artist']) && $_GET['artist'] != "")) {
+      $artist = $_GET['artist'];
+      $sql .= " AND artist LIKE $artist";
+    }
+  } elseif ((isset($_GET['artist']) && $_GET['artist'] != "")) {
+    $artist = $_GET['artist'];
+    $sql .= " artist LIKE  $artist";
+  }
+}
+if (isset($_GET['sort']) && $_GET['sort'] != 0) {
+  $sortValue = $_GET['sort'];
+  $sql .= " ORDER BY ";
+  if ($sortValue = 1)
+    $sql .= " price ";
+  else
+    $sql .= " view DESC";
+}
+$result = mysqli_query($connection, $sql);
+$images = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
 <div class="container">
   <div class="row">
     <div class="col-md-10">
-      <form method="get" action="http://www.randyconnolly.com/tests/process.php">
+      <form method="get" action="search.php">
         <div id="searchBox">
-          <input id="searchInput"
-                 type="search" name="search" placeholder="Search titles"/>
+          <input id="searchInput" type="search" name="title"
+                 placeholder="Search titles"/>
+          <input type="search" name="description"
+                 placeholder="Search descriptions">
+          <input type="search" name="artist"
+                 placeholder="Search artist">
+          <select name="sort" id="sort" title="">
+            <option value="0">Sort the result</option>
+            <option value="1">By Price</option>
+            <option value="2">By View</option>
+          </select>
           <input type="submit" class="btn btn-primary" value="Search"/>
-        </div>
-        <div id="settingsBox">
-          <select title="" name="actions">
-            <option value="0">Actions</option>
-            <option value="1">Archive</option>
-          </select>
-          <input type="submit" class="btn btn-primary" value="Apply"/>
-          <select title="" name="filter">
-            <option value="0">Genre</option>
-            <option value="1">Baroque</option>
-            <option value="2">Mannerism</option>
-            <option value="3">Neo-Classicism</option>
-            <option value="4">Realism</option>
-            <option value="5">Romanticism</option>
-          </select>
-          <input type="submit" class="btn btn-primary" value="Filter"/>
-          <select title="" name="sort" id="sort-selection">
-            <option value="0">Artists</option>
-            <option value="1">Genre</option>
-          </select>
-          <input type="submit" class="btn btn-primary" value="Sort">
         </div>
         <div id="artistBox">
           <table class="table table-bordered">
             <caption>Paintings</caption>
             <thead>
             <tr>
-              <th colspan="2"></th>
+              <th scope="col"></th>
               <th scope="col">Title</th>
               <th scope="col">Artist</th>
-              <th scope="col">Year</th>
-              <th scope="col">Genre</th>
-              <th></th>
+              <th scope="col">Price</th>
+              <th scope="col">View</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-              <td><input title="checkbox" type="checkbox" name="index[]" value="10"/></td>
-              <td><img class="artThumb" src="images/art/thumbs/05030.jpg" alt="Death of Marat"/></td>
-              <td><em>Death of Marat</em></td>
-              <td>David, Jacques-Louis</td>
-              <td>1793</td>
-              <td>Romanticism</td>
-              <td>
-                <button><a href="details.php"><img src="images/edit16.png" alt=""/> See</a></button>
-              </td>
-            </tr>
-            <tr>
-              <td><input title="checkbox" type="checkbox" name="index[]" value="20"/></td>
-              <td><img class="artThumb" src="images/art/thumbs/120010.jpg" alt="Portrait of Eleanor of Toledo"/></td>
-              <td><em>Portrait of Eleanor of Toledo</em></td>
-              <td>Bronzino, Agnolo</td>
-              <td>1545</td>
-              <td>Mannerism</td>
-              <td>
-                <button><a href="details.php"><img src="images/edit16.png" alt=""/> See</a></button>
-              </td>
-            </tr>
-            <tr>
-              <td><input title="checkbox" type="checkbox" name="index[]" value="30"/></td>
-              <td><img class="artThumb" src="images/art/thumbs/07020.jpg" alt="Liberty Leading the People"/></td>
-              <td><em>Liberty Leading the People</em></td>
-              <td>Delacroix, Eugene</td>
-              <td>1830</td>
-              <td>Romanticism</td>
-              <td>
-                <button><a href="details.php"><img src="images/edit16.png" alt=""/> See</a></button>
-              </td>
-            </tr>
-            <tr>
-              <td><input title="checkbox" type="checkbox" name="index[]" value="40"/></td>
-              <td><img class="artThumb" src="images/art/thumbs/13030.jpg" alt="Arrangement in Grey and Black"/></td>
-              <td><em>Arrangement in Grey and Black</em></td>
-              <td>Whistler, James Abbott</td>
-              <td>1871</td>
-              <td>Realism</td>
-              <td>
-                <button><a href="details.php"><img src="images/edit16.png" alt=""/> See</a></button>
-              </td>
-            </tr>
-            <tr id="selected_row">
-              <td><input title="checkbox" type="checkbox" name="index[]" value="50"/></td>
-              <td><img class="artThumb" src="images/art/thumbs/06010.jpg" alt="Mademoiselle Caroline Riviere"/></td>
-              <td><em>Mademoiselle Caroline Riviere</em></td>
-              <td>Ingres, Jean-Auguste</td>
-              <td>1806</td>
-              <td>Neo-Classicism</td>
-              <td>
-                <button><a href="details.php"><img src="images/edit16.png" alt=""/> See</a></button>
-              </td>
-            </tr>
+            <?php
+            for ($i = 0; $i < count($images); $i++) {
+              echo "<tr id=\"selected_row\">";
+              echo "<td><img class=\"artThumb\" src=\"img/" .
+                  $images[$i]['imageFileName'] . "\" alt = \"" .
+                  str_replace('"', ' ', $images[$i]['description']) .
+                  "\"/></td>";
+              echo "<td><em><a href=\"details.php?artworkID=" .
+                  $images[$i]['artworkID'] . "\">" .
+                  $images[$i]['title'] . "</a></em></td>";
+              echo "<td>" . $images[$i]['artist'] . "</td>";
+              echo "<td>$" . $images[$i]['price'] . "</td>";
+              echo "<td>" . $images[$i]['view'] . "</td>";
+              echo "</tr>";
+            }
+            ?>
             </tbody>
           </table>
         </div>
@@ -156,10 +137,12 @@ $imagesMostRecent = mysqli_fetch_all($result, MYSQLI_ASSOC);
           </div>
           <strong class="cartText">Subtotal: <span class="text-warning">$1200</span></strong>
           <div>
-            <button type="button" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-info-sign"></span>
+            <button type="button" class="btn btn-primary btn-xs">
+              <span class="glyphicon glyphicon-info-sign"></span>
               Edit
             </button>
-            <button type="button" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-arrow-right"></span>
+            <button type="button" class="btn btn-primary btn-xs">
+              <span class="glyphicon glyphicon-arrow-right"></span>
               Checkout
             </button>
           </div>
@@ -207,7 +190,7 @@ $imagesMostRecent = mysqli_fetch_all($result, MYSQLI_ASSOC);
 <script type="text/javascript">
   jQuery(document).ready(function ($) {
     $('.table tbody').pagination({
-      perPage: 3,
+      perPage: 8,
       insertAfter: '.table',
       pageNumbers: true
     });
