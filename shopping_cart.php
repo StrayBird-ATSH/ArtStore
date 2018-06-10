@@ -8,7 +8,9 @@
   <link href="css/site_theme.css" rel="stylesheet">
 </head>
 <body>
-<?php include 'includes\art-header.inc.php' ?>
+<?php
+session_start();
+include 'art-header.inc.php' ?>
 <div class="container">
   <div class="page-header">
     <h2>View Cart</h2>

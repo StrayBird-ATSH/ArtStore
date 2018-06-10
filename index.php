@@ -8,7 +8,9 @@
   <link rel="stylesheet" href="css/site_theme.css">
 </head>
 <body>
-<?php include 'includes\art-header.inc.php';
+<?php
+session_start();
+include 'art-header.inc.php';
 require_once 'includes\config.php';
 $connection = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME);
 $connection->query("SET NAMES utf8");

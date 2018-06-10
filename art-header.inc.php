@@ -11,30 +11,41 @@
             <span class="icon-bar"></span>
           </button>
           <p class="navbar-text">Welcome to <strong>Art Store</strong>,
-            <a href="#" class="navbar-link">Login</a> or
-            <a href="#" class="navbar-link">Create new account</a>
+            <?php
+            $sessionStatus = false;
+            if (!isset($_SESSION['email'])) {
+              echo "<a href=\"login.php\" class=\"navbar-link\">Login</a> or";
+              echo "<a href=\"register_page.php\" class=\"navbar-link\">";
+              echo "Create new account</a>";
+            } else {
+              $sessionStatus = true;
+              echo "Welcome " . $_SESSION['email'];
+            }
+            ?>
           </p>
         </div>
-        <div class="collapse navbar-collapse navbar-ex1-collapse pull-right">
-          <ul class="nav navbar-nav">
-            <li><a href="#">
+        <?php if ($sessionStatus === true) { ?>
+          <div class="collapse navbar-collapse navbar-ex1-collapse pull-right">
+            <ul class="nav navbar-nav">
+              <li><a href="account.php">
                 <span class="glyphicon glyphicon-user">
                 </span> My Account</a>
-            </li>
-            <li><a href="#">
+              </li>
+              <li><a href="#">
                 <span class="glyphicon glyphicon-gift">
                 </span> Wish List</a>
-            </li>
-            <li><a href="#">
+              </li>
+              <li><a href="shopping_cart.php">
                 <span class="glyphicon glyphicon-shopping-cart">
                 </span> Shopping Cart</a>
-            </li>
-            <li><a href="#">
+              </li>
+              <li><a href="#">
                 <span class="glyphicon glyphicon-arrow-right">
                 </span> Checkout</a>
-            </li>
-          </ul>
-        </div>
+              </li>
+            </ul>
+          </div>
+        <?php } ?>
       </nav>
     </div>
   </div>

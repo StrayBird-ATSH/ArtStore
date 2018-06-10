@@ -8,7 +8,9 @@
   <link rel="stylesheet" href="css/site_theme.css">
 </head>
 <body>
-<?php include 'includes\art-header.inc.php' ?>
+<?php
+session_start();
+include 'art-header.inc.php' ?>
 <div class="container">
   <div class="row">
     <div class="col-md-3">

@@ -8,7 +8,9 @@
   <link rel="stylesheet" href="css/site_theme.css">
 </head>
 <body>
-<?php include 'includes\art-header.inc.php';
+<?php
+session_start();
+include 'art-header.inc.php';
 function saltHash($originalPassword)
 {
   $salt = "RandomSALT_HJFKJDKL";  //the random string is set here
@@ -35,7 +37,11 @@ if (isset($_POST['email']) && isset($_POST['passwordLogin'])) {
   $row = $result->fetch_assoc();
   if ($row['COUNT(*)'] === '0')
     $status = 'loginFailed';
-  else $status = 'loginSuccess';
+  else {
+    $status = 'loginSuccess';
+    $expiryTime = time() + 60 * 60 * 24;
+    $_SESSION['email'] = $_POST['email'];
+  }
 }
 ?>
 <div class="container">

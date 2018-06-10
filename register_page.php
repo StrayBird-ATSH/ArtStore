@@ -8,7 +8,9 @@
   <link href="css/site_theme.css" rel="stylesheet">
 </head>
 <body>
-<?php include 'includes\art-header.inc.php';
+<?php
+session_start();
+include 'art-header.inc.php';
 function saltHash($originalPassword)
 {
   $salt = "RandomSALT_HJFKJDKL";  //the random string is set here
