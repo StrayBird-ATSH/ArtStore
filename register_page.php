@@ -53,46 +53,48 @@ if (isset($_POST['email'])) {
         <div class="panel-heading">Account</div>
         <div class="panel-body">
           <ul class="nav nav-pills nav-stacked">
-            <li><a href="#">Login</a></li>
-            <li class="active"><a href="#">Register</a></li>
+            <li><a href="login.php">Login</a></li>
+            <li class="active">
+              <a href="register_page.php">Register</a>
+            </li>
           </ul>
         </div>
       </div>
     </div>
     <div class="col-md-9">
+      <?php
+      if ($status === 'success') {
+        echo "<div class=\"alert alert-success alert-dismissible\" role=\"alert\">";
+        echo "<button type=\"button\" class=\"close\" data-dismiss=\"alert\">";
+        echo "<span aria-hidden=\"true\">&times;</span>";
+        echo "</button>";
+        echo "<strong>Success! </strong>";
+        echo "You have successfully registered!</div>";
+      } elseif ($status === 'register failed') {
+        echo "<div class=\"alert alert-danger alert-dismissible\" role=\"alert\">";
+        echo "<button type=\"button\" class=\"close\" data-dismiss=\"alert\">";
+        echo "<span aria-hidden=\"true\">&times;</span>";
+        echo "</button>";
+        echo "<strong>Failed! </strong>";
+        echo "Sorry! The registration failed.</div>";
+      } elseif ($status === 'missing something') {
+        echo "<div class=\"alert alert-info alert-dismissible\" role=\"alert\">";
+        echo "<button type=\"button\" class=\"close\" data-dismiss=\"alert\">";
+        echo "<span aria-hidden=\"true\">&times;</span>";
+        echo "</button>";
+        echo "<strong>Info </strong>";
+        echo "Sorry! The form you submitted misses something</div>";
+      } elseif ($status === 'already registered') {
+        echo "<div class=\"alert alert-warning alert-dismissible\" role=\"alert\">";
+        echo "<button type=\"button\" class=\"close\" data-dismiss=\"alert\">";
+        echo "<span aria-hidden=\"true\">&times;</span>";
+        echo "</button>";
+        echo "<strong>Warning </strong>";
+        echo "Sorry! The email is already registered</div>";
+      }
+      ?>
       <form role="form" class="form-horizontal"
             action="register_page.php" method="post">
-        <?php
-        if ($status === 'success') {
-          echo "<div class=\"alert alert-success alert-dismissible\" role=\"alert\">";
-          echo "<button type=\"button\" class=\"close\" data-dismiss=\"alert\">";
-          echo "<span aria-hidden=\"true\">&times;</span>";
-          echo "</button>";
-          echo "<strong>Success! </strong>";
-          echo "You have successfully registered!</div>";
-        } elseif ($status === 'register failed') {
-          echo "<div class=\"alert alert-danger alert-dismissible\" role=\"alert\">";
-          echo "<button type=\"button\" class=\"close\" data-dismiss=\"alert\">";
-          echo "<span aria-hidden=\"true\">&times;</span>";
-          echo "</button>";
-          echo "<strong>Failed! </strong>";
-          echo "Sorry! The registration failed.</div>";
-        } elseif ($status === 'missing something') {
-          echo "<div class=\"alert alert-info alert-dismissible\" role=\"alert\">";
-          echo "<button type=\"button\" class=\"close\" data-dismiss=\"alert\">";
-          echo "<span aria-hidden=\"true\">&times;</span>";
-          echo "</button>";
-          echo "<strong>Info </strong>";
-          echo "Sorry! The form you submitted misses something</div>";
-        } elseif ($status === 'already registered') {
-          echo "<div class=\"alert alert-warning alert-dismissible\" role=\"alert\">";
-          echo "<button type=\"button\" class=\"close\" data-dismiss=\"alert\">";
-          echo "<span aria-hidden=\"true\">&times;</span>";
-          echo "</button>";
-          echo "<strong>Warning </strong>";
-          echo "Sorry! The email is already registered</div>";
-        }
-        ?>
         <div class="page-header">
           <h2>Register Account</h2>
           <p>If you already have an account with us,

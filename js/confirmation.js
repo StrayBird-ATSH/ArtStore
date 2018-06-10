@@ -46,7 +46,7 @@ $("form input").blur(function () {
   }
 
   //Password validation
-  if ($(this).is("#login-password")) {
+  if ($(this).is("input[name=\"passwordLogin\"]")) {
     console.log('confirmationTwo line29');
     var passwordVal = $.trim(this.value);
     if (passwordVal === "") {
