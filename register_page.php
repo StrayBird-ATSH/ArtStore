@@ -9,7 +9,17 @@
 </head>
 <body>
 <?php include 'includes\art-header.inc.php';
-if (isset($_POST)) {
+function saltHash($originalPassword)
+{
+  $salt = "RandomSALT_HJFKJDKL";  //the random string is set here
+  $longPassword = $originalPassword . $salt;
+  //connects the original password with the random string
+  $longHashPassword = md5($longPassword);  //perform  MD5 calculation
+  return $longHashPassword;  //returns the new password
+}
+
+$status = '0';
+if (isset($_POST['email'])) {
   require_once 'includes\config.php';
   $connection = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME);
   $connection->query("SET NAMES utf8");
@@ -19,11 +29,20 @@ if (isset($_POST)) {
     exit($output);
   }
   $email = $_POST['email'];
-  $sql = "SELECT COUNT(*) FROM users WHERE email=$email";
+  $sql = "SELECT COUNT(*) FROM users AS number WHERE email=$email";
   $result = mysqli_query($connection, $sql);
-  if ($result === 0) {
-
-  }
+  if ($result['number'] === 0) {
+    if (isset($_POST['last']) && isset($_POST['password1']) &&
+        isset($_POST['first'])) {
+      $name = $_POST['first'] . " " . $_POST['last'];
+      $longHashPassword = saltHash($_POST['password1']);
+      $sql = "INSERT INTO users (name, email, password, balance) 
+                      VALUES ('$name',$email,$longHashPassword,0)";
+      if (mysqli_query($connection, $sql))
+        $status = 'success';
+      else $status = 'register failed';
+    } else $status = 'missing something';
+  } else $status = 'already registered';
 }
 
 
@@ -42,10 +61,43 @@ if (isset($_POST)) {
       </div>
     </div>
     <div class="col-md-9">
-      <form role="form" class="form-horizontal" action="register_page.php" method="post">
+      <form role="form" class="form-horizontal"
+            action="register_page.php" method="post">
+        <?php
+        if ($status === 'success') {
+          echo "<div class=\"alert alert-success alert-dismissible\" role=\"alert\">";
+          echo "<button type=\"button\" class=\"close\" data-dismiss=\"alert\">";
+          echo "<span aria-hidden=\"true\">&times;</span>";
+          echo "</button>";
+          echo "<strong>Success! </strong>";
+          echo "You have successfully registered!</div>";
+        } elseif ($status === 'register failed') {
+          echo "<div class=\"alert alert-danger alert-dismissible\" role=\"alert\">";
+          echo "<button type=\"button\" class=\"close\" data-dismiss=\"alert\">";
+          echo "<span aria-hidden=\"true\">&times;</span>";
+          echo "</button>";
+          echo "<strong>Failed! </strong>";
+          echo "Sorry! The registration failed.</div>";
+        } elseif ($status === 'missing something') {
+          echo "<div class=\"alert alert-info alert-dismissible\" role=\"alert\">";
+          echo "<button type=\"button\" class=\"close\" data-dismiss=\"alert\">";
+          echo "<span aria-hidden=\"true\">&times;</span>";
+          echo "</button>";
+          echo "<strong>Info </strong>";
+          echo "Sorry! The form you submitted misses something</div>";
+        } elseif ($status === 'already registered') {
+          echo "<div class=\"alert alert-warning alert-dismissible\" role=\"alert\">";
+          echo "<button type=\"button\" class=\"close\" data-dismiss=\"alert\">";
+          echo "<span aria-hidden=\"true\">&times;</span>";
+          echo "</button>";
+          echo "<strong>Warning </strong>";
+          echo "Sorry! The email is already registered</div>";
+        }
+        ?>
         <div class="page-header">
           <h2>Register Account</h2>
-          <p>If you already have an account with us, please login at the login page.</p>
+          <p>If you already have an account with us,
+            please login at the login page.</p>
         </div>
         <div class="form-group">
           <label for="first" class="col-md-3 control-label">First Name</label>
@@ -72,7 +124,9 @@ if (isset($_POST)) {
           </div>
         </div>
         <div class="form-group">
-          <label for="password2" class="col-md-3 control-label">Password Confirm</label>
+          <label for="password2" class="col-md-3 control-label">
+            Password Confirm
+          </label>
           <div class="col-md-9">
             <input type="password" class="form-control" name="password2" title="">
           </div>
@@ -81,7 +135,8 @@ if (isset($_POST)) {
           <div class="col-md-offset-3 col-md-9">
             <div class="checkbox">
               <label>
-                <input type="checkbox" name="privacy"> I agree to the <a href="#">privacy policy</a>
+                <input type="checkbox" name="privacy"> I agree to the
+                <a href="#">privacy policy</a>
               </label>
             </div>
           </div>
