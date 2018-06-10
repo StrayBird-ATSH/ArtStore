@@ -10,8 +10,11 @@
 <body>
 <?php
 session_start();
-include 'art-header.inc.php';
 require_once 'includes\config.php';
+if (isset($_GET['logOut']) && isset($_SESSION['email']))
+  unset($_SESSION['email']);
+setcookie("email", "", -1);
+include 'art-header.inc.php';
 $connection = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME);
 $connection->query("SET NAMES utf8");
 $error = mysqli_connect_error();

@@ -10,16 +10,6 @@
 <body>
 <?php
 session_start();
-include 'art-header.inc.php';
-function saltHash($originalPassword)
-{
-  $salt = "RandomSALT_HJFKJDKL";  //the random string is set here
-  $longPassword = $originalPassword . $salt;
-  //connects the original password with the random string
-  $longHashPassword = md5($longPassword);  //perform  MD5 calculation
-  return $longHashPassword;  //returns the new password
-}
-
 $status = '0';
 if (isset($_POST['email']) && isset($_POST['passwordLogin'])) {
   require_once 'includes\config.php';
@@ -42,6 +32,15 @@ if (isset($_POST['email']) && isset($_POST['passwordLogin'])) {
     $expiryTime = time() + 60 * 60 * 24;
     $_SESSION['email'] = $_POST['email'];
   }
+}
+include 'art-header.inc.php';
+function saltHash($originalPassword)
+{
+  $salt = "RandomSALT_HJFKJDKL";  //the random string is set here
+  $longPassword = $originalPassword . $salt;
+  //connects the original password with the random string
+  $longHashPassword = md5($longPassword);  //perform  MD5 calculation
+  return $longHashPassword;  //returns the new password
 }
 ?>
 <div class="container">

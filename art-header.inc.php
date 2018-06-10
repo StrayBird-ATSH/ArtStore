@@ -14,12 +14,13 @@
             <?php
             $sessionStatus = false;
             if (!isset($_SESSION['email'])) {
-              echo "<a href=\"login.php\" class=\"navbar-link\">Login</a> or";
+              echo "<a href=\"login.php\" class=\"navbar-link\">Login</a> or ";
               echo "<a href=\"register_page.php\" class=\"navbar-link\">";
-              echo "Create new account</a>";
+              echo " Create new account</a>";
             } else {
               $sessionStatus = true;
               echo "Welcome " . $_SESSION['email'];
+              echo " <a href=\"index.php?logOut=true\">Log out</a>";
             }
             ?>
           </p>
@@ -87,16 +88,16 @@
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
+            <li class="active"><a href="index.php">Home</a></li>
             <li><a href="#">About Us</a></li>
-            <li><a href="#">Art Works</a></li>
-            <li><a href="#">Artists</a></li>
+            <li><a href="details.php">Art Works</a></li>
+            <li><a href="search.php">Artists</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle"
                  data-toggle="dropdown">Specials <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="#">Special 1</a></li>
-                <li><a href="#">Special 2</a></li>
+                <li><a href="details.php?artworkID=29">Three Musicians</a></li>
+                <li><a href="details.php?artworkID=44">Impression Sunrise</a></li>
               </ul>
             </li>
           </ul>
