@@ -10,11 +10,11 @@
 <body>
 <?php
 session_start();
+require_once 'includes\config.php';
 include 'art-header.inc.php' ?>
 <div class="container">
   <div class="row">
     <div class="col-md-3">
-
       <div class="panel panel-default">
         <div class="panel-heading">Account</div>
         <div class="panel-body">
@@ -31,6 +31,11 @@ include 'art-header.inc.php' ?>
     <div class="col-md-9">
       <div class="page-header">
         <h2>My Account</h2>
+        <?php
+        include 'art-header.inc.php';
+        if (!isset($_SESSION['email']))
+          exit("<h1>Please login first.</h1>");
+        ?>
         <p>Welcome .</p>
       </div>
       <div class="form-group">

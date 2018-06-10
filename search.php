@@ -94,7 +94,7 @@ $images = mysqli_fetch_all($result, MYSQLI_ASSOC);
             <tbody>
             <?php
             for ($i = 0; $i < count($images); $i++) {
-              echo "<tr id=\"selected_row\">";
+              echo "<tr>";
               echo "<td><img class=\"artThumb\" src=\"img/" .
                   $images[$i]['imageFileName'] . "\" alt = \"" .
                   str_replace('"', ' ', $images[$i]['description']) .

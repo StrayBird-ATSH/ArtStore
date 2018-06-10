@@ -16,54 +16,74 @@
     include 'art-header.inc.php';
     if (!isset($_SESSION['email']))
       exit("<h1>Please login first.</h1>");
+    $connection = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME);
+    $connection->query("SET NAMES utf8");
+    $error = mysqli_connect_error();
+    if ($error != null) {
+      $output = "<p>Unable to connect to database<p>" . $error;
+      exit($output);
+    }
+    $email = $_SESSION['email'];
+    $sql =
+        "SELECT imageFileName,title,description,artworkID,price FROM artworks WHERE shopping_cart = '$email'";
+    $result = mysqli_query($connection, $sql);
+    $images = mysqli_fetch_all($result, MYSQLI_ASSOC);
     ?>
     <h2>View Cart</h2>
-    <table class="table table-condensed">
+    <table class="table table-bordered
+    table-striped table-hover table-condensed">
+      <tbody>
       <tr>
         <th>Image</th>
-        <th>Product</th>
-        <th>Quantity</th>
+        <th>Title</th>
         <th>Price</th>
-        <th>Amount</th>
+        <th>Description</th>
       </tr>
-      <tr>
-        <td><img class="img-thumbnail" src="images/art/tiny/116010.jpg" alt="..."></td>
-        <td>Artist Holding a Thistle</td>
-        <td>2</td>
-        <td>$500</td>
-        <td>$1000</td>
-      </tr>
-      <tr>
-        <td><img class="img-thumbnail" src="images/art/tiny/113010.jpg" alt="..."></td>
-        <td>Self-portrait in a Straw Hat</td>
-        <td>1</td>
-        <td>$700</td>
-        <td>$700</td>
-      </tr>
+      <?php
+      $totalPrice = 0;
+      for ($i = 0; $i < count($images); $i++) {
+        $description = $images[$i]['description'];
+        if (strlen($description) > 100)
+          $description = substr($description, 0, 300);
+        echo "<tr>";
+        echo "<td><img class=\"img-thumbnail\" src=\"img/" .
+            $images[$i]['imageFileName'] . "\" /></td>";
+        echo "<td><em><a href=\"details.php?artworkID=" .
+            $images[$i]['artworkID'] . "\">" .
+            $images[$i]['title'] . "</a></em></td>";
+        echo "<td>" . $description . "</td>";
+        echo "<td>$" . $images[$i]['price'] . "</td>";
+        echo "</tr>";
+        $totalPrice += $images[$i]['price'];
+      }
+      ?>
       <tr class="success strong">
-        <td colspan="4" class="moveRight">Subtotal</td>
-        <td>$1700</td>
+        <td colspan="3" class="moveRight">Subtotal</td>
+        <td>$<?php echo $totalPrice ?></td>
       </tr>
       <tr class="active strong">
-        <td colspan="4" class="moveRight">Tax</td>
-        <td>$170</td>
+        <td colspan="3" class="moveRight">Tax</td>
+        <td>$0</td>
       </tr>
       <tr class="strong">
-        <td colspan="4" class="moveRight">Shipping</td>
-        <td>$100</td>
+        <td colspan="3" class="moveRight">Shipping</td>
+        <td>$0</td>
       </tr>
       <tr class="warning strong text-danger">
-        <td colspan="4" class="moveRight">Grand Total</td>
-        <td>$1970</td>
+        <td colspan="3" class="moveRight">Grand Total</td>
+        <td>$<?php echo $totalPrice ?></td>
       </tr>
       <tr>
-        <td colspan="4" class="moveRight">
-          <button type="button" class="btn btn-primary">Continue Shopping</button>
+        <td colspan="3" class="moveRight">
+          <button type="button" class="btn btn-primary"
+                  href="index.php">Continue Shopping
+          </button>
         </td>
         <td>
           <button type="button" class="btn btn-success">Checkout</button>
         </td>
       </tr>
+      </tbody>
     </table>
   </div>
 </div>
