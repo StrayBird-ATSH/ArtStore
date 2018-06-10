@@ -56,7 +56,7 @@
     </div>
   </div>
 </div>  <!-- end container -->
-<?php include 'includes\art-footer.inc.php' ?>
+<?php include 'art-footer.inc.php' ?>
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.js"></script>
 </body>

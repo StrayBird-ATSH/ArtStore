@@ -17,14 +17,14 @@
         <div class="panel-body">
           <ul class="nav nav-pills nav-stacked">
             <li class="active"><a href="login.php">Login</a></li>
-            <li><a href="register.html">Register</a></li>
+            <li><a href="register_page.php">Register</a></li>
           
           </ul>
         </div>
       </div>
     </div>
     <div class="col-md-5">
-      <form role="form" class="form-horizontal" action="login_success_redirect.php"
+      <form role="form" class="form-horizontal" action="login.php"
             method="post">
         <div class="page-header">
           <h2>Log in</h2>
