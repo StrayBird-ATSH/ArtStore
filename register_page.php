@@ -32,7 +32,6 @@ if (isset($_POST['email'])) {
   $sql = "SELECT COUNT(*) FROM users AS number WHERE email='$email'";
   $result = mysqli_query($connection, $sql);
   $row = $result->fetch_assoc();
-  echo print_r($row);
   if ($row['COUNT(*)'] === '0') {
     if (isset($_POST['last']) && isset($_POST['password1']) &&
         isset($_POST['first'])) {
@@ -102,25 +101,29 @@ if (isset($_POST['email'])) {
         <div class="form-group">
           <label for="first" class="col-md-3 control-label">First Name</label>
           <div class="col-md-9">
-            <input type="text" class="form-control" name="first" title="">
+            <input type="text" class="form-control" required="required"
+                   name="first" title="">
           </div>
         </div>
         <div class="form-group">
           <label for="last" class="col-md-3 control-label">Last Name</label>
           <div class="col-md-9">
-            <input type="text" class="form-control" name="last" title="">
+            <input type="text" class="form-control" required="required"
+                   name="last" title="">
           </div>
         </div>
         <div class="form-group">
           <label for="email" class="col-md-3 control-label">Email</label>
           <div class="col-md-9">
-            <input type="email" class="form-control" name="email" title="">
+            <input type="email" class="form-control" required="required"
+                   name="email" title="">
           </div>
         </div>
         <div class="form-group">
           <label for="password1" class="col-md-3 control-label">Password</label>
           <div class="col-md-9">
-            <input type="password" class="form-control" name="password1" title="">
+            <input type="password" class="form-control" required="required"
+                   name="password1" title="">
           </div>
         </div>
         <div class="form-group">
@@ -128,15 +131,16 @@ if (isset($_POST['email'])) {
             Password Confirm
           </label>
           <div class="col-md-9">
-            <input type="password" class="form-control" name="password2" title="">
+            <input type="password" class="form-control" required="required"
+                   name="password2" title="">
           </div>
         </div>
         <div class="form-group">
           <div class="col-md-offset-3 col-md-9">
             <div class="checkbox">
               <label>
-                <input type="checkbox" name="privacy"> I agree to the
-                <a href="#">privacy policy</a>
+                <input type="checkbox" name="privacy" required="required">
+                I agree to the <a href="#">privacy policy</a>
               </label>
             </div>
           </div>
@@ -152,7 +156,7 @@ if (isset($_POST['email'])) {
 </div>
 <?php include 'art-footer.inc.php' ?>
 <script src="js/jquery.js"></script>
-<script src="js/confirmation.js"></script>
 <script src="js/bootstrap.js"></script>
+<script src="js/confirmation.js"></script>
 </body>
 </html>

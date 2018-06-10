@@ -8,7 +8,7 @@ $("form input").blur(function () {
     //find(): finds all the matching elements in the matching elements set
 
     //Name validation
-    if ($(this).is("#first-name")) {
+    if ($(this).is("input[name=\"first\"]")) {
         console.log('confirmationTwo line7');
         var nameVal = $.trim(this.value),
             regName = /^[a-zA-Z ]+$/;
@@ -26,7 +26,7 @@ $("form input").blur(function () {
             $parent.append("<span class='msg onSuccess'>" + okMsg + "</span>");
         }
     }
-    if ($(this).is("#last-name")) {
+    if ($(this).is("input[name=\"last\"]")) {
         console.log('confirmationTwo line7');
         regName = /^[a-zA-Z ]+$/;
         nameVal = $.trim(this.value);
@@ -80,7 +80,7 @@ $("form input").blur(function () {
             $parent.append("<span class='msg onSuccess'>" + okMsg + "</span>");
         }
     }
-    if ($(this).is("#passwordInput")) {
+    if ($(this).is("input[name=\"password1\"]")) {
         regName = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,21}$/;
         passwordVal = $.trim(this.value);
         passwordValue = passwordVal;
@@ -101,7 +101,7 @@ $("form input").blur(function () {
             $parent.append("<span class='msg onSuccess'>" + okMsg + "</span>");
         }
     }
-    if ($(this).is("#passwordConfirm")) {
+    if ($(this).is("input[name=\"password2\"]")) {
         var passwordValTwo = $.trim(this.value);
         if (passwordValTwo === "") {
             errorMsg = "Password confirmation cannot be empty";
@@ -120,7 +120,7 @@ $("form input").blur(function () {
 
 
     //email validation
-    if ($(this).is("#email")) {
+    if ($(this).is("input[name=\"email\"]")) {
         console.log('confirmationTwo line28');
         var emailVal = $.trim(this.value);
         var regEmail = /.+@.+\.[a-zA-Z]{2,4}$/;
