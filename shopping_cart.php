@@ -38,6 +38,7 @@
         <th>Title</th>
         <th>Price</th>
         <th>Description</th>
+        <th>Action</th>
       </tr>
       <?php
       $totalPrice = 0;
@@ -53,25 +54,26 @@
             $images[$i]['title'] . "</a></em></td>";
         echo "<td>" . $description . "</td>";
         echo "<td>$" . $images[$i]['price'] . "</td>";
+        echo "<td><button type=\"button\" class=\"btn btn-danger\">Remove</button></td>";
         echo "</tr>";
         $totalPrice += $images[$i]['price'];
       }
       ?>
       <tr class="success strong">
         <td colspan="3" class="moveRight">Subtotal</td>
-        <td>$<?php echo $totalPrice ?></td>
+        <td colspan="2">$<?php echo $totalPrice ?></td>
       </tr>
       <tr class="active strong">
         <td colspan="3" class="moveRight">Tax</td>
-        <td>$0</td>
+        <td colspan="2">$0</td>
       </tr>
       <tr class="strong">
         <td colspan="3" class="moveRight">Shipping</td>
-        <td>$0</td>
+        <td colspan="2">$0</td>
       </tr>
       <tr class="warning strong text-danger">
         <td colspan="3" class="moveRight">Grand Total</td>
-        <td>$<?php echo $totalPrice ?></td>
+        <td colspan="2">$<?php echo $totalPrice ?></td>
       </tr>
       <tr>
         <td colspan="3" class="moveRight">
@@ -79,7 +81,7 @@
                   href="index.php">Continue Shopping
           </button>
         </td>
-        <td>
+        <td colspan="2">
           <button type="button" class="btn btn-success">Checkout</button>
         </td>
       </tr>
