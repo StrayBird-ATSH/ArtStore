@@ -29,23 +29,23 @@ if (isset($_POST['email'])) {
     exit($output);
   }
   $email = $_POST['email'];
-  $sql = "SELECT COUNT(*) FROM users AS number WHERE email=$email";
+  $sql = "SELECT COUNT(*) FROM users AS number WHERE email='$email'";
   $result = mysqli_query($connection, $sql);
-  if ($result['number'] === 0) {
+  $row = $result->fetch_assoc();
+  echo print_r($row);
+  if ($row['COUNT(*)'] === '0') {
     if (isset($_POST['last']) && isset($_POST['password1']) &&
         isset($_POST['first'])) {
       $name = $_POST['first'] . " " . $_POST['last'];
       $longHashPassword = saltHash($_POST['password1']);
       $sql = "INSERT INTO users (name, email, password, balance) 
-                      VALUES ('$name',$email,$longHashPassword,0)";
+                      VALUES ('$name','$email','$longHashPassword',0)";
       if (mysqli_query($connection, $sql))
         $status = 'success';
       else $status = 'register failed';
     } else $status = 'missing something';
   } else $status = 'already registered';
 }
-
-
 ?>
 <div class="container">
   <div class="row">
