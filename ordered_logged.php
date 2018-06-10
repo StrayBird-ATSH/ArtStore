@@ -10,7 +10,16 @@
 <body>
 <?php
 session_start();
-include 'art-header.inc.php' ?>
+require_once 'includes\config.php';
+include 'art-header.inc.php';
+$connection = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME);
+$connection->query("SET NAMES utf8");
+$error = mysqli_connect_error();
+if ($error != null) {
+  $output = "<p>Unable to connect to database<p>" . $error;
+  exit($output);
+}
+?>
 <div class="container">
   <div class="row">
     <div class="col-md-3">
@@ -29,6 +38,16 @@ include 'art-header.inc.php' ?>
     </div>
     <div class="col-md-9">
       <h2>Ordered Art Works</h2>
+      <?php
+      if (!isset($_SESSION['email']))
+        exit("<h1>Please login first.</h1>");
+      $email = $_SESSION['email'];
+      $sql = "SELECT name,balance FROM users WHERE email='$email'";
+      $result = mysqli_query($connection, $sql);
+      $userInformation = mysqli_fetch_all($result, MYSQLI_ASSOC);
+      $name = $userInformation[0]['name'];
+      $balance = $userInformation[0]['balance'];
+      ?>
       <table class="table table-condensed">
         <thead>
         <tr>
@@ -68,7 +87,7 @@ include 'art-header.inc.php' ?>
 
 
 </div>  <!-- end container -->
-<?php include 'includes\art-footer.inc.php' ?>
+<?php include 'art-footer.inc.php' ?>
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.js"></script>
 <script src="js/pagination.js"></script>

@@ -10,11 +10,20 @@
 <body>
 <?php
 session_start();
-include 'art-header.inc.php' ?>
+require_once 'includes\config.php';
+include 'art-header.inc.php';
+$connection = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME);
+$connection->query("SET NAMES utf8");
+$error = mysqli_connect_error();
+if ($error != null) {
+  $output = "<p>Unable to connect to database<p>" . $error;
+  exit($output);
+}
+?>
 <div class="container">
   <div class="row">
     <div class="col-md-3">
-      
+
       <div class="panel panel-default">
         <div class="panel-heading">Account</div>
         <div class="panel-body">
@@ -26,10 +35,20 @@ include 'art-header.inc.php' ?>
           </ul>
         </div>
       </div>
-    
+
     </div>
     <div class="col-md-9">
       <h2>Selling Art Works</h2>
+      <?php
+      if (!isset($_SESSION['email']))
+        exit("<h1>Please login first.</h1>");
+      $email = $_SESSION['email'];
+      $sql = "SELECT name,balance FROM users WHERE email='$email'";
+      $result = mysqli_query($connection, $sql);
+      $userInformation = mysqli_fetch_all($result, MYSQLI_ASSOC);
+      $name = $userInformation[0]['name'];
+      $balance = $userInformation[0]['balance'];
+      ?>
       <table class="table table-condensed">
         <thead>
         <tr>
@@ -59,24 +78,24 @@ include 'art-header.inc.php' ?>
           <td>March 18, 2018</td>
         </tr>
         </tbody>
-      
+
       </table>
     </div>
   </div>
 </div>  <!-- end container -->
-<?php include 'includes\art-footer.inc.php' ?>
+<?php include 'art-footer.inc.php' ?>
 <script src="js/jquery.js"></script>
 <script src="js/pagination.js"></script>
 <script type="text/javascript" src="js/big_image.js"></script>
 <script src="js/bootstrap.js"></script>
 <script type="text/javascript">
-    jQuery(document).ready(function ($) {
-        $('.table tbody').pagination({
-            perPage: 2,
-            insertAfter: '.table',
-            pageNumbers: true
-        });
+  jQuery(document).ready(function ($) {
+    $('.table tbody').pagination({
+      perPage: 2,
+      insertAfter: '.table',
+      pageNumbers: true
     });
+  });
 </script>
 </body>
 </html>

@@ -11,7 +11,15 @@
 <?php
 session_start();
 require_once 'includes\config.php';
-include 'art-header.inc.php' ?>
+include 'art-header.inc.php';
+$connection = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME);
+$connection->query("SET NAMES utf8");
+$error = mysqli_connect_error();
+if ($error != null) {
+  $output = "<p>Unable to connect to database<p>" . $error;
+  exit($output);
+}
+?>
 <div class="container">
   <div class="row">
     <div class="col-md-3">
@@ -32,33 +40,41 @@ include 'art-header.inc.php' ?>
       <div class="page-header">
         <h2>My Account</h2>
         <?php
-        include 'art-header.inc.php';
         if (!isset($_SESSION['email']))
           exit("<h1>Please login first.</h1>");
+        $email = $_SESSION['email'];
+        $sql = "SELECT name,balance FROM users WHERE email='$email'";
+        $result = mysqli_query($connection, $sql);
+        $userInformation = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        $name = $userInformation[0]['name'];
+        $balance = $userInformation[0]['balance'];
         ?>
         <p>Welcome .</p>
       </div>
       <div class="form-group">
         <label class="col-lg-2 control-label">Email</label>
         <div class="col-lg-10">
-          <p class="form-control-static">email@example.com</p>
+          <p class="form-control-static"><?php echo $email ?></p>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-lg-2 control-label">First Name</label>
+        <label class="col-lg-2 control-label">Name</label>
         <div class="col-lg-10">
-          <p class="form-control-static">Chen</p>
+          <p class="form-control-static"><?php echo $name ?></p>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-lg-2 control-label">Last Name</label>
+        <label class="col-lg-2 control-label">Balance</label>
         <div class="col-lg-10">
-          <p class="form-control-static">Wang</p>
+          <p class="form-control-static"><?php echo $balance ?></p>
         </div>
       </div>
       <form action="#">
-        <input title="Top up amount" required="required" type="number" placeholder="The amount of top up">
-        <button type="submit" class="btn btn-primary" onclick="alert('Top up success')"> Top Up</button>
+        <input title="Top up amount" required="required"
+               type="number" placeholder="The amount of top up">
+        <button type="submit" class="btn btn-primary"
+                onclick="alert('Top up success')"> Top Up
+        </button>
       </form>
     </div>
   </div>
