@@ -3,16 +3,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chapter 8</title>
+  <title>Art Stored-Shopping Cart</title>
   <link href="css/bootstrap.css" rel="stylesheet">
   <link href="css/site_theme.css" rel="stylesheet">
 </head>
 <body>
-<?php
-session_start();
-include 'art-header.inc.php' ?>
 <div class="container">
   <div class="page-header">
+    <?php
+    session_start();
+    require_once 'includes\config.php';
+    include 'art-header.inc.php';
+    if (!isset($_SESSION['email']))
+      exit("<h1>Please login first.</h1>");
+    ?>
     <h2>View Cart</h2>
     <table class="table table-condensed">
       <tr>

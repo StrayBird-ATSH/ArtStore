@@ -12,6 +12,7 @@
           </button>
           <p class="navbar-text">Welcome to <strong>Art Store</strong>,
             <?php
+            require_once 'includes\config.php';
             $sessionStatus = false;
             if (!isset($_SESSION['email'])) {
               echo "<a href=\"login.php\" class=\"navbar-link\">Login</a> or ";
