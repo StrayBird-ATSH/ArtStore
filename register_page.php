@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chapter 9</title>
+  <title>Art Store-Register Page</title>
   <link href="css/bootstrap.css" rel="stylesheet">
   <link href="css/site_theme.css" rel="stylesheet">
 </head>

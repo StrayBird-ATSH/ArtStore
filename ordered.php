@@ -18,8 +18,7 @@ $error = mysqli_connect_error();
 if ($error != null) {
   $output = "<p>Unable to connect to database<p>" . $error;
   exit($output);
-}
-?>
+} ?>
 <div class="container">
   <div class="row">
     <div class="col-md-3">
@@ -43,8 +42,7 @@ if ($error != null) {
       $email = $_SESSION['email'];
       $sql = "SELECT orderID,title,artworkID,timeCreated,price FROM orders WHERE ownerEmail='$email'";
       $result = mysqli_query($connection, $sql);
-      $list = mysqli_fetch_all($result, MYSQLI_ASSOC);
-      ?>
+      $list = mysqli_fetch_all($result, MYSQLI_ASSOC); ?>
       <table class="table table-condensed">
         <thead>
         <tr>

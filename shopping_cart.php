@@ -22,14 +22,11 @@
     if ($error != null) {
       $output = "<p>Unable to connect to database<p>" . $error;
       exit($output);
-    }
-    $email = $_SESSION['email'];
-    $sql =
-        "SELECT imageFileName,title,description,artworkID,price FROM artworks WHERE shopping_cart = '$email'";
-    $result = mysqli_query($connection, $sql);
-    $images = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    ?>
+    } ?>
     <h2>View Cart</h2>
+    <?php
+    if (!isset($_SESSION['email']))
+      exit("<h1>Please login first.</h1>"); ?>
     <table class="table table-bordered
     table-striped table-hover table-condensed">
       <tbody>
@@ -41,6 +38,11 @@
         <th>Action</th>
       </tr>
       <?php
+      $email = $_SESSION['email'];
+      $sql =
+          "SELECT imageFileName,title,description,artworkID,price FROM artworks WHERE shopping_cart = '$email'";
+      $result = mysqli_query($connection, $sql);
+      $images = mysqli_fetch_all($result, MYSQLI_ASSOC);
       $totalPrice = 0;
       for ($i = 0; $i < count($images); $i++) {
         $description = $images[$i]['description'];
