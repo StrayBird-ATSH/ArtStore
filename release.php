@@ -111,7 +111,7 @@ if (isset($_POST['title'])) {
           <label for="year" class="col-md-2 control-label">Year</label>
           <div class="col-md-9">
             <input type="number" class="form-control" required="required"
-                   name="year" title="">
+                   min="0" max="2018" name="year" title="">
           </div>
         </div>
         <div class="form-group">
@@ -125,7 +125,7 @@ if (isset($_POST['title'])) {
           <label for="width" class="col-md-2 control-label">Width</label>
           <div class="col-md-9">
             <input type="number" class="form-control" required="required"
-                   name="width" title="">
+                   min="1" max="1000" name="width" title="">
           </div>
         </div>
         <div class="form-group">
@@ -134,7 +134,7 @@ if (isset($_POST['title'])) {
           </label>
           <div class="col-md-9">
             <input type="number" class="form-control" required="required"
-                   name="height" title="">
+                   min="1" max="1000" name="height" title="">
           </div>
         </div>
         <div class="form-group">
@@ -143,7 +143,7 @@ if (isset($_POST['title'])) {
           </label>
           <div class="col-md-9">
             <input type="number" class="form-control" required="required"
-                   name="price" title="">
+                   min="1" max="10000" name="price" title="">
           </div>
         </div>
         <div class="form-group">

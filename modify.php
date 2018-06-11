@@ -12,11 +12,20 @@
 session_start();
 include 'art-header.inc.php';
 $status = '0';
-if (isset($_POST['title'])) {
-  require_once 'includes\config.php';
-  $connection = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME);
-  $connection->query("SET NAMES utf8");
-  $error = mysqli_connect_error();
+require_once 'includes\config.php';
+$connection = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME);
+$connection->query("SET NAMES utf8");
+$error = mysqli_connect_error();
+if ($error != null) {
+  $output = "<p>Unable to connect to database<p>" . $error;
+  exit($output);
+}
+if (isset($_GET['artworkID'])) {
+  $artworkID = $_GET['artworkID'];
+  $sql = "SELECT title,artist,description,yearOfWork,genre,width,height,price,imageFileName FROM artworks WHERE artworkID='$artworkID'";
+
+
+} elseif (isset($_POST['title'])) {
   if ($error != null) {
     $output = "<p>Unable to connect to database<p>" . $error;
     exit($output);
@@ -39,7 +48,7 @@ if (isset($_POST['title'])) {
     if (mysqli_query($connection, $sql) &&
         move_uploaded_file($fileToMove, $destination))
       $status = 'success';
-    else $status = 'publish failed';
+    else $status = 'modify failed';
   }
 } ?>
 <div class="container">
@@ -66,7 +75,7 @@ if (isset($_POST['title'])) {
         echo "</button>";
         echo "<strong>Success! </strong>";
         echo "You have successfully released!</div>";
-      } elseif ($status === 'register failed') {
+      } elseif ($status === 'modify failed') {
         echo "<div class=\"alert alert-danger alert-dismissible\" role=\"alert\">";
         echo "<button type=\"button\" class=\"close\" data-dismiss=\"alert\">";
         echo "<span aria-hidden=\"true\">&times;</span>";
@@ -75,15 +84,15 @@ if (isset($_POST['title'])) {
         echo "Sorry, the release is failed.</div>";
       }
       ?>
-      <form role="form" class="form-horizontal"
+      <form role="form" class="form-horizontal" enctype="multipart/form-data"
             action="release.php" method="post">
         <div class="page-header">
-          <h2>Release an artwork</h2>
+          <h2>Modify an artwork</h2>
           <?php
           if (!isset($_SESSION['email']))
-            exit("<h1>Please login first.</h1>");
+            exit("<h1><Pleas></Pleas>e login first.</h1>");
           ?>
-          <p>You can release your own artworks here.</p>
+          <p>You can modify your own artworks here.</p>
         </div>
         <div class="form-group">
           <label for="title" class="col-md-2 control-label">Artwork Title </label>

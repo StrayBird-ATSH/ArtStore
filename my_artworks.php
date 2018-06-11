@@ -62,8 +62,12 @@ if ($error != null) {
               $myArtworkList[$i]['artworkID'] . "\">" .
               $myArtworkList[$i]['title'] . "</a></em></td>";
           echo "<td>" . $myArtworkList[$i]['timeReleased'] . "</td>";
-          echo "<td><button type=\"button\" class=\"btn btn-info\" href='#'>Edit</button></td>";
-          echo "<td><button type=\"button\" class=\"btn btn-danger\" href='#'>Remove</button></td>";
+          echo "<td><button type=\"button\" class=\"btn btn-info\" href='modify.php?artworkID=";
+          echo $myArtworkList[$i]['artworkID'];
+          echo "'>Edit</button></td>";
+          echo "<td><button type=\"button\" class=\"btn btn-danger\" href='my_artworks.php?artworkID=";
+          echo $myArtworkList[$i]['artworkID'];
+          echo "'>Remove</button></td>";
           echo "</tr>";
         }
         ?>
