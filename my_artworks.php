@@ -30,7 +30,7 @@ if ($error != null) {
             <li><a href="account.php">My Account</a></li>
             <li class="active"><a href="my_artworks.php">My art works</a></li>
             <li><a href="sold.php">Sold art works</a></li>
-            <li><a href="ordered_logged.php">Order history</a></li>
+            <li><a href="ordered.php">Order history</a></li>
           </ul>
         </div>
       </div>

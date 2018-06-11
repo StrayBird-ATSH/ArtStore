@@ -30,11 +30,10 @@ if ($error != null) {
             <li><a href="account.php">My Account</a></li>
             <li><a href="my_artworks.php">My art works</a></li>
             <li><a href="sold.php">Sold art works</a></li>
-            <li class="active"><a href="ordered_logged.php">Order history</a></li>
+            <li class="active"><a href="ordered.php">Order history</a></li>
           </ul>
         </div>
       </div>
-
     </div>
     <div class="col-md-9">
       <h2>Ordered Art Works</h2>
@@ -42,50 +41,37 @@ if ($error != null) {
       if (!isset($_SESSION['email']))
         exit("<h1>Please login first.</h1>");
       $email = $_SESSION['email'];
-      $sql = "SELECT name,balance FROM users WHERE email='$email'";
+      $sql = "SELECT orderID,title,artworkID,timeCreated,price FROM orders WHERE ownerEmail='$email'";
       $result = mysqli_query($connection, $sql);
-      $userInformation = mysqli_fetch_all($result, MYSQLI_ASSOC);
-      $name = $userInformation[0]['name'];
-      $balance = $userInformation[0]['balance'];
+      $list = mysqli_fetch_all($result, MYSQLI_ASSOC);
       ?>
       <table class="table table-condensed">
         <thead>
         <tr>
           <th>Order Number</th>
-          <th>Image</th>
           <th>Product</th>
-          <th>Quantity</th>
           <th>Price</th>
-          <th>Amount</th>
           <th>Date</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td>101010</td>
-          <td><img class="img-thumbnail" src="images/art/tiny/116010.jpg" alt="..."></td>
-          <td><a href="details.php">Artist Holding a Thistle</a></td>
-          <td>2</td>
-          <td>$500</td>
-          <td>$1000</td>
-          <td>March 18, 2018</td>
-        </tr>
-        <tr>
-          <td>101010</td>
-          <td><img class="img-thumbnail" src="images/art/tiny/113010.jpg" alt="..."></td>
-          <td><a href="details.php">Self-portrait in a Straw Hat</a></td>
-          <td>1</td>
-          <td>$700</td>
-          <td>$700</td>
-          <td>March 18, 2018</td>
-        </tr>
-        </tbody>
+        <?php
+        for ($i = 0; $i < count($list); $i++) {
+          $orderNumber = $list[$i]['orderID'];
 
+          echo "<tr>";
+          echo "<td>" . $list[$i]['orderID'] . "</td>";
+          echo "<td><em><a href=\"details.php?artworkID=" .
+              $list[$i]['artworkID'] . "\">" .
+              $list[$i]['title'] . "</a></em></td>";
+          echo "<td>$" . $list[$i]['price'] . "</td>";
+          echo "<td>" . $list[$i]['timeCreated'] . "</td>";
+          echo "</tr>";
+        } ?>
+        </tbody>
       </table>
     </div>
   </div>
-
-
 </div>  <!-- end container -->
 <?php include 'art-footer.inc.php' ?>
 <script src="js/jquery.js"></script>
