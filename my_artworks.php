@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Art Store-selling art works</title>
+  <title>Art Store-My art works</title>
   <link href="css/bootstrap.css" rel="stylesheet">
   <link rel="stylesheet" href="css/site_theme.css">
 </head>
@@ -23,62 +23,51 @@ if ($error != null) {
 <div class="container">
   <div class="row">
     <div class="col-md-3">
-
       <div class="panel panel-default">
         <div class="panel-heading">Account</div>
         <div class="panel-body">
           <ul class="nav nav-pills nav-stacked">
             <li><a href="account.php">My Account</a></li>
-            <li class="active"><a href="selling.php">Selling art works</a></li>
+            <li class="active"><a href="my_artworks.php">My art works</a></li>
             <li><a href="sold.php">Sold art works</a></li>
             <li><a href="ordered_logged.php">Order history</a></li>
           </ul>
         </div>
       </div>
-
     </div>
     <div class="col-md-9">
-      <h2>Selling Art Works</h2>
+      <h2>My art works</h2>
       <?php
       if (!isset($_SESSION['email']))
         exit("<h1>Please login first.</h1>");
       $email = $_SESSION['email'];
-      $sql = "SELECT name,balance FROM users WHERE email='$email'";
+      $sql = "SELECT title,timeReleased,artworkID FROM artworks WHERE releaseUserEmail ='$email'";
       $result = mysqli_query($connection, $sql);
-      $userInformation = mysqli_fetch_all($result, MYSQLI_ASSOC);
-      $name = $userInformation[0]['name'];
-      $balance = $userInformation[0]['balance'];
+      $myArtworkList = mysqli_fetch_all($result, MYSQLI_ASSOC);
       ?>
       <table class="table table-condensed">
         <thead>
         <tr>
-          <th>Image</th>
-          <th>Product</th>
-          <th>Quantity</th>
-          <th>Price</th>
-          <th>Amount</th>
-          <th>Date</th>
+          <th>Artwork Name</th>
+          <th>Date Released</th>
+          <th>Action</th>
+          <th></th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td><img class="img-thumbnail" src="images/art/tiny/116010.jpg" alt="..."></td>
-          <td><a href="details.php">Artist Holding a Thistle</a></td>
-          <td>2</td>
-          <td>$500</td>
-          <td>$1000</td>
-          <td>March 18, 2018</td>
-        </tr>
-        <tr>
-          <td><img class="img-thumbnail" src="images/art/tiny/113010.jpg" alt="..."></td>
-          <td><a href="details.php">Self-portrait in a Straw Hat</a></td>
-          <td>1</td>
-          <td>$700</td>
-          <td>$700</td>
-          <td>March 18, 2018</td>
-        </tr>
+        <?php
+        for ($i = 0; $i < count($myArtworkList); $i++) {
+          echo "<tr>";
+          echo "<td><em><a href=\"details.php?artworkID=" .
+              $myArtworkList[$i]['artworkID'] . "\">" .
+              $myArtworkList[$i]['title'] . "</a></em></td>";
+          echo "<td>" . $myArtworkList[$i]['timeReleased'] . "</td>";
+          echo "<td><button type=\"button\" class=\"btn btn-info\" href='#'>Edit</button></td>";
+          echo "<td><button type=\"button\" class=\"btn btn-danger\" href='#'>Remove</button></td>";
+          echo "</tr>";
+        }
+        ?>
         </tbody>
-
       </table>
     </div>
   </div>

@@ -28,13 +28,12 @@ if ($error != null) {
         <div class="panel-body">
           <ul class="nav nav-pills nav-stacked">
             <li class="active"><a href="account.php">My Account</a></li>
-            <li><a href="selling.php">Selling art works</a></li>
+            <li><a href="my_artworks.php">My art works</a></li>
             <li><a href="sold.php">Sold art works</a></li>
             <li><a href="ordered_logged.php">Order history</a></li>
           </ul>
         </div>
       </div>
-
     </div>
     <div class="col-md-9">
       <div class="page-header">

@@ -39,8 +39,10 @@ if (isset($_POST['email'])) {
         isset($_POST['first'])) {
       $name = $_POST['first'] . " " . $_POST['last'];
       $longHashPassword = saltHash($_POST['password1']);
-      $sql = "INSERT INTO users (name, email, password, balance) 
-                      VALUES ('$name','$email','$longHashPassword',0)";
+      $tel = $_POST['tel'];
+      $address = $_POST['address'];
+      $sql = "INSERT INTO users (name, email, password, balance,tel,address) 
+                      VALUES ('$name','$email','$longHashPassword',0,$tel,$address)";
       if (mysqli_query($connection, $sql))
         $status = 'success';
       else $status = 'register failed';
@@ -121,6 +123,20 @@ if (isset($_POST['email'])) {
           <div class="col-md-9">
             <input type="email" class="form-control" required="required"
                    name="email" title="">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="tel" class="col-md-3 control-label">Telephone</label>
+          <div class="col-md-9">
+            <input type="tel" class="form-control" required="required"
+                   name="tel" title="">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="address" class="col-md-3 control-label">Address</label>
+          <div class="col-md-9">
+            <input type="text" class="form-control" required="required"
+                   name="address" title="">
           </div>
         </div>
         <div class="form-group">
