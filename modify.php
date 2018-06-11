@@ -158,8 +158,10 @@ if (isset($_POST['title'])) {
           <label class="col-md-2 control-label">
             Image Preview
           </label>
-          <div class="col-md-9">
-            <img id="preview" src="images/art/113010.jpg" alt="">
+          <div class="col-sm-12 col-md-9">
+            <div class="thumbnail">
+              <img id="preview" src="images/art/113010.jpg">
+            </div>
           </div>
         </div>
         <div class="form-group">
