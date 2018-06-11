@@ -34,7 +34,7 @@ if (isset($_POST['title'])) {
     $email = $_SESSION['email'];
     $sql = "INSERT INTO artworks (title, artist, description, yearOfWork,genre,width,height,price,releaseUserEmail,imageFileName) 
                       VALUES ('$title','$author','$description',$year,'$genre',$width,$height,$price,'$email','$fileName')";
-    $fileToMove = $_FILES['file_upload']['tmp_name'];
+    $fileToMove = $_FILES['image']['tmp_name'];
     $destination = "./img/" . $fileName;
     if (mysqli_query($connection, $sql) &&
         move_uploaded_file($fileToMove, $destination))
@@ -52,7 +52,7 @@ if (isset($_POST['title'])) {
             <li class="active">
               <a href="release.php">Release</a>
             </li>
-            <li><a href="#">Modify</a></li>
+            <li><a href="modify.php">Modify</a></li>
           </ul>
         </div>
       </div>
@@ -160,7 +160,7 @@ if (isset($_POST['title'])) {
           </label>
           <div class="col-sm-12 col-md-9">
             <div class="thumbnail">
-              <img id="preview" src="images/art/113010.jpg">
+              <img id="preview" src="#" alt="Please choose an image.">
             </div>
           </div>
         </div>

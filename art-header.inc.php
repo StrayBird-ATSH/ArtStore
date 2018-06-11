@@ -33,15 +33,15 @@
                 <span class="glyphicon glyphicon-user">
                 </span> My Account</a>
               </li>
-              <li><a href="#">
+              <li><a href="release.php">
                 <span class="glyphicon glyphicon-gift">
-                </span> Wish List</a>
+                </span> Release & Modify </a>
               </li>
               <li><a href="shopping_cart.php">
                 <span class="glyphicon glyphicon-shopping-cart">
                 </span> Shopping Cart</a>
               </li>
-              <li><a href="#">
+              <li><a href="shopping_cart.php">
                 <span class="glyphicon glyphicon-arrow-right">
                 </span> Checkout</a>
               </li>

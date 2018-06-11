@@ -34,10 +34,12 @@ if (isset($_POST['title'])) {
     $email = $_SESSION['email'];
     $sql = "INSERT INTO artworks (title, artist, description, yearOfWork,genre,width,height,price,releaseUserEmail,imageFileName) 
                       VALUES ('$title','$author','$description',$year,'$genre',$width,$height,$price,'$email','$fileName')";
-    $fileToMove = $_FILES['file_upload']['tmp_name'];
+    echo print_r($_FILES);
+    $fileToMove = $_FILES['upload']['tmp_name'];
     $destination = "./img/" . $fileName;
-    if (mysqli_query($connection, $sql) &&
-        move_uploaded_file($fileToMove, $destination))
+    if (mysqli_query($connection, $sql))
+      echo "connect OK";
+    if (move_uploaded_file($fileToMove, $destination))
       $status = 'success';
     else $status = 'publish failed';
   }
@@ -52,7 +54,7 @@ if (isset($_POST['title'])) {
             <li class="active">
               <a href="release.php">Release</a>
             </li>
-            <li><a href="#">Modify</a></li>
+            <li><a href="modify.php">Modify</a></li>
           </ul>
         </div>
       </div>
@@ -66,16 +68,15 @@ if (isset($_POST['title'])) {
         echo "</button>";
         echo "<strong>Success! </strong>";
         echo "You have successfully released!</div>";
-      } elseif ($status === 'register failed') {
+      } elseif ($status === 'publish failed') {
         echo "<div class=\"alert alert-danger alert-dismissible\" role=\"alert\">";
         echo "<button type=\"button\" class=\"close\" data-dismiss=\"alert\">";
         echo "<span aria-hidden=\"true\">&times;</span>";
         echo "</button>";
         echo "<strong>Failed! </strong>";
         echo "Sorry, the release is failed.</div>";
-      }
-      ?>
-      <form role="form" class="form-horizontal"
+      } ?>
+      <form role="form" class="form-horizontal" enctype="multipart/form-data"
             action="release.php" method="post">
         <div class="page-header">
           <h2>Release an artwork</h2>
@@ -151,7 +152,7 @@ if (isset($_POST['title'])) {
           </label>
           <div class="col-md-9">
             <input type="file" class="form-control" required="required"
-                   name="image" title="" id="upload" onchange="imagePreview()">
+                   name="upload" title="" id="upload" onchange="imagePreview()">
           </div>
         </div>
         <div class="form-group">
@@ -160,7 +161,7 @@ if (isset($_POST['title'])) {
           </label>
           <div class="col-sm-12 col-md-9">
             <div class="thumbnail">
-              <img id="preview" src="images/art/113010.jpg">
+              <img id="preview" src="#" alt="Please choose an image.">
             </div>
           </div>
         </div>
