@@ -1,5 +1,13 @@
 var passwordValue = "";
 var emailValue = "";
+
+function imagePreview() {
+  let uploadElement = document.getElementById('upload');
+  let previewImage = document.getElementById('preview');
+  previewImage.src = window.URL.createObjectURL(uploadElement.files[0]);
+  console.log('this is line 184');
+}
+
 $("form input").blur(function () {
   console.log('confirmationTwo line2');
   var $parent = $(this).parent();

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Art Store-Release page</title>
+  <title>Art Store-Modify page</title>
   <link href="css/bootstrap.css" rel="stylesheet">
   <link href="css/site_theme.css" rel="stylesheet">
 </head>
