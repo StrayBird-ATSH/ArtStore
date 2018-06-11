@@ -103,7 +103,7 @@ width = $width,height=$height,price=$price,imageFileName='$fileName'
           <div class="col-md-9">
             <input type="text" class="form-control" required="required"
                    name="title" title=""
-                   placeholder="<?php echo $artworkInfo[0]['title'] ?>">
+                   value="<?php echo $artworkInfo[0]['title'] ?>">
           </div>
         </div>
         <div class="form-group">
@@ -111,7 +111,7 @@ width = $width,height=$height,price=$price,imageFileName='$fileName'
           <div class="col-md-9">
             <input type="text" class="form-control" required="required"
                    name="author" title=""
-                   placeholder="<?php echo $artworkInfo[0]['artist'] ?>">
+                   value="<?php echo $artworkInfo[0]['artist'] ?>">
           </div>
         </div>
         <div class="form-group">
@@ -119,7 +119,7 @@ width = $width,height=$height,price=$price,imageFileName='$fileName'
           <div class="col-md-9">
             <input type="text" class="form-control" required="required"
                    name="description" title=""
-                   placeholder="<?php echo $artworkInfo[0]['description'] ?>">
+                   value="<?php echo $artworkInfo[0]['description'] ?>">
           </div>
         </div>
         <div class="form-group">
@@ -127,7 +127,7 @@ width = $width,height=$height,price=$price,imageFileName='$fileName'
           <div class="col-md-9">
             <input type="number" class="form-control" required="required"
                    name="year" title=""
-                   placeholder="<?php echo $artworkInfo[0]['yearOfWork'] ?>">
+                   value="<?php echo $artworkInfo[0]['yearOfWork'] ?>">
           </div>
         </div>
         <div class="form-group">
@@ -135,7 +135,7 @@ width = $width,height=$height,price=$price,imageFileName='$fileName'
           <div class="col-md-9">
             <input type="text" class="form-control" required="required"
                    name="genre" title=""
-                   placeholder="<?php $artworkInfo[0]['genre'] ?>">
+                   value="<?php echo $artworkInfo[0]['genre'] ?>">
           </div>
         </div>
         <div class="form-group">
@@ -143,7 +143,7 @@ width = $width,height=$height,price=$price,imageFileName='$fileName'
           <div class="col-md-9">
             <input type="number" class="form-control" required="required"
                    name="width" title=""
-                   placeholder="<?php echo $artworkInfo[0]['width'] ?>">
+                   value="<?php echo $artworkInfo[0]['width'] ?>">
           </div>
         </div>
         <div class="form-group">
@@ -153,7 +153,7 @@ width = $width,height=$height,price=$price,imageFileName='$fileName'
           <div class="col-md-9">
             <input type="number" class="form-control" required="required"
                    name="height" title=""
-                   placeholder="<?php echo $artworkInfo[0]['height'] ?>">
+                   value="<?php echo $artworkInfo[0]['height'] ?>">
           </div>
         </div>
         <div class="form-group">
@@ -163,7 +163,7 @@ width = $width,height=$height,price=$price,imageFileName='$fileName'
           <div class="col-md-9">
             <input type="number" class="form-control" required="required"
                    name="price" title=""
-                   placeholder="$<?php echo $artworkInfo[0]['price'] ?>">
+                   value="<?php echo $artworkInfo[0]['price'] ?>">
           </div>
         </div>
         <div class="form-group">
