@@ -13,7 +13,8 @@ session_start();
 include 'art-header.inc.php';
 $status = '0';
 require_once 'includes\config.php';
-$connection = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME);
+$connection = mysqli_connect(
+    DBHOST, DBUSER, DBPASS, DBNAME);
 $connection->query("SET NAMES utf8");
 $error = mysqli_connect_error();
 if ($error != null) {
@@ -22,14 +23,13 @@ if ($error != null) {
 }
 if (isset($_GET['artworkID'])) {
   $artworkID = $_GET['artworkID'];
-  $sql = "SELECT title,artist,description,yearOfWork,genre,width,height,price,imageFileName FROM artworks WHERE artworkID='$artworkID'";
-
-
-} elseif (isset($_POST['title'])) {
-  if ($error != null) {
-    $output = "<p>Unable to connect to database<p>" . $error;
-    exit($output);
-  }
+  $sql = "SELECT title,artist,description,yearOfWork,genre,
+width,height,price,imageFileName FROM artworks 
+WHERE artworkID=$artworkID";
+  $result = mysqli_query($connection, $sql);
+  $artworkInfo = mysqli_fetch_all($result, MYSQLI_ASSOC);
+} elseif ($_SERVER['REQUEST_METHOD'] === "POST") {
+  $artworkID = $_GET['artworkID'];
   $title = $_POST['title'];
   $author = $_POST['author'];
   $description = $_POST['description'];
@@ -41,8 +41,10 @@ if (isset($_GET['artworkID'])) {
   $fileName = time() . ".jpg";
   if (isset($_SESSION['email'])) {
     $email = $_SESSION['email'];
-    $sql = "INSERT INTO artworks (title, artist, description, yearOfWork,genre,width,height,price,releaseUserEmail,imageFileName) 
-                      VALUES ('$title','$author','$description',$year,'$genre',$width,$height,$price,'$email','$fileName')";
+    $sql = "UPDATE artworks SET title='$title',artist='$author',
+description='$description',yearOfWork=$year,genre='$genre',
+width = $width,height=$height,price=$price,imageFileName='$fileName'
+ WHERE artworkID = $artworkID";
     $fileToMove = $_FILES['image']['tmp_name'];
     $destination = "./img/" . $fileName;
     if (mysqli_query($connection, $sql) &&
@@ -58,10 +60,10 @@ if (isset($_GET['artworkID'])) {
         <div class="panel-heading">Manage your artworks</div>
         <div class="panel-body">
           <ul class="nav nav-pills nav-stacked">
-            <li class="active">
+            <li>
               <a href="release.php">Release</a>
-            </li>
-            <li><a href="modify.php">Modify</a></li>
+            </li">
+            <li class="active"><a href="modify.php">Modify</a></li>
           </ul>
         </div>
       </div>
@@ -85,12 +87,14 @@ if (isset($_GET['artworkID'])) {
       }
       ?>
       <form role="form" class="form-horizontal" enctype="multipart/form-data"
-            action="release.php" method="post">
+            action="release.php"
+          <?php if (isset($_GET['artworkID']))
+            echo "?artworkID=" . $_GET['artworkID'] ?> method="post">
         <div class="page-header">
           <h2>Modify an artwork</h2>
           <?php
           if (!isset($_SESSION['email']))
-            exit("<h1><Pleas></Pleas>e login first.</h1>");
+            exit("<h1>Please login first.</h1>");
           ?>
           <p>You can modify your own artworks here.</p>
         </div>
@@ -98,42 +102,48 @@ if (isset($_GET['artworkID'])) {
           <label for="title" class="col-md-2 control-label">Artwork Title </label>
           <div class="col-md-9">
             <input type="text" class="form-control" required="required"
-                   name="title" title="">
+                   name="title" title=""
+                   placeholder="<?php echo $artworkInfo[0]['title'] ?>">
           </div>
         </div>
         <div class="form-group">
           <label for="author" class="col-md-2 control-label">Author</label>
           <div class="col-md-9">
             <input type="text" class="form-control" required="required"
-                   name="author" title="">
+                   name="author" title=""
+                   placeholder="<?php echo $artworkInfo[0]['artist'] ?>">
           </div>
         </div>
         <div class="form-group">
           <label for="description" class="col-md-2 control-label">Description</label>
           <div class="col-md-9">
             <input type="text" class="form-control" required="required"
-                   name="description" title="">
+                   name="description" title=""
+                   placeholder="<?php echo $artworkInfo[0]['description'] ?>">
           </div>
         </div>
         <div class="form-group">
           <label for="year" class="col-md-2 control-label">Year</label>
           <div class="col-md-9">
             <input type="number" class="form-control" required="required"
-                   name="year" title="">
+                   name="year" title=""
+                   placeholder="<?php echo $artworkInfo[0]['yearOfWork'] ?>">
           </div>
         </div>
         <div class="form-group">
           <label for="genre" class="col-md-2 control-label">Genre</label>
           <div class="col-md-9">
             <input type="text" class="form-control" required="required"
-                   name="genre" title="">
+                   name="genre" title=""
+                   placeholder="<?php $artworkInfo[0]['genre'] ?>">
           </div>
         </div>
         <div class="form-group">
           <label for="width" class="col-md-2 control-label">Width</label>
           <div class="col-md-9">
             <input type="number" class="form-control" required="required"
-                   name="width" title="">
+                   name="width" title=""
+                   placeholder="<?php echo $artworkInfo[0]['width'] ?>">
           </div>
         </div>
         <div class="form-group">
@@ -142,7 +152,8 @@ if (isset($_GET['artworkID'])) {
           </label>
           <div class="col-md-9">
             <input type="number" class="form-control" required="required"
-                   name="height" title="">
+                   name="height" title=""
+                   placeholder="<?php echo $artworkInfo[0]['height'] ?>">
           </div>
         </div>
         <div class="form-group">
@@ -151,7 +162,8 @@ if (isset($_GET['artworkID'])) {
           </label>
           <div class="col-md-9">
             <input type="number" class="form-control" required="required"
-                   name="price" title="">
+                   name="price" title=""
+                   placeholder="$<?php echo $artworkInfo[0]['price'] ?>">
           </div>
         </div>
         <div class="form-group">
@@ -169,13 +181,14 @@ if (isset($_GET['artworkID'])) {
           </label>
           <div class="col-sm-12 col-md-9">
             <div class="thumbnail">
-              <img id="preview" src="#" alt="Please choose an image.">
+              <img id="preview"
+                   src="img/<?php echo $artworkInfo[0]['imageFileName'] ?>">
             </div>
           </div>
         </div>
         <div class="form-group">
           <div class="col-md-offset-3 col-md-9">
-            <button type="submit" class="btn btn-success">Release</button>
+            <button type="submit" class="btn btn-success">Modify</button>
           </div>
         </div>
       </form>

@@ -54,7 +54,6 @@ if (isset($_POST['title'])) {
             <li class="active">
               <a href="release.php">Release</a>
             </li>
-            <li><a href="modify.php">Modify</a></li>
           </ul>
         </div>
       </div>

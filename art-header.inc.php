@@ -35,7 +35,7 @@
               </li>
               <li><a href="release.php">
                 <span class="glyphicon glyphicon-gift">
-                </span> Release & Modify </a>
+                </span> Release </a>
               </li>
               <li><a href="shopping_cart.php">
                 <span class="glyphicon glyphicon-shopping-cart">
