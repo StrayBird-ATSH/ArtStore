@@ -29,7 +29,7 @@ WHERE artworkID=$artworkID";
   $result = mysqli_query($connection, $sql);
   $artworkInfo = mysqli_fetch_all($result, MYSQLI_ASSOC);
 } elseif ($_SERVER['REQUEST_METHOD'] === "POST") {
-  $artworkID = $_GET['artworkID'];
+  $artworkID = $_POST['artworkID'];
   $title = $_POST['title'];
   $author = $_POST['author'];
   $description = $_POST['description'];
@@ -87,14 +87,14 @@ width = $width,height=$height,price=$price,imageFileName='$fileName'
       }
       ?>
       <form role="form" class="form-horizontal" enctype="multipart/form-data"
-            action="release.php"
-          <?php if (isset($_GET['artworkID']))
-            echo "?artworkID=" . $_GET['artworkID'] ?> method="post">
+            action="modify.php" method="post">
         <div class="page-header">
           <h2>Modify an artwork</h2>
           <?php
           if (!isset($_SESSION['email']))
             exit("<h1>Please login first.</h1>");
+          if (!isset($_GET['artworkID']) && !isset($_POST['artworkID']))
+            exit("<h1>Cannot be accessed directly.</h1>");
           ?>
           <p>You can modify your own artworks here.</p>
         </div>
@@ -186,6 +186,8 @@ width = $width,height=$height,price=$price,imageFileName='$fileName'
             </div>
           </div>
         </div>
+        <input type="hidden" name="artworkID"
+               value="<?php echo $artworkID ?>">
         <div class="form-group">
           <div class="col-md-offset-3 col-md-9">
             <button type="submit" class="btn btn-success">Modify</button>
