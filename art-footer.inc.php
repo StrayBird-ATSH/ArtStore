@@ -25,8 +25,9 @@
             <img class="media-object" src="images/art/tiny/099110.jpg" alt="...">
           </a>
           <div class="media-body">
-            <p class="media-heading similarTitle"><a href="#">The Veiled Woman</a></p>
-            <em>5 minutes ago</em>
+            <p class="media-heading similarTitle">
+              <a href="details.php?artworkID=404">The Veiled Woman</a></p>
+            <em>2 years ago</em>
           </div>
         </div>
         <div class="media">
@@ -34,8 +35,9 @@
             <img class="media-object" src="images/art/tiny/116010.jpg" alt="...">
           </a>
           <div class="media-body">
-            <p class="media-heading similarTitle"><a href="#">Artist Holding a Thistle</a></p>
-            <em>11 minutes ago</em>
+            <p class="media-heading similarTitle">
+              <a href="details.php?artworkID=443">Artist Holding a Thistle</a></p>
+            <em>2 years ago</em>
           </div>
         </div>
         <div class="media">
@@ -43,8 +45,9 @@
             <img class="media-object" src="images/art/tiny/113010.jpg" alt="...">
           </a>
           <div class="media-body">
-            <p class="media-heading similarTitle"><a href="#">Self-portrait in a Straw Hat</a></p>
-            <em>23 minutes ago</em>
+            <p class="media-heading similarTitle">
+              <a href="details.php?artworkID=437">Self-portrait in a Straw Hat</a></p>
+            <em>2 years ago</em>
           </div>
         </div>
       </div>

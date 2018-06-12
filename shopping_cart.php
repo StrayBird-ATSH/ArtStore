@@ -22,6 +22,12 @@
     if ($error != null) {
       $output = "<p>Unable to connect to database<p>" . $error;
       exit($output);
+    }
+    if (isset($_GET['delete']) && isset($_SESSION['email'])) {
+      $email = $_SESSION['email'];
+      $artworkID = $_GET['delete'];
+      $sql = "DELETE FROM carts WHERE artworkID=$artworkID AND userEmail = '$email'";
+      mysqli_query($connection, $sql);
     } ?>
     <h2>View Cart</h2>
     <?php
@@ -48,6 +54,7 @@
         $description = $images[$i]['description'];
         if (strlen($description) > 400)
           $description = substr($description, 0, 300);
+        $artworkID = $images[$i]['artworkID'];
         echo "<tr>";
         echo "<td><img class=\"img-thumbnail\" src=\"img/" .
             $images[$i]['imageFileName'] . "\" /></td>";
@@ -56,7 +63,7 @@
             $images[$i]['title'] . "</a></em></td>";
         echo "<td>" . $description . "</td>";
         echo "<td>$" . $images[$i]['price'] . "</td>";
-        echo "<td><button type=\"button\" class=\"btn btn-danger\">Remove</button></td>";
+        echo "<td><a type=\"button\" class=\"btn btn-danger\" href='shopping_cart.php?delete=$artworkID'>Remove</a></td>";
         echo "</tr>";
         $totalPrice += $images[$i]['price'];
       }
