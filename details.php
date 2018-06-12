@@ -289,7 +289,6 @@ if (isset($_SESSION['email']) && isset($_GET['add'])) {
           </ul>
         </div>
       </div>
-
       <div class="panel panel-info">
         <div class="panel-heading">
           <h3 class="panel-title">Popular Genres</h3>

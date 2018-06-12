@@ -12,7 +12,7 @@
 session_start();
 if (isset($_COOKIE['footprint'])) {
   setcookie('footprint', $_COOKIE['footprint'] . ("my_artworks.php" . ","));
-  setcookie('title',  $_COOKIE['title'] . "My Artworks Page,");
+  setcookie('title', $_COOKIE['title'] . "My Artworks Page,");
 } else {
   setcookie('footprint', "my_artworks.php,");
   setcookie('title', "My Artworks Page,");
@@ -96,9 +96,9 @@ if (isset($_GET['artworkID'])) {
           echo "<td><a type=\"button\" class=\"btn btn-info\" href='modify.php?artworkID=";
           echo $myArtworkList[$i]['artworkID'];
           echo "'>Edit</a></td>";
-          echo "<td><a type=\"button\" class=\"btn btn-danger\" href='my_artworks.php?artworkID=";
+          echo "<td><button type=\"button\" class=\"btn btn-danger\" onclick='alert(\"Are you sure to delete?\");location.href=\"my_artworks.php?artworkID=";
           echo $myArtworkList[$i]['artworkID'];
-          echo "'>Remove</a></td>";
+          echo "\";'>Remove</button></td>";
           echo "</tr>";
         }
         ?>
