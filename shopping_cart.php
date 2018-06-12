@@ -9,6 +9,13 @@
 </head>
 <body>
 <?php session_start();
+if (isset($_COOKIE['footprint'])) {
+  $_COOKIE['footprint'] .= ("shopping_cart.php" . ",");
+  $_COOKIE['title'] .= "Shopping Cart Page,";
+} else {
+  setcookie('footprint', "shopping_cart.php,");
+  setcookie('title', "Shopping Cart Page,");
+}
 require_once 'includes\config.php';
 include 'art-header.inc.php'; ?>
 <div class="container">

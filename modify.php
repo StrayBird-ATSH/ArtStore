@@ -10,6 +10,16 @@
 <body>
 <?php
 session_start();
+if (isset($_GET['artworkID'])) {
+  $artworkID = $_GET['artworkID'];
+  if (isset($_COOKIE['footprint'])) {
+    $_COOKIE['footprint'] .= ("modify.php?artworkID=$artworkID" . ",");
+    $_COOKIE['title'] .= "Modify_Page,";
+  } else {
+    setcookie('footprint', "modify.php?artworkID=$artworkID,");
+    setcookie('title', "Modify_Page,");
+  }
+}
 include 'art-header.inc.php';
 $status = '0';
 require_once 'includes\config.php';

@@ -9,6 +9,18 @@
 <body>
 <?php
 session_start();
+$suffix = "";
+if (isset($_SERVER['QUERY_STRING']))
+  $suffix = "?" . $_SERVER['QUERY_STRING'];
+if (isset($_COOKIE['footprint'])) {
+  $_COOKIE['footprint'] .= ("search.php" . $suffix . ",");
+  $_COOKIE['title'] .= "Search_Page,";
+} else {
+  setcookie('footprint', "search.php" . $suffix . ",");
+  setcookie('title', "Search_Page,");
+}
+
+
 include 'art-header.inc.php';
 require_once 'includes\config.php';
 $connection = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME);

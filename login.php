@@ -10,6 +10,13 @@
 <body>
 <?php
 session_start();
+if (isset($_COOKIE['footprint'])) {
+  $_COOKIE['footprint'] .= ("login.php" . ",");
+  $_COOKIE['title'] .= "Login_Page,";
+} else {
+  setcookie('footprint', "login.php,");
+  setcookie('title', "Login_Page,");
+}
 $status = '0';
 if (isset($_POST['email']) && isset($_POST['passwordLogin'])) {
   require_once 'includes\config.php';

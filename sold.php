@@ -10,6 +10,13 @@
 <body>
 <?php
 session_start();
+if (isset($_COOKIE['footprint'])) {
+  $_COOKIE['footprint'] .= ("sold.php" . ",");
+  $_COOKIE['title'] .= "Sold Page,";
+} else {
+  setcookie('footprint', "sold.php,");
+  setcookie('title', "Sold Page,");
+}
 require_once 'includes\config.php';
 include 'art-header.inc.php';
 $connection = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME);

@@ -10,6 +10,13 @@
 <body>
 <?php
 session_start();
+if (isset($_COOKIE['footprint'])) {
+  $_COOKIE['footprint'] .= ("register_page.php" . ",");
+  $_COOKIE['title'] .= "Register Page,";
+} else {
+  setcookie('footprint', "register_page.php,");
+  setcookie('title',"Register_Page,");
+}
 include 'art-header.inc.php';
 function saltHash($originalPassword)
 {
@@ -42,7 +49,7 @@ if (isset($_POST['email'])) {
       $tel = $_POST['tel'];
       $address = $_POST['address'];
       $sql = "INSERT INTO users (name, email, password, balance,tel,address) 
-                      VALUES ('$name','$email','$longHashPassword',0,$tel,$address)";
+                  VALUES ('$name','$email','$longHashPassword',0,$tel,$address)";
       if (mysqli_query($connection, $sql))
         $status = 'success';
       else $status = 'register failed';

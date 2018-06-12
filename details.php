@@ -10,6 +10,18 @@
 <body>
 <?php
 session_start();
+$artworkID = 437;
+if (isset($_GET['artworkID']))
+  $artworkID = $_GET['artworkID'];
+elseif (isset($_GET['add']))
+  $artworkID = $_GET['add'];
+if (isset($_COOKIE['footprint'])) {
+  $_COOKIE['footprint'] .= ("details.php?artworkID=$artworkID" . ",");
+  $_COOKIE['title'] .= "Details_Page,";
+} else {
+  setcookie('footprint', "details.php?artworkID=$artworkID,");
+  setcookie('title', "Details_Page,");
+}
 require_once 'includes\config.php';
 include 'art-header.inc.php';
 $connection = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME);
@@ -19,13 +31,7 @@ if ($error != null) {
   $output = "<p>Unable to connect to database<p>" . $error;
   exit($output);
 }
-$artworkID = 437;
-if (isset($_GET['artworkID']))
-  $artworkID = $_GET['artworkID'];
-elseif (isset($_GET['add']))
-  $artworkID = $_GET['add'];
 $sql = "SELECT * FROM artworks WHERE artworkID=$artworkID";
-
 $result = mysqli_query($connection, $sql);
 $imagesInformation = mysqli_fetch_all($result, MYSQLI_ASSOC);
 $view = $imagesInformation[0]['view'];

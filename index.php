@@ -10,6 +10,13 @@
 <body>
 <?php
 session_start();
+if (isset($_COOKIE['footprint'])) {
+  $_COOKIE['footprint'] .= ("index.php" . ",");
+  $_COOKIE['title'] .= "Home Page,";
+} else {
+  setcookie('footprint', "index.php,");
+  setcookie('title', "Home_Page,");
+}
 require_once 'includes\config.php';
 if (isset($_GET['logOut']) && isset($_SESSION['email']))
   unset($_SESSION['email']);

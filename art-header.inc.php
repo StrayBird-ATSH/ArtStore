@@ -22,8 +22,7 @@
               $sessionStatus = true;
               echo "Welcome " . $_SESSION['email'];
               echo " <a href=\"index.php?logOut=true\">Log out</a>";
-            }
-            ?>
+            } ?>
           </p>
         </div>
         <?php if ($sessionStatus === true) { ?>
@@ -104,6 +103,18 @@
           </ul>
         </div>
       </nav>
+      Your footprint:
+      <?php
+      $path = explode(",", $_COOKIE['footprint']);
+      $pathTitle = explode(",", $_COOKIE['title']);
+      if (count($path) > 1)
+        for ($i = 0; $i < count($path) - 1; $i++) {
+          echo "<a href=\"$path[$i]\">";
+          echo "$pathTitle[$i]";
+          echo "</a> -> ";
+        }
+      ?>
+      Current Page
     </div>
   </div>
 </header>

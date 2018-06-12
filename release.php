@@ -10,6 +10,13 @@
 <body>
 <?php
 session_start();
+if (isset($_COOKIE['footprint'])) {
+  $_COOKIE['footprint'] .= ("release.php" . ",");
+  $_COOKIE['title'] .= "Release Page,";
+} else {
+  setcookie('footprint', "release.php,");
+  setcookie('title', "Release Page,");
+}
 include 'art-header.inc.php';
 $status = '0';
 if (isset($_POST['title'])) {
