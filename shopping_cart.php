@@ -50,6 +50,7 @@ include 'art-header.inc.php'; ?>
 //          item information;
           $artworkID = $item['artworkID'];
           $price = $item['price'];
+          $title = $item['title'];
           $releaseUserEmail = $item['releaseUserEmail'];
 
 
@@ -77,6 +78,11 @@ include 'art-header.inc.php'; ?>
 
 //        remove the shopping cart item.
           $sql = "DELETE FROM carts WHERE artworkID=$artworkID AND userEmail = '$email'";
+          mysqli_query($connection, $sql);
+
+
+//          write order information
+          $sql = "INSERT INTO orders (ownerEmail, title, price, artworkID) VALUES ('$email','$title',$price,$artworkID)";
           mysqli_query($connection, $sql);
         }
         $checkOutResult = 'success';
