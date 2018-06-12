@@ -50,10 +50,10 @@ if ((isset($_GET['title']) && $_GET['title'] != "") ||
     $sql .= " artist LIKE  '$artist'";
   }
 }
-if (isset($_GET['sort']) && $_GET['sort'] != 0) {
+if (isset($_GET['sort']) && $_GET['sort'] !== 0) {
   $sortValue = $_GET['sort'];
   $sql .= " ORDER BY ";
-  if ($sortValue == "1")
+  if ($sortValue === "1")
     $sql .= " price ";
   else
     $sql .= " view DESC";
@@ -106,21 +106,18 @@ $images = mysqli_fetch_all($result, MYSQLI_ASSOC);
               echo "<td>$" . $images[$i]['price'] . "</td>";
               echo "<td>" . $images[$i]['view'] . "</td>";
               echo "</tr>";
-            }
-            ?>
+            } ?>
             </tbody>
           </table>
         </div>
       </form>
     </div>
     <div class="col-md-2">
-
       <div class="panel panel-primary">
         <div class="panel-heading">
           <h3 class="panel-title">Cart </h3>
         </div>
         <div class="panel-body">
-
           <div class="media">
             <a class="pull-left" href="#">
               <img class="media-object" src="images/art/tiny/116010.jpg" alt="..." width="32">
@@ -167,7 +164,6 @@ $images = mysqli_fetch_all($result, MYSQLI_ASSOC);
           </ul>
         </div>
       </div>
-
       <div class="panel panel-info">
         <div class="panel-heading">
           <h3 class="panel-title">Popular Genres</h3>

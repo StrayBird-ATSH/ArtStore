@@ -25,9 +25,11 @@ if (isset($_GET['artworkID']))
 elseif (isset($_GET['add']))
   $artworkID = $_GET['add'];
 $sql = "SELECT * FROM artworks WHERE artworkID=$artworkID";
+
 $result = mysqli_query($connection, $sql);
 $imagesInformation = mysqli_fetch_all($result, MYSQLI_ASSOC);
 $view = $imagesInformation[0]['view'];
+$releaseUserEmail = $imagesInformation[0]['releaseUserEmail'];
 $imageFileName = $imagesInformation[0]['imageFileName'];
 $title = $imagesInformation[0]['title'];
 $description = $imagesInformation[0]['description'];
@@ -47,8 +49,8 @@ if (isset($_SESSION['email']) && isset($_GET['add'])) {
   $result = mysqli_query($connection, $sql);
   $row = $result->fetch_assoc();
   if ($row['COUNT(*)'] === '0') {
-    $sql = "INSERT INTO carts (artworkID,title,description,price,imageFileName,userEmail) 
-          VALUES ($artworkID,'$title','$description',$price,'$imageFileName','$email')";
+    $sql = "INSERT INTO carts (artworkID,title,description,price,imageFileName,userEmail,releaseUserEmail) 
+          VALUES ($artworkID,'$title','$description',$price,'$imageFileName','$email','$releaseUserEmail')";
     if (mysqli_query($connection, $sql))
       $add_result = 'success';
     else $add_result = 'add failed';

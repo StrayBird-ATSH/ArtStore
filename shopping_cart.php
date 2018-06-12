@@ -8,12 +8,13 @@
   <link href="css/site_theme.css" rel="stylesheet">
 </head>
 <body>
+<?php session_start();
+require_once 'includes\config.php';
+include 'art-header.inc.php'; ?>
 <div class="container">
   <div class="page-header">
     <?php
-    session_start();
-    require_once 'includes\config.php';
-    include 'art-header.inc.php';
+    $checkOutResult = '0';
     if (!isset($_SESSION['email']))
       exit("<h1>Please login first.</h1>");
     $connection = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME);
@@ -28,11 +29,86 @@
       $artworkID = $_GET['delete'];
       $sql = "DELETE FROM carts WHERE artworkID=$artworkID AND userEmail = '$email'";
       mysqli_query($connection, $sql);
+    } elseif (isset($_GET['check'])) {
+      $checkOutResult = 'error';
+      $email = $_SESSION['email'];
+      $sql = "SELECT balance FROM users WHERE email = '$email'";
+      $result = mysqli_query($connection, $sql);
+      $balance = $result->fetch_assoc();
+      $balance = $balance['balance'];
+      $sql = "SELECT sum(price) FROM carts WHERE userEmail = '$email'";
+      $result = mysqli_query($connection, $sql);
+      $sum = $result->fetch_assoc();
+      $sum = $sum['sum(price)'];
+      if ($balance > $sum) {
+        $sql = "SELECT * FROM carts WHERE userEmail = '$email'";
+        $result = mysqli_query($connection, $sql);
+        $items = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        foreach ($items as $item) {
+
+
+//          item information;
+          $artworkID = $item['artworkID'];
+          $price = $item['price'];
+          $releaseUserEmail = $item['releaseUserEmail'];
+
+
+//          remove balance from user account
+          $sql = "UPDATE artworks SET buyerEmail = '$email' WHERE artworkID =$artworkID ";
+          mysqli_query($connection, $sql);
+          $sql = "SELECT balance FROM users WHERE email = '$email'";
+          $result = mysqli_query($connection, $sql);
+          $balance = $result->fetch_assoc();
+          $balance = $balance['balance'];
+          $balance = $balance - $price;
+          $sql = "UPDATE users SET balance = $balance WHERE email='$email'";
+          mysqli_query($connection, $sql);
+
+
+//          add balance to the owner user account
+          $sql = "SELECT balance FROM users WHERE email = '$releaseUserEmail'";
+          $result = mysqli_query($connection, $sql);
+          $balance = $result->fetch_assoc();
+          $balance = $balance['balance'];
+          $balance += $price;
+          $sql = "UPDATE users SET balance = $balance WHERE email='$releaseUserEmail'";
+          mysqli_query($connection, $sql);
+
+
+//        remove the shopping cart item.
+          $sql = "DELETE FROM carts WHERE artworkID=$artworkID AND userEmail = '$email'";
+          mysqli_query($connection, $sql);
+        }
+        $checkOutResult = 'success';
+      } else $checkOutResult = 'insufficient balance';
     } ?>
     <h2>View Cart</h2>
     <?php
     if (!isset($_SESSION['email']))
-      exit("<h1>Please login first.</h1>"); ?>
+      exit("<h1>Please login first.</h1>");
+    if ($checkOutResult === 'success') {
+      echo "<div class=\"alert alert-success alert-dismissible\" role=\"alert\">";
+      echo "<button type=\"button\" class=\"close\" data-dismiss=\"alert\">";
+      echo "<span aria-hidden=\"true\">&times;</span>";
+      echo "</button>";
+      echo "<strong>Success! </strong>";
+      echo "You have successfully checked out!</div>";
+    } elseif ($checkOutResult === 'insufficient balance') {
+      echo "<div class=\"alert alert-danger alert-dismissible\" role=\"alert\">";
+      echo "<button type=\"button\" class=\"close\" data-dismiss=\"alert\">";
+      echo "<span aria-hidden=\"true\">&times;</span>";
+      echo "</button>";
+      echo "<strong>Failed! </strong>";
+      echo "Sorry, you don't have sufficient balance to check out.</div>";
+    } elseif ($checkOutResult === 'error') {
+      echo "<div class=\"alert alert-warning alert-dismissible\" role=\"alert\">";
+      echo "<button type=\"button\" class=\"close\" data-dismiss=\"alert\">";
+      echo "<span aria-hidden=\"true\">&times;</span>";
+      echo "</button>";
+      echo "<strong>Failed! </strong>";
+      echo "Sorry, check out failed.</div>";
+    }
+    ?>
     <table class="table table-bordered
     table-striped table-hover table-condensed">
       <tbody>
@@ -86,12 +162,12 @@
       </tr>
       <tr>
         <td colspan="3" class="moveRight">
-          <button type="button" class="btn btn-primary"
-                  href="index.php">Continue Shopping
-          </button>
+          <a type="button" class="btn btn-primary"
+             href="index.php">Continue Shopping
+          </a>
         </td>
         <td colspan="2">
-          <button type="button" class="btn btn-success">Checkout</button>
+          <a type="button" class="btn btn-success" href="shopping_cart.php?check=out">Checkout</a>
         </td>
       </tr>
       </tbody>
