@@ -19,6 +19,15 @@ if ($error != null) {
   $output = "<p>Unable to connect to database<p>" . $error;
   exit($output);
 }
+$status = '0';
+if (isset($_GET['artworkID'])) {
+  $artworkID = $_GET['artworkID'];
+  $sql = "DELETE FROM artworks WHERE artworkID=$artworkID";
+  $result = mysqli_query($connection, $sql);
+  if ($result)
+    $status = 'delete success';
+  else $status = 'delete failed';
+}
 ?>
 <div class="container">
   <div class="row">
@@ -41,6 +50,21 @@ if ($error != null) {
       if (!isset($_SESSION['email']))
         exit("<h1>Please login first.</h1>");
       $email = $_SESSION['email'];
+      if ($status === 'delete success') {
+        echo "<div class=\"alert alert-success alert-dismissible\" role=\"alert\">";
+        echo "<button type=\"button\" class=\"close\" data-dismiss=\"alert\">";
+        echo "<span aria-hidden=\"true\">&times;</span>";
+        echo "</button>";
+        echo "<strong>Success! </strong>";
+        echo "You have successfully deleted!</div>";
+      } elseif ($status === 'delete failed') {
+        echo "<div class=\"alert alert-danger alert-dismissible\" role=\"alert\">";
+        echo "<button type=\"button\" class=\"close\" data-dismiss=\"alert\">";
+        echo "<span aria-hidden=\"true\">&times;</span>";
+        echo "</button>";
+        echo "<strong>Failed! </strong>";
+        echo "Sorry, the delete is failed.</div>";
+      }
       $sql = "SELECT title,timeReleased,artworkID FROM artworks WHERE releaseUserEmail ='$email'";
       $result = mysqli_query($connection, $sql);
       $myArtworkList = mysqli_fetch_all($result, MYSQLI_ASSOC);

@@ -22,8 +22,11 @@ if (isset($_POST['title'])) {
     exit($output);
   }
   $title = $_POST['title'];
+  $title = str_replace("'", "\'", $title);
   $author = $_POST['author'];
+  $author = str_replace("'", "\'", $author);
   $description = $_POST['description'];
+  $description = str_replace("'", "\'", $description);
   $year = $_POST['year'];
   $genre = $_POST['genre'];
   $width = $_POST['width'];

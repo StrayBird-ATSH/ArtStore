@@ -22,6 +22,7 @@ if ($error != null) {
   exit($output);
 }
 if (isset($_GET['artworkID'])) {
+  $status = true;
   $artworkID = $_GET['artworkID'];
   $sql = "SELECT title,artist,description,yearOfWork,genre,
 width,height,price,imageFileName FROM artworks 
@@ -31,8 +32,11 @@ WHERE artworkID=$artworkID";
 } elseif ($_SERVER['REQUEST_METHOD'] === "POST") {
   $artworkID = $_POST['artworkID'];
   $title = $_POST['title'];
+  $title = str_replace("'", "\'", $title);
   $author = $_POST['author'];
+  $author = str_replace("'", "\'", $author);
   $description = $_POST['description'];
+  $description = str_replace("'", "\'", $description);
   $year = $_POST['year'];
   $genre = $_POST['genre'];
   $width = $_POST['width'];
@@ -47,10 +51,15 @@ width = $width,height=$height,price=$price,imageFileName='$fileName'
  WHERE artworkID = $artworkID";
     $fileToMove = $_FILES['image']['tmp_name'];
     $destination = "./img/" . $fileName;
-    if (mysqli_query($connection, $sql) &&
-        move_uploaded_file($fileToMove, $destination))
-      $status = 'success';
-    else $status = 'modify failed';
+    echo $email;
+    echo $sql;
+    echo $fileToMove;
+    echo $destination;
+    if (mysqli_query($connection, $sql)) {
+      $status = 'database update success';
+      if (move_uploaded_file($fileToMove, $destination))
+        $status = 'success';
+    } else $status = 'modify failed';
   }
 } ?>
 <div class="container">
@@ -76,7 +85,14 @@ width = $width,height=$height,price=$price,imageFileName='$fileName'
         echo "<span aria-hidden=\"true\">&times;</span>";
         echo "</button>";
         echo "<strong>Success! </strong>";
-        echo "You have successfully released!</div>";
+        echo "You have successfully modified!</div>";
+      } elseif ($status === 'database update success') {
+        echo "<div class=\"alert alert-warning alert-dismissible\" role=\"alert\">";
+        echo "<button type=\"button\" class=\"close\" data-dismiss=\"alert\">";
+        echo "<span aria-hidden=\"true\">&times;</span>";
+        echo "</button>";
+        echo "<strong>Partially failed</strong>";
+        echo "The database update is successful but the image update failed.</div>";
       } elseif ($status === 'modify failed') {
         echo "<div class=\"alert alert-danger alert-dismissible\" role=\"alert\">";
         echo "<button type=\"button\" class=\"close\" data-dismiss=\"alert\">";
@@ -84,8 +100,7 @@ width = $width,height=$height,price=$price,imageFileName='$fileName'
         echo "</button>";
         echo "<strong>Failed! </strong>";
         echo "Sorry, the release is failed.</div>";
-      }
-      ?>
+      } ?>
       <form role="form" class="form-horizontal" enctype="multipart/form-data"
             action="modify.php" method="post">
         <div class="page-header">
@@ -103,7 +118,8 @@ width = $width,height=$height,price=$price,imageFileName='$fileName'
           <div class="col-md-9">
             <input type="text" class="form-control" required="required"
                    name="title" title=""
-                   value="<?php echo $artworkInfo[0]['title'] ?>">
+                   value=
+                   "<?php if ($status) echo $artworkInfo[0]['title'] ?>">
           </div>
         </div>
         <div class="form-group">
@@ -111,7 +127,8 @@ width = $width,height=$height,price=$price,imageFileName='$fileName'
           <div class="col-md-9">
             <input type="text" class="form-control" required="required"
                    name="author" title=""
-                   value="<?php echo $artworkInfo[0]['artist'] ?>">
+                   value="<?php if ($status)
+                     echo $artworkInfo[0]['artist'] ?>">
           </div>
         </div>
         <div class="form-group">
@@ -119,15 +136,15 @@ width = $width,height=$height,price=$price,imageFileName='$fileName'
           <div class="col-md-9">
             <input type="text" class="form-control" required="required"
                    name="description" title=""
-                   value="<?php echo $artworkInfo[0]['description'] ?>">
+                   value="<?php if ($status) echo $artworkInfo[0]['description'] ?>">
           </div>
         </div>
         <div class="form-group">
           <label for="year" class="col-md-2 control-label">Year</label>
           <div class="col-md-9">
             <input type="number" class="form-control" required="required"
-                   name="year" title=""
-                   value="<?php echo $artworkInfo[0]['yearOfWork'] ?>">
+                   name="year" title="" min="0" max="2018"
+                   value="<?php if ($status) echo $artworkInfo[0]['yearOfWork'] ?>">
           </div>
         </div>
         <div class="form-group">
@@ -135,15 +152,15 @@ width = $width,height=$height,price=$price,imageFileName='$fileName'
           <div class="col-md-9">
             <input type="text" class="form-control" required="required"
                    name="genre" title=""
-                   value="<?php echo $artworkInfo[0]['genre'] ?>">
+                   value="<?php if ($status) echo $artworkInfo[0]['genre'] ?>">
           </div>
         </div>
         <div class="form-group">
           <label for="width" class="col-md-2 control-label">Width</label>
           <div class="col-md-9">
             <input type="number" class="form-control" required="required"
-                   name="width" title=""
-                   value="<?php echo $artworkInfo[0]['width'] ?>">
+                   name="width" title="" min="1" max="1000"
+                   value="<?php if ($status) echo $artworkInfo[0]['width'] ?>">
           </div>
         </div>
         <div class="form-group">
@@ -152,8 +169,8 @@ width = $width,height=$height,price=$price,imageFileName='$fileName'
           </label>
           <div class="col-md-9">
             <input type="number" class="form-control" required="required"
-                   name="height" title=""
-                   value="<?php echo $artworkInfo[0]['height'] ?>">
+                   name="height" title="" min="1" max="1000"
+                   value="<?php if ($status) echo $artworkInfo[0]['height'] ?>">
           </div>
         </div>
         <div class="form-group">
@@ -162,8 +179,8 @@ width = $width,height=$height,price=$price,imageFileName='$fileName'
           </label>
           <div class="col-md-9">
             <input type="number" class="form-control" required="required"
-                   name="price" title=""
-                   value="<?php echo $artworkInfo[0]['price'] ?>">
+                   name="price" title="" min="1" max="1000"
+                   value="<?php if ($status) echo $artworkInfo[0]['price'] ?>">
           </div>
         </div>
         <div class="form-group">
@@ -182,12 +199,12 @@ width = $width,height=$height,price=$price,imageFileName='$fileName'
           <div class="col-sm-12 col-md-9">
             <div class="thumbnail">
               <img id="preview"
-                   src="img/<?php echo $artworkInfo[0]['imageFileName'] ?>">
+                   src="img/<?php if ($status) echo $artworkInfo[0]['imageFileName'] ?>">
             </div>
           </div>
         </div>
         <input type="hidden" name="artworkID"
-               value="<?php echo $artworkID ?>">
+               value="<?php if ($status) echo $artworkID ?>">
         <div class="form-group">
           <div class="col-md-offset-3 col-md-9">
             <button type="submit" class="btn btn-success">Modify</button>
