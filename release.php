@@ -37,14 +37,12 @@ if (isset($_POST['title'])) {
     $email = $_SESSION['email'];
     $sql = "INSERT INTO artworks (title, artist, description, yearOfWork,genre,width,height,price,releaseUserEmail,imageFileName) 
                       VALUES ('$title','$author','$description',$year,'$genre',$width,$height,$price,'$email','$fileName')";
-    echo print_r($_FILES);
     $fileToMove = $_FILES['upload']['tmp_name'];
     $destination = "./img/" . $fileName;
     if (mysqli_query($connection, $sql))
-      echo "connect OK";
-    if (move_uploaded_file($fileToMove, $destination))
-      $status = 'success';
-    else $status = 'publish failed';
+      if (move_uploaded_file($fileToMove, $destination))
+        $status = 'success';
+      else $status = 'publish failed';
   }
 } ?>
 <div class="container">

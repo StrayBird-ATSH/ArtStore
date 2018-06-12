@@ -40,13 +40,13 @@
       <?php
       $email = $_SESSION['email'];
       $sql =
-          "SELECT imageFileName,title,description,artworkID,price FROM artworks WHERE shopping_cart = '$email'";
+          "SELECT imageFileName,title,description,artworkID,price FROM carts WHERE userEmail = '$email'";
       $result = mysqli_query($connection, $sql);
       $images = mysqli_fetch_all($result, MYSQLI_ASSOC);
       $totalPrice = 0;
       for ($i = 0; $i < count($images); $i++) {
         $description = $images[$i]['description'];
-        if (strlen($description) > 100)
+        if (strlen($description) > 400)
           $description = substr($description, 0, 300);
         echo "<tr>";
         echo "<td><img class=\"img-thumbnail\" src=\"img/" .
