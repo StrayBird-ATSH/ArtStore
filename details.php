@@ -38,6 +38,9 @@ $view++;
 $sql = "UPDATE artworks SET view = $view WHERE artworkID = $artworkID";
 mysqli_query($connection, $sql);
 $add_result = '0';
+$saleStatus = '0';
+if (isset($imagesInformation[0]['buyerEmail']))
+  $saleStatus = '1';
 if (isset($_SESSION['email']) && isset($_GET['add'])) {
   $email = $_SESSION['email'];
   $sql = "SELECT COUNT(*) FROM carts WHERE userEmail='$email' AND artworkID=$artworkID";
@@ -58,25 +61,33 @@ if (isset($_SESSION['email']) && isset($_GET['add'])) {
       <p>By <?php echo $imagesInformation[0]['artist'] ?></p>
       <div class="row">
         <div class="col-md-5">
-          <img src="img/<?php echo $imagesInformation[0]['imageFileName'] ?>"
+          <img src="img/<?php echo $imageFileName ?>"
                class="img-thumbnail img-responsive"/>
         </div>
         <div class="col-md-7">
           <p>
             <?php echo $imagesInformation[0]['description'] ?>
           </p>
-          <p class="price">$<?php echo $imagesInformation[0]['price'] ?></p>
+          <p class="price">$<?php echo $price ?></p>
           <div class="btn-group btn-group-lg">
             <button type="button" class="btn btn-default">
               <a href="#"><span class="glyphicon glyphicon-gift">
                 </span> Add to Wish List</a>
             </button>
-            <button type="button" class="btn btn-default">
-              <a href="details.php?add=<?php
-              echo $imagesInformation[0]['artworkID'] ?>">
-                <span class="glyphicon glyphicon-shopping-cart">
-                </span> Add to Shopping Cart</a>
-            </button>
+            <?php
+            if ($saleStatus === '0') {
+              echo "<button type=\"button\" class=\"btn btn-default\">";
+              echo "<a href=\"details.php?add=";
+              echo $artworkID;
+              echo "\">";
+            } else {
+              echo "<button type=\"button\" class=\"btn btn-warning\">";
+              echo "<a>";
+            }
+            echo "<span class=\"glyphicon glyphicon-shopping-cart\">";
+            echo "</span> Add to Shopping Cart</a>";
+            echo "</button>";
+            ?>
           </div>
           <p>&nbsp;</p>
           <?php
@@ -142,6 +153,14 @@ if (isset($_SESSION['email']) && isset($_GET['add'])) {
                 <th>Subjects:</th>
                 <td>People, Arts</td>
               </tr>
+              <tr>
+                <th>Status:</th>
+                <td>
+                  <?php
+                  if ($saleStatus === '0') echo "On Sale";
+                  else echo "Sold";
+                  ?></td>
+              </tr>
             </table>
           </div>
         </div>  <!-- end col-md-7 -->
@@ -156,17 +175,19 @@ if (isset($_SESSION['email']) && isset($_GET['add'])) {
             <div class="caption">
               <p class="similarTitle">
                 <a href="details.php?artworkID=443">Artist Holding a Thistle</a></p>
-              <button type="button" class="btn btn-primary btn-xs">
+              <a type="button" class="btn btn-primary btn-xs"
+                 href="details.php?artworkID=443">
                 <span class="glyphicon glyphicon-info-sign"></span>
                 View
-              </button>
+              </a>
               <button type="button" class="btn btn-success btn-xs">
                 <span class="glyphicon glyphicon-gift"></span> Wish
               </button>
-              <button type="button" class="btn btn-info btn-xs" onclick="">
+              <a type="button" class="btn btn-info btn-xs"
+                 href="details.php?artworkID=443">
                 <span class="glyphicon glyphicon-shopping-cart"></span>
                 Cart
-              </button>
+              </a>
             </div>
           </div>
         </div>
@@ -177,38 +198,41 @@ if (isset($_SESSION['email']) && isset($_GET['add'])) {
             <div class="caption">
               <p class="similarTitle">
                 <a href="details.php?artworkID=450">Portrait of Eleanor of Toledo</a></p>
-              <button type="button" class="btn btn-primary btn-xs">
+              <a type="button" class="btn btn-primary btn-xs"
+                 href="details.php?artworkID=450">
                 <span class="glyphicon glyphicon-info-sign"></span>
                 View
-              </button>
+              </a>
               <button type="button" class="btn btn-success btn-xs">
                 <span class="glyphicon glyphicon-gift"></span> Wish
               </button>
-              <button type="button" class="btn btn-info btn-xs" onclick="">
+              <a type="button" class="btn btn-info btn-xs"
+                 href="details.php?artworkID=450">
                 <span class="glyphicon glyphicon-shopping-cart"></span>
                 Cart
-              </button>
+              </a>
             </div>
           </div>
         </div>
-
         <div class="col-md-3">
           <div class="thumbnail">
             <img src="images/art/thumbs/107010.jpg" class="img-thumbnail img-responsive">
             <div class="caption">
               <p class="similarTitle">
                 <a href="details.php?artworkID=428">Madame de Pompadour</a></p>
-              <button type="button" class="btn btn-primary btn-xs">
+              <a type="button" class="btn btn-primary btn-xs"
+                 href="details.php?artworkID=428">
                 <span class="glyphicon glyphicon-info-sign"></span>
                 View
-              </button>
+              </a>
               <button type="button" class="btn btn-success btn-xs">
                 <span class="glyphicon glyphicon-gift"></span> Wish
               </button>
-              <button type="button" class="btn btn-info btn-xs" onclick="">
+              <a type="button" class="btn btn-info btn-xs"
+                 href="details.php?artworkID=428">
                 <span class="glyphicon glyphicon-shopping-cart"></span>
                 Cart
-              </button>
+              </a>
             </div>
           </div>
         </div>
@@ -220,17 +244,19 @@ if (isset($_SESSION['email']) && isset($_GET['add'])) {
             <div class="caption">
               <p class="similarTitle">
                 <a href="details.php?artworkID=425">Girl with a Pearl Earring</a></p>
-              <button type="button" class="btn btn-primary btn-xs">
+              <a type="button" class="btn btn-primary btn-xs"
+                 href="details.php?artworkID=425">
                 <span class="glyphicon glyphicon-info-sign"></span>
                 View
-              </button>
+              </a>
               <button type="button" class="btn btn-success btn-xs">
                 <span class="glyphicon glyphicon-gift"></span> Wish
               </button>
-              <button type="button" class="btn btn-info btn-xs">
+              <a type="button" class="btn btn-info btn-xs"
+                 href="details.php?artworkID=425">
                 <span class="glyphicon glyphicon-shopping-cart"></span>
                 Cart
-              </button>
+              </a>
             </div>
           </div>
         </div>
