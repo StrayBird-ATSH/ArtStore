@@ -12,7 +12,7 @@
 session_start();
 if (isset($_COOKIE['footprint'])) {
   setcookie('footprint', $_COOKIE['footprint'] . ("account.php" . ","));
-  setcookie('title',  $_COOKIE['title'] . "Account Page,");
+  setcookie('title', $_COOKIE['title'] . "Account Page,");
 } else {
   setcookie('footprint', "account.php,");
   setcookie('title', "Account Page,");
@@ -49,6 +49,16 @@ if ($error != null) {
         if (!isset($_SESSION['email']))
           exit("<h1>Please login first.</h1>");
         $email = $_SESSION['email'];
+        if (isset($_GET['topUp'])) {
+          $amount = $_GET['topUp'];
+          $sql = "SELECT balance FROM users WHERE email='$email'";
+          $result = mysqli_query($connection, $sql);
+          $userInformation = mysqli_fetch_all($result, MYSQLI_ASSOC);
+          $balance = $userInformation[0]['balance'];
+          $balance = $balance + $amount;
+          $sql = "UPDATE users SET balance = $balance WHERE email='$email'";
+          mysqli_query($connection, $sql);
+        }
         $sql = "SELECT name,balance FROM users WHERE email='$email'";
         $result = mysqli_query($connection, $sql);
         $userInformation = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -75,11 +85,10 @@ if ($error != null) {
           <p class="form-control-static"><?php echo $balance ?></p>
         </div>
       </div>
-      <form action="#">
-        <input title="Top up amount" required="required"
+      <form action="account.php?topUp">
+        <input title="Top up amount" required="required" name="topUp"
                type="number" placeholder="The amount of top up">
-        <button type="submit" class="btn btn-primary"
-                onclick="alert('Top up success')"> Top Up
+        <button type="submit" class="btn btn-primary"> Top Up
         </button>
       </form>
     </div>
