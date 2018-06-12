@@ -13,11 +13,11 @@ $suffix = "";
 if (isset($_SERVER['QUERY_STRING']))
   $suffix = "?" . $_SERVER['QUERY_STRING'];
 if (isset($_COOKIE['footprint'])) {
-  $_COOKIE['footprint'] .= ("search.php" . $suffix . ",");
-  $_COOKIE['title'] .= "Search_Page,";
+  setcookie('footprint', $_COOKIE['footprint'] . ("search.php" . $suffix . ","));
+  setcookie('title', $_COOKIE['title'] . "Search Page,");
 } else {
   setcookie('footprint', "search.php" . $suffix . ",");
-  setcookie('title', "Search_Page,");
+  setcookie('title', "Search Page,");
 }
 
 
@@ -31,41 +31,23 @@ if ($error != null) {
   exit($output);
 }
 $sql =
-    "SELECT imageFileName,title,description,artist,artworkID,price,view FROM artworks";
-if ((isset($_GET['title']) && $_GET['title'] != "") ||
-    (isset($_GET['description']) && $_GET['description'] != "") ||
-    (isset($_GET['artist']) && $_GET['artist'] != "")) {
-  $sql .= " WHERE ";
-  if ((isset($_GET['title']) && $_GET['title'] != "")) {
-    $title = $_GET['title'];
-    $sql .= " title LIKE  '$title'";
-    if ((isset($_GET['description']) && $_GET['description'] != "")) {
-      $description = $_GET['description'];
-      $sql .= " AND description LIKE  '$description'";
-      if ((isset($_GET['artist']) && $_GET['artist'] != "")) {
-        $artist = $_GET['artist'];
-        $sql .= " AND artist LIKE  '$artist'";
-      }
-    } elseif ((isset($_GET['artist']) && $_GET['artist'] != "")) {
-      $artist = $_GET['artist'];
-      $sql .= " AND artist LIKE  '$artist'";
-    }
-  } elseif ((isset($_GET['description']) && $_GET['description'] != "")) {
-    $description = $_GET['description'];
-    $sql .= " description LIKE  '$description'";
-    if ((isset($_GET['artist']) && $_GET['artist'] != "")) {
-      $artist = $_GET['artist'];
-      $sql .= " AND artist LIKE '$artist'";
-    }
-  } elseif ((isset($_GET['artist']) && $_GET['artist'] != "")) {
-    $artist = $_GET['artist'];
-    $sql .= " artist LIKE  '$artist'";
-  }
+    "SELECT imageFileName,title,description,artist,artworkID,price,view FROM artworks WHERE buyerEmail IS NULL";
+if ((isset($_GET['title']) && $_GET['title'] != "")) {
+  $title = $_GET['title'];
+  $sql .= " AND title LIKE  '$title'";
+}
+if ((isset($_GET['description']) && $_GET['description'] != "")) {
+  $description = $_GET['description'];
+  $sql .= " AND description LIKE  '$description'";
+}
+if ((isset($_GET['artist']) && $_GET['artist'] != "")) {
+  $artist = $_GET['artist'];
+  $sql .= " AND artist LIKE  '$artist'";
 }
 if (isset($_GET['sort']) && $_GET['sort'] !== 0) {
   $sortValue = $_GET['sort'];
   $sql .= " ORDER BY ";
-  if ($sortValue === "1")
+  if ("$sortValue" === "1")
     $sql .= " price ";
   else
     $sql .= " view DESC";
@@ -125,41 +107,6 @@ $images = mysqli_fetch_all($result, MYSQLI_ASSOC);
       </form>
     </div>
     <div class="col-md-2">
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          <h3 class="panel-title">Cart </h3>
-        </div>
-        <div class="panel-body">
-          <div class="media">
-            <a class="pull-left" href="#">
-              <img class="media-object" src="images/art/tiny/116010.jpg" alt="..." width="32">
-            </a>
-            <div class="media-body">
-              <p class="cartText"><a href="#">Artist Holding a Thistle</a></p>
-            </div>
-          </div>
-          <div class="media">
-            <a class="pull-left" href="#">
-              <img class="media-object" src="images/art/tiny/113010.jpg" alt="..." width="32">
-            </a>
-            <div class="media-body">
-              <p class="cartText"><a href="#">Self-portrait in a Straw Hat</a></p>
-            </div>
-          </div>
-          <strong class="cartText">Subtotal: <span class="text-warning">$1200</span></strong>
-          <div>
-            <button type="button" class="btn btn-primary btn-xs">
-              <span class="glyphicon glyphicon-info-sign"></span>
-              Edit
-            </button>
-            <button type="button" class="btn btn-primary btn-xs">
-              <span class="glyphicon glyphicon-arrow-right"></span>
-              Checkout
-            </button>
-          </div>
-        </div>
-      </div>
-
       <div class="panel panel-info">
         <div class="panel-heading">
           <h3 class="panel-title">Popular Artists</h3>

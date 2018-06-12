@@ -11,11 +11,11 @@
 <?php
 session_start();
 if (isset($_COOKIE['footprint'])) {
-  $_COOKIE['footprint'] .= ("register_page.php" . ",");
-  $_COOKIE['title'] .= "Register Page,";
+  setcookie('footprint', $_COOKIE['footprint'] . ("register_page.php" . ","));
+  setcookie('title', $_COOKIE['title'] . "Register Page,");
 } else {
   setcookie('footprint', "register_page.php,");
-  setcookie('title',"Register_Page,");
+  setcookie('title',"Register Page,");
 }
 include 'art-header.inc.php';
 function saltHash($originalPassword)

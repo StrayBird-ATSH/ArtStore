@@ -11,11 +11,11 @@
 <?php
 session_start();
 if (isset($_COOKIE['footprint'])) {
-  $_COOKIE['footprint'] .= ("index.php" . ",");
-  $_COOKIE['title'] .= "Home Page,";
+  setcookie('footprint', $_COOKIE['footprint'] . ("index.php" . ","));
+  setcookie('title', $_COOKIE['title'] . "Home Page,");
 } else {
   setcookie('footprint', "index.php,");
-  setcookie('title', "Home_Page,");
+  setcookie('title', "Home Page,");
 }
 require_once 'includes\config.php';
 if (isset($_GET['logOut']) && isset($_SESSION['email']))
@@ -30,10 +30,10 @@ if ($error != null) {
   exit($output);
 }
 $sqlView =
-    "SELECT imageFileName,title,description,artworkID FROM artworks ORDER BY view DESC LIMIT 3";
+    "SELECT imageFileName,title,description,artworkID FROM artworks WHERE buyerEmail IS NULL ORDER BY view DESC LIMIT 3";
 $result = mysqli_query($connection, $sqlView);
 $imagesViewMost = mysqli_fetch_all($result, MYSQLI_ASSOC);
-$sqlRecent = "SELECT * FROM artworks ORDER BY timeReleased DESC LIMIT 3";
+$sqlRecent = "SELECT * FROM artworks WHERE buyerEmail IS NULL ORDER BY timeReleased DESC LIMIT 3";
 $result = mysqli_query($connection, $sqlRecent);
 $imagesMostRecent = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>

@@ -11,8 +11,8 @@
 <?php
 session_start();
 if (isset($_COOKIE['footprint'])) {
-  $_COOKIE['footprint'] .= ("sold.php" . ",");
-  $_COOKIE['title'] .= "Sold Page,";
+  setcookie('footprint', $_COOKIE['footprint'] . ("sold.php" . ","));
+  setcookie('title', $_COOKIE['title'] . "Sold Page,");
 } else {
   setcookie('footprint', "sold.php,");
   setcookie('title', "Sold Page,");

@@ -57,7 +57,7 @@
           <h1>Art Store</h1>
         </div>
         <div class="col-md-4">
-          <form class="form-inline" role="search">
+          <form class="form-inline" role="search" action="search.php">
             <div class="input-group">
               <label class="sr-only" for="search">Search</label>
               <input type="text" class="form-control"
@@ -103,18 +103,20 @@
           </ul>
         </div>
       </nav>
-      Your footprint:
-      <?php
-      $path = explode(",", $_COOKIE['footprint']);
-      $pathTitle = explode(",", $_COOKIE['title']);
-      if (count($path) > 1)
-        for ($i = 0; $i < count($path) - 1; $i++) {
-          echo "<a href=\"$path[$i]\">";
-          echo "$pathTitle[$i]";
-          echo "</a> -> ";
-        }
-      ?>
-      Current Page
+      <?php if (isset($_COOKIE['footprint'])) { ?>
+        Your footprint:
+        <?php
+        $path = explode(",", $_COOKIE['footprint']);
+        $pathTitle = explode(",", $_COOKIE['title']);
+        if (count($path) > 1)
+          for ($i = 0; $i < count($path) - 1; $i++) {
+            echo "<a href=\"$path[$i]\">";
+            echo "$pathTitle[$i]";
+            echo "</a> -> ";
+          }
+        ?>
+        Current Page
+      <?php } ?>
     </div>
   </div>
 </header>

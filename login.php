@@ -11,11 +11,11 @@
 <?php
 session_start();
 if (isset($_COOKIE['footprint'])) {
-  $_COOKIE['footprint'] .= ("login.php" . ",");
-  $_COOKIE['title'] .= "Login_Page,";
+  setcookie('footprint', $_COOKIE['footprint'] . ("login.php" . ","));
+  setcookie('title', $_COOKIE['title'] . "Login Page,");
 } else {
   setcookie('footprint', "login.php,");
-  setcookie('title', "Login_Page,");
+  setcookie('title', "Login Page,");
 }
 $status = '0';
 if (isset($_POST['email']) && isset($_POST['passwordLogin'])) {

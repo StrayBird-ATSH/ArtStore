@@ -13,11 +13,11 @@ session_start();
 if (isset($_GET['artworkID'])) {
   $artworkID = $_GET['artworkID'];
   if (isset($_COOKIE['footprint'])) {
-    $_COOKIE['footprint'] .= ("modify.php?artworkID=$artworkID" . ",");
-    $_COOKIE['title'] .= "Modify_Page,";
+    setcookie('footprint', $_COOKIE['footprint'] . ("modify.php?artworkID=$artworkID" . ","));
+    setcookie('title',  $_COOKIE['title'] . "Modify Page,");
   } else {
     setcookie('footprint', "modify.php?artworkID=$artworkID,");
-    setcookie('title', "Modify_Page,");
+    setcookie('title', "Modify Page,");
   }
 }
 include 'art-header.inc.php';

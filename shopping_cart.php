@@ -10,8 +10,8 @@
 <body>
 <?php session_start();
 if (isset($_COOKIE['footprint'])) {
-  $_COOKIE['footprint'] .= ("shopping_cart.php" . ",");
-  $_COOKIE['title'] .= "Shopping Cart Page,";
+  setcookie('footprint', $_COOKIE['footprint'] . ("shopping_cart.php" . ","));
+  setcookie('title', $_COOKIE['title'] . "Shopping Cart Page,");
 } else {
   setcookie('footprint', "shopping_cart.php,");
   setcookie('title', "Shopping Cart Page,");
