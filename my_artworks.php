@@ -79,7 +79,7 @@ if (isset($_GET['artworkID'])) {
         echo "</button>";
         echo "<strong>Danger! </strong>";
         echo "Are you sure to delete this item?";
-        echo "<a type=\"button\" class=\"btn btn-danger\" href='modify.php?artworkID=";
+        echo "<a type=\"button\" class=\"btn btn-danger\" href='my_artworks.php?artworkID=";
         echo $artworkID;
         echo "'>Delete</a></td>";
         echo "</div>";
@@ -108,7 +108,7 @@ if (isset($_GET['artworkID'])) {
           echo "<td><a type=\"button\" class=\"btn btn-info\" href='modify.php?artworkID=";
           echo $myArtworkList[$i]['artworkID'];
           echo "'>Edit</a></td>";
-          echo "<td><a type=\"button\" class=\"btn btn-danger\" href='modify.php?delete=";
+          echo "<td><a type=\"button\" class=\"btn btn-danger\" href='my_artworks.php?delete=";
           echo $myArtworkList[$i]['artworkID'];
           echo "'>Remove</a></td>";
           echo "</tr>";
