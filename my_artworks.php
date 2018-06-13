@@ -127,7 +127,7 @@ if (isset($_GET['artworkID'])) {
 <script type="text/javascript">
   jQuery(document).ready(function ($) {
     $('.table tbody').pagination({
-      perPage: 2,
+      perPage: 8,
       insertAfter: '.table',
       pageNumbers: true
     });
