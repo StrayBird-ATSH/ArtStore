@@ -56,7 +56,7 @@ $imagesMostRecent = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 <h3><?php echo $imagesViewMost[0]['title'] ?>
                 </h3>
               </a>
-              <?php echo $imagesViewMost[0]['description'] ?>
+              <?php echo substr($imagesViewMost[0]['description'], 0, 100) ?>
             </div>
           </div>
           <div class="item">
@@ -67,7 +67,7 @@ $imagesMostRecent = mysqli_fetch_all($result, MYSQLI_ASSOC);
                   <?php echo $imagesViewMost[1]['title'] ?>
                 </h3>
               </a>
-              <?php echo $imagesViewMost[1]['description'] ?>
+              <?php echo substr($imagesViewMost[1]['description'], 0, 100) ?>
             </div>
           </div>
           <div class="item">
@@ -78,7 +78,7 @@ $imagesMostRecent = mysqli_fetch_all($result, MYSQLI_ASSOC);
                   <?php echo $imagesViewMost[2]['title'] ?>
                 </a>
               </h3>
-              <?php echo $imagesViewMost[2]['description'] ?>
+              <?php echo substr($imagesViewMost[2]['description'], 0, 100) ?>
             </div>
           </div>
         </div>

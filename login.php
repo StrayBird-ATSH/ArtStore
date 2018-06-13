@@ -49,6 +49,7 @@ function saltHash($originalPassword)
   $longHashPassword = md5($longPassword);  //perform  MD5 calculation
   return $longHashPassword;  //returns the new password
 }
+
 ?>
 <div class="container">
   <div class="row">
@@ -71,7 +72,7 @@ function saltHash($originalPassword)
         echo "<span aria-hidden=\"true\">&times;</span>";
         echo "</button>";
         echo "<strong>Success! </strong>";
-        echo " You have successfully Logged in</div>";
+        echo " You have successfully Logged in. </div>";
       } elseif ($status === 'loginFailed') {
         echo "<div class=\"alert alert-danger alert-dismissible\" role=\"alert\">";
         echo "<button type=\"button\" class=\"close\" data-dismiss=\"alert\">";
@@ -113,6 +114,19 @@ function saltHash($originalPassword)
   </div>
 </div>  <!-- end container -->
 <?php include 'art-footer.inc.php' ?>
+<?php
+if (($status === 'loginSuccess') && isset($_COOKIE['footprint'])) {
+  $path = explode(",", $_COOKIE['footprint']);
+  if (count($path) > 2) {
+    $url = $path[count($path) - 3];
+    echo "<script>";
+    echo "function jump(){  ";
+    echo "location='$url';  ";
+    echo "}  ";
+    echo "setTimeout('jump()',3000);  ";
+  }
+  echo "</script>";
+} ?>
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.js"></script>
 <script src="js/confirmation.js"></script>

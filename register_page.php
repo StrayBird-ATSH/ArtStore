@@ -15,9 +15,9 @@ if (isset($_COOKIE['footprint'])) {
   setcookie('title', $_COOKIE['title'] . "Register Page,");
 } else {
   setcookie('footprint', "register_page.php,");
-  setcookie('title',"Register Page,");
+  setcookie('title', "Register Page,");
 }
-include 'art-header.inc.php';
+
 function saltHash($originalPassword)
 {
   $salt = "RandomSALT_HJFKJDKL";  //the random string is set here
@@ -49,13 +49,15 @@ if (isset($_POST['email'])) {
       $tel = $_POST['tel'];
       $address = $_POST['address'];
       $sql = "INSERT INTO users (name, email, password, balance,tel,address) 
-                  VALUES ('$name','$email','$longHashPassword',0,$tel,$address)";
-      if (mysqli_query($connection, $sql))
+                  VALUES ('$name','$email','$longHashPassword',0,'$tel','$address')";
+      if (mysqli_query($connection, $sql)) {
         $status = 'success';
-      else $status = 'register failed';
+        $_SESSION['email'] = $_POST['email'];
+      } else $status = 'register failed';
     } else $status = 'missing something';
   } else $status = 'already registered';
 }
+include 'art-header.inc.php';
 ?>
 <div class="container">
   <div class="row">

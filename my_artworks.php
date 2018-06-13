@@ -71,6 +71,18 @@ if (isset($_GET['artworkID'])) {
         echo "</button>";
         echo "<strong>Failed! </strong>";
         echo "Sorry, the delete is failed.</div>";
+      } elseif (isset($_GET['delete'])) {
+        $artworkID = $_GET['delete'];
+        echo "<div class=\"alert alert-danger alert-dismissible\" role=\"alert\">";
+        echo "<button type=\"button\" class=\"close\" data-dismiss=\"alert\">";
+        echo "<span aria-hidden=\"true\">&times;</span>";
+        echo "</button>";
+        echo "<strong>Danger! </strong>";
+        echo "Are you sure to delete this item?";
+        echo "<a type=\"button\" class=\"btn btn-danger\" href='modify.php?artworkID=";
+        echo $artworkID;
+        echo "'>Delete</a></td>";
+        echo "</div>";
       }
       $sql = "SELECT title,timeReleased,artworkID FROM artworks WHERE releaseUserEmail ='$email'";
       $result = mysqli_query($connection, $sql);
@@ -96,9 +108,9 @@ if (isset($_GET['artworkID'])) {
           echo "<td><a type=\"button\" class=\"btn btn-info\" href='modify.php?artworkID=";
           echo $myArtworkList[$i]['artworkID'];
           echo "'>Edit</a></td>";
-          echo "<td><button type=\"button\" class=\"btn btn-danger\" onclick='alert(\"Are you sure to delete?\");location.href=\"my_artworks.php?artworkID=";
+          echo "<td><a type=\"button\" class=\"btn btn-danger\" href='modify.php?delete=";
           echo $myArtworkList[$i]['artworkID'];
-          echo "\";'>Remove</button></td>";
+          echo "'>Remove</a></td>";
           echo "</tr>";
         }
         ?>
